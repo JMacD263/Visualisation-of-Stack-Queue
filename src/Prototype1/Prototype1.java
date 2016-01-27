@@ -11,17 +11,20 @@ import java.util.Stack;
  */
 public class Prototype1 {
     static boolean stop = false;
-    public static void main(String [] args) {
+
+    public static void main(String[] args) {
         Scanner s = new Scanner(System.in);
         while (!stop) {
             System.out.println("Would you like to experiment with Stacks or Queues?");
-            System.out.println("Please select a number: 1 for Stack or 2 for Queue or 3 to Exit.");
+            System.out.println("Please select a number: 1 for Stack or 2 for Queue or 0 to Exit.");
             int x = Integer.parseInt(s.nextLine());
             if (x == 1) {
                 runStack();
+                stop = false;
             } else if (x == 2) {
-                //runQueue();
-            } else if (x == 3) {
+                runQueue();
+                stop = false;
+            } else if (x == 0) {
                 stop = true;
             } else {
                 System.out.println("Sorry the number was not in range, please try again.");
@@ -33,11 +36,16 @@ public class Prototype1 {
 
     }
 
-    static public void runStack(){
+    static public void runStack() {
         System.out.println("This initial Stack will use the default Java Stack implementation");
         Stack<Integer> stack = new Stack<>();
-        while(!stop){
-            System.err.println("Please select the number of the operation you would like to perform (or 6 to exit):");
+        while (!stop) {
+            try {
+                Thread.sleep(250);                 //So things get printed correctly
+            } catch(InterruptedException ex) {
+                Thread.currentThread().interrupt();
+            }
+            System.err.println("Please select the number of the operation you would like to perform (or 0 to exit):");
             System.err.println("1. Push (Adds an object to the head of the Stack)");
             System.err.println("2. Pop (Returns and removes the element on the top of the Stack)");
             System.err.println("3. Peek (Returns the element on the top of the Stack without removing it)");
@@ -50,63 +58,43 @@ public class Prototype1 {
                 x = Integer.parseInt(s.nextLine());
                 System.out.println("Pushing " + x + " on to the Stack");
                 stack.push(x);
-                if(stack.size()>1){
-                    System.out.println("Stack: Tail-> " + stack + " <-Head");
-                } else {
-                    System.out.println("Stack: " + stack);
-                }
+                printStack(stack);
             } else if (x == 2) {
-                if(stack.empty()){
+                if (stack.empty()) {
                     System.out.println("Sorry, the Stack is empty and therefore cannot be popped");
-                }else{
+                } else {
                     System.out.println("Popping " + stack.pop() + " from the Stack");
-                    if(stack.size()>1){
-                        System.out.println("Stack: Tail-> " + stack + " <-Head");
-                    } else {
-                        System.out.println("Stack: " + stack);
-                    }
+                    printStack(stack);
                 }
             } else if (x == 3) {
-                if(stack.empty()){
+                if (stack.empty()) {
                     System.out.println("Sorry, the Stack is empty and therefore cannot be peeked");
-                }else{
+                } else {
                     System.out.println("Peek: " + stack.peek());
-                    if(stack.size()>1){
-                        System.out.println("Stack: Tail-> " + stack + " <-Head");
-                    } else {
-                        System.out.println("Stack: " + stack);
-                    }
+                    printStack(stack);
                 }
             } else if (x == 4) {
-                if(stack.empty()){
+                if (stack.empty()) {
                     System.out.println("True - Stack is empty");
-                }else{
+                } else {
                     System.out.println("False - Stack is not empty");
                 }
-                if(stack.size()>1){
-                    System.out.println("Stack: Tail-> " + stack + " <-Head");
-                } else {
-                    System.out.println("Stack: " + stack);
-                }
+                printStack(stack);
             } else if (x == 5) {
-                if(stack.empty()){
+                if (stack.empty()) {
                     System.out.println("Sorry, the Stack is empty and therefore cannot be searched");
-                }else{
+                } else {
                     System.out.println("Please enter what you would like to search for");
                     x = Integer.parseInt(s.nextLine());
                     System.out.println("Searching Stack for " + x);
-                    if(stack.search(x) < 0){
+                    if (stack.search(x) < 0) {
                         System.out.println("-1 was returned and therefore " + x + " was not found in the Stack");
-                    }else{
-                        System.out.println(stack.search(x) + " was returned, therefore " + x + " is in the Stack and " + stack.search(x) + "spaces from the head of the Stack");
-                    }
-                    if(stack.size()>1){
-                        System.out.println("Stack: Tail-> " + stack + " <-Head");
                     } else {
-                        System.out.println("Stack: " + stack);
+                        System.out.println(stack.search(x) + " was returned, therefore " + x + " is in the Stack and " + stack.search(x) + " spaces from the top of the Stack");
                     }
+                    printStack(stack);
                 }
-            } else if (x == 6) {
+            } else if (x == 0) {
                 stop = true;
             } else {
                 System.out.println("Sorry the number was not in range, please try again.");
@@ -114,49 +102,104 @@ public class Prototype1 {
         }
     }
 
-    public void runQueue(){
-        System.out.println("This initial Queue will use the LinkedList implementation");
-        Queue<Integer> queue = new LinkedList<>();
-
+    static public void printStack(Stack<Integer> s) {
+        Stack<Integer> stack = new Stack<>();
+        stack.addAll(s);
+        System.out.println("\tTop");
+        for(int i = stack.size(); i > 0; i--){
+            System.out.println("\t " + stack.pop());
+        }
+        System.out.println("\tBottom");
     }
 
-      /*  while (stop == false) {
-            System.out
-                    .println("Enter 'Front', 'Enqueue', 'Dequeue', 'Size', 'isEmpty' or 'Stop' to quit the program");
-            String y = s.nextLine();
-            if (y.equals("stop") || y.equals("Stop")) {
+
+    static public void runQueue() {
+        System.out.println("This initial Queue will use the LinkedList implementation");
+        Queue<Integer> queue = new LinkedList<>();
+        while (!stop) {
+            try {
+                Thread.sleep(250);                 //So things get printed correctly
+            } catch(InterruptedException ex) {
+                Thread.currentThread().interrupt();
+            }
+            System.err.println("Please select the number of the operation you would like to perform (or 0 to exit):");
+            System.err.println("1. Add (Adds an object into the Queue)");
+            System.err.println("2. Poll (Returns and removes the element at the head of the Queue, returns Null if Queue is empty)");
+            System.err.println("3. Peek (Returns the element at the head of the Queue without removing it, returns Null if Queue is empty)");
+            System.err.println("4. Offer (Inserts an object into the Queue, only if there is space)");
+            System.err.println("5. Remove (Returns and removes the element at the head of the Queue)");
+            System.err.println("6. Element (Returns the element at the head of the Queue without removing it)");
+            Scanner s = new Scanner(System.in);
+            int x = Integer.parseInt(s.nextLine());
+            if (x == 1) {
+                System.out.println("Please enter the number you would like to added to the Queue");
+                x = Integer.parseInt(s.nextLine());
+                System.out.println("Adding " + x + " to the Queue");
+                queue.add(x);
+                if (queue.size() > 1) {
+                    System.out.println("Queue: Head-> " + queue + " <-Tail");
+                } else {
+                    System.out.println("Queue: " + queue);
+                }
+            } else if (x == 2) {
+                if(queue.peek()==null){
+                    System.out.println("Sorry, the Queue is empty and therefore cannot be polled");
+                }else{
+                    System.out.println("Poll: " + queue.poll() + " from the Queue");
+                    if (queue.size() > 1) {
+                        System.out.println("Queue: Head-> " + queue + " <-Tail");
+                    } else {
+                        System.out.println("Queue: " + queue);
+                    }
+                }
+            } else if (x == 3) {
+                if(queue.peek()==null){
+                    System.out.println("Sorry, the Queue is empty and therefore cannot be peeked");
+                }else{
+                    System.out.println("Peek: " + queue.peek());
+                    if (queue.size() > 1) {
+                        System.out.println("Queue: Head-> " + queue + " <-Tail");
+                    } else {
+                        System.out.println("Queue: " + queue);
+                    }
+                }
+            } else if (x == 4) {
+                System.out.println("Please enter the number you would like to offer to the Queue");
+                x = Integer.parseInt(s.nextLine());
+                System.out.println("Offer " + x + " to the Queue");
+                queue.offer(x);
+                if (queue.size() > 1) {
+                    System.out.println("Queue: Head-> " + queue + " <-Tail");
+                } else {
+                    System.out.println("Queue: " + queue);
+                }
+            } else if (x == 5) {
+                if(queue.peek()==null){
+                    System.out.println("Sorry, the Queue is empty and therefore an element cannot be removed");
+                }else{
+                    System.out.println("Remove: " + queue.remove() + " from the Queue");
+                    if (queue.size() > 1) {
+                        System.out.println("Queue: Head-> " + queue + " <-Tail");
+                    } else {
+                        System.out.println("Queue: " + queue);
+                    }
+                }
+            } else if (x == 6) {
+                if(queue.peek()==null){
+                    System.out.println("Sorry, the Queue is empty and therefore Element cannot be used");
+                }else{
+                    System.out.println("Element: " + queue.peek());
+                    if (queue.size() > 1) {
+                        System.out.println("Queue: Head-> " + queue + " <-Tail");
+                    } else {
+                        System.out.println("Queue: " + queue);
+                    }
+                }
+            } else if (x == 0) {
                 stop = true;
+            } else {
+                System.out.println("Sorry the number was not in range, please try again.");
             }
-            if (y.equals("Front") || y.equals("front")) {
-                try {
-                    System.out.println(qadt.front());
-                } catch (EmptyQueueException e) {
-                    System.err.println("Empty Queue: Cannot find an element");
-                }
-            }
-            if (y.equals("Enqueue") || y.equals("enqueue")) {
-                System.out
-                        .println("Enter the string you want to enqueue in to the Queue");
-                String e = s.nextLine();
-                qadt.enqueue(e);
-            }
-            if (y.equals("Dequeue") || y.equals("dequeue")) {
-                try {
-                    System.out.println(qadt.dequeue());
-                } catch (EmptyQueueException e) {
-                    System.err.println("Empty Queue: Cannot Dequeue");
-                }
-
-            }
-            if (y.equals("Size") || y.equals("size")) {
-                System.out.println(qadt.size());
-            }
-            if (y.equals("isEmpty") || y.equals("isempty")) {
-                System.out.println(qadt.isEmpty());
-            }
-        }*/
-
-
-
-
+        }
+    }
 }
