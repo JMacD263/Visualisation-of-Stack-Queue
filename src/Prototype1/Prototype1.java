@@ -46,7 +46,7 @@ public class Prototype1 {
                 Thread.currentThread().interrupt();
             }
             System.err.println("Please select the number of the operation you would like to perform (or 0 to exit):");
-            System.err.println("1. Push (Adds an object to the head of the Stack)");
+            System.err.println("1. Push (Adds an object to the top of the Stack)");
             System.err.println("2. Pop (Returns and removes the element on the top of the Stack)");
             System.err.println("3. Peek (Returns the element on the top of the Stack without removing it)");
             System.err.println("4. Empty (Simply returns true if Stack is empty and false if not)");
