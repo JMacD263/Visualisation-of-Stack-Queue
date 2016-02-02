@@ -40,11 +40,22 @@ public class View extends JFrame {
     private JLabel elementLabel;
     private JPanel stackPanel;
 
+
     View() {
         super("Stack and Queue Visualisation");
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         this.setSize(1200, 800);
         this.add(tabbedPane1);
+
+        /*
+        This is from the auto-constructor may be useful
+        JFrame frame = new JFrame("View");
+        frame.setContentPane(new View().rootPanel);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.pack();
+        frame.setVisible(true);
+         */
+
 //        this.add(rootPanel);
 //        this.add(addButton);
 //        this.add(pollButton);
@@ -73,13 +84,66 @@ public class View extends JFrame {
 //        this.add(elementLabel);
 //        this.add(stackPanel);
 
+        /*
+        Start of the Stack button action listeners
+         */
         pushButton.addActionListener(new ActionListener() { //anonymous inner class
             @Override
             public void actionPerformed(ActionEvent e) {
-                System.out.println("TEST?");
+                while(true){
+                    try{
+                        int toBePushed = Integer.parseInt(JOptionPane.showInputDialog(null, "Enter the number you want to push on to the Stack", "Push", JOptionPane.DEFAULT_OPTION));
+                        System.out.println(toBePushed); //replace with real code to add to data bit
+                        break;
+                    }
+                    catch(java.lang.NumberFormatException exception){
+                        if(exception.getMessage().equals("null")){
+                            break;
+                        }
+                        JOptionPane.showMessageDialog(null, "Sorry that was not an Integer, please try again", "Not an Integer", JOptionPane.ERROR_MESSAGE);
+                    }
+                }
+            }
+        });
+
+
+        popButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
 
             }
         });
+
+
+        peekButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
+
+
+        emptyButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
+
+
+        searchButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
+
+        /*
+        Start of the Queue button action listeners
+         */
     }
+
+
+
 
 }
