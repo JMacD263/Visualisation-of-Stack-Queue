@@ -15,7 +15,7 @@ public class Controller {
         theView = view;
         theModel = model;
 
-        theView.addListener(new PopListener());
+        //theView.addListener(new PopListener());
 
     }
 
