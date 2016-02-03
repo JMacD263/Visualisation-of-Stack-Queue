@@ -4,6 +4,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.EmptyStackException;
+import java.util.LinkedList;
 
 /**
  * Created by xnb12162 on 01/02/16.
@@ -39,13 +41,18 @@ public class View extends JFrame {
     private JLabel removeLabel;
     private JLabel elementLabel;
     private JPanel stackPanel;
+    private JList previousOperations;
+    private JList previousOperationsQueue;
+    private LinkedList<String> operationsList = new LinkedList<String>();
 
 
-    View() {
+    View(Model m) {
         super("Stack and Queue Visualisation");
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         this.setSize(1200, 800);
         this.add(tabbedPane1);
+
+        Model model = m;
 
         /*
         This is from the auto-constructor may be useful
@@ -94,6 +101,8 @@ public class View extends JFrame {
                     try{
                         int toBePushed = Integer.parseInt(JOptionPane.showInputDialog(null, "Enter the number you want to push on to the Stack", "Push", JOptionPane.DEFAULT_OPTION));
                         System.out.println(toBePushed); //replace with real code to add to data bit
+                        addOperation("Pushing: " + toBePushed);
+                        model.push(toBePushed);
                         break;
                     }
                     catch(java.lang.NumberFormatException exception){
@@ -110,7 +119,13 @@ public class View extends JFrame {
         popButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                try{
+                    int popped = model.pop();
+                    addOperation("Popped: " + popped);
+                } catch(EmptyStackException exception){
+                    addOperation("Cannot Pop - Stack Empty");
+                    JOptionPane.showMessageDialog(null, "Sorry the Stack is empty and therefore cannot be popped", "Stack Empty", JOptionPane.ERROR_MESSAGE);
+                }
             }
         });
 
@@ -118,7 +133,13 @@ public class View extends JFrame {
         peekButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                try{
+                    int peeked = model.peek();
+                    addOperation("Peeked: " + peeked);
+                } catch(EmptyStackException exception){
+                    addOperation("Cannot Peek - Stack Empty");
+                    JOptionPane.showMessageDialog(null, "Sorry the Stack is empty and therefore cannot be peeked", "Stack Empty", JOptionPane.ERROR_MESSAGE);
+                }
             }
         });
 
@@ -126,7 +147,7 @@ public class View extends JFrame {
         emptyButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                addOperation("Stack Empty: " + model.empty());
             }
         });
 
@@ -134,6 +155,25 @@ public class View extends JFrame {
         searchButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                while(true){
+                    try{
+                        int toBeSearched = Integer.parseInt(JOptionPane.showInputDialog(null, "Enter the number you want to Search for in the Stack", "Search", JOptionPane.DEFAULT_OPTION));
+                        int searched = model.search(toBeSearched);
+                        if(searched > -1){
+                            addOperation("Searching for " + toBeSearched + " - " + searched + " from the top of the stack");
+                        } else{
+                            addOperation("Searching for " + toBeSearched + " : " + searched + " therefore not in the stack");
+                        }
+
+                        break;
+                    }
+                    catch(java.lang.NumberFormatException exception){
+                        if(exception.getMessage().equals("null")){
+                            break;
+                        }
+                        JOptionPane.showMessageDialog(null, "Sorry that was not an Integer, please try again", "Not an Integer", JOptionPane.ERROR_MESSAGE);
+                    }
+                }
 
             }
         });
@@ -141,6 +181,17 @@ public class View extends JFrame {
         /*
         Start of the Queue button action listeners
          */
+    }
+
+    public void addOperation(String op){
+        if(operationsList.size() < 25){
+            operationsList.push(op);
+        }else{
+            operationsList.removeLast();
+            operationsList.push(op);
+        }
+        String listData[] = operationsList.toArray(new String[operationsList.size()]);
+        previousOperations.setListData(listData);
     }
 
 
