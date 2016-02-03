@@ -31,4 +31,8 @@ public class Model {
         return stack.search(x);
     }
 
+    public Stack<Integer> getStack(){
+        return  stack;
+    }
+
 }

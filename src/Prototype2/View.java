@@ -4,8 +4,11 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.geom.Rectangle2D;
+import java.util.ArrayList;
 import java.util.EmptyStackException;
 import java.util.LinkedList;
+import java.util.Stack;
 
 /**
  * Created by xnb12162 on 01/02/16.
@@ -43,16 +46,16 @@ public class View extends JFrame {
     private JPanel stackPanel;
     private JList previousOperations;
     private JList previousOperationsQueue;
-    private LinkedList<String> operationsList = new LinkedList<String>();
+    private LinkedList<String> operationsList = new LinkedList<>();
 
 
-    View(Model m) {
+    View(Model model) {
         super("Stack and Queue Visualisation");
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         this.setSize(1200, 800);
         this.add(tabbedPane1);
 
-        Model model = m;
+        stackDisplay.add(new DrawStuff(model));
 
         /*
         This is from the auto-constructor may be useful
@@ -103,6 +106,7 @@ public class View extends JFrame {
                         System.out.println(toBePushed); //replace with real code to add to data bit
                         addOperation("Pushing: " + toBePushed);
                         model.push(toBePushed);
+                        stackDisplay.updateUI();
                         break;
                     }
                     catch(java.lang.NumberFormatException exception){
@@ -178,13 +182,10 @@ public class View extends JFrame {
             }
         });
 
-        /*
-        Start of the Queue button action listeners
-         */
     }
 
     public void addOperation(String op){
-        if(operationsList.size() < 25){
+        if(operationsList.size() < 30){
             operationsList.push(op);
         }else{
             operationsList.removeLast();
@@ -194,7 +195,43 @@ public class View extends JFrame {
         previousOperations.setListData(listData);
     }
 
+    private class DrawStuff extends JComponent {
+        Model model;
 
+        public DrawStuff(Model model){
+            this.model = model;
+        }
 
+        public void paint(Graphics g){
+
+            Graphics2D graph2 = (Graphics2D)g;
+            graph2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+
+            Stack<Integer> s = model.getStack();
+            Stack<Integer> stack = new Stack<>();
+            stack.addAll(s);
+            ArrayList<boxElement> stackRepresentation = new ArrayList<>();
+
+            for(int i = stack.size(); i > 0; i--){
+                stackRepresentation.add(new boxElement(stack.pop()));
+            }
+
+            /*Rectangle rect = new Rectangle(200, 200, 150, 150);
+
+            graph2.draw(rect);
+
+            String test = "This is a test";
+
+            FontMetrics metrics = g.getFontMetrics();
+            // Determine the X coordinate for the text
+            int x = (int)(rect.getX() + (rect.width - metrics.stringWidth(test)) / 2);
+            // Determine the Y coordinate for the text
+            int y = (int)(rect.getY() + ((rect.height - metrics.getHeight()) / 2) + metrics.getAscent());
+            // Draw the String
+            g.drawString(test, x, y);*/
+
+        }
+
+    }
 
 }
