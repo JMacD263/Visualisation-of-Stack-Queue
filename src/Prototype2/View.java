@@ -52,7 +52,7 @@ public class View extends JFrame {
     View(Model model) {
         super("Stack and Queue Visualisation");
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        this.setSize(1200, 800);
+        this.setSize(1000, 600);
         this.add(tabbedPane1);
 
         stackDisplay.add(new DrawStuff(model));
@@ -126,6 +126,7 @@ public class View extends JFrame {
                 try{
                     int popped = model.pop();
                     addOperation("Popped: " + popped);
+                    stackDisplay.updateUI();
                 } catch(EmptyStackException exception){
                     addOperation("Cannot Pop - Stack Empty");
                     JOptionPane.showMessageDialog(null, "Sorry the Stack is empty and therefore cannot be popped", "Stack Empty", JOptionPane.ERROR_MESSAGE);
@@ -140,6 +141,7 @@ public class View extends JFrame {
                 try{
                     int peeked = model.peek();
                     addOperation("Peeked: " + peeked);
+                    stackDisplay.updateUI();
                 } catch(EmptyStackException exception){
                     addOperation("Cannot Peek - Stack Empty");
                     JOptionPane.showMessageDialog(null, "Sorry the Stack is empty and therefore cannot be peeked", "Stack Empty", JOptionPane.ERROR_MESSAGE);
@@ -168,7 +170,7 @@ public class View extends JFrame {
                         } else{
                             addOperation("Searching for " + toBeSearched + " : " + searched + " therefore not in the stack");
                         }
-
+                        stackDisplay.updateUI();
                         break;
                     }
                     catch(java.lang.NumberFormatException exception){
@@ -185,7 +187,7 @@ public class View extends JFrame {
     }
 
     public void addOperation(String op){
-        if(operationsList.size() < 30){
+        if(operationsList.size() < 20){
             operationsList.push(op);
         }else{
             operationsList.removeLast();
@@ -214,6 +216,29 @@ public class View extends JFrame {
 
             for(int i = stack.size(); i > 0; i--){
                 stackRepresentation.add(new boxElement(stack.pop()));
+            }
+
+            int y = (30);
+            int x = ((this.getWidth() / 2) - 20);
+            for(boxElement b: stackRepresentation){
+                FontMetrics fm = graph2.getFontMetrics();
+                int textx;
+                if(b.getText().length() < 2){
+                     textx = (x + 10);
+                } else {
+                     textx = (x + 5);
+                }
+                int texty = (y + 20);
+                graph2.draw(new Rectangle(x, y, 30, 30));
+                graph2.drawString(b.getText(), textx, texty);
+                y = y + 45;
+            }
+
+
+            y = 75;
+            for(int i = 1; i < stackRepresentation.size(); i++){
+                graph2.drawLine((x + 15), (y), (x + 15), (y - 15));
+                y+=45;
             }
 
             /*Rectangle rect = new Rectangle(200, 200, 150, 150);

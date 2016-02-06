@@ -9,8 +9,8 @@ public class boxElement {
     public boxElement(int element){
         elementNo = element;
     }
-
-    public void print(){
-        System.out.println(elementNo);
+    
+    public String getText(){
+        return Integer.toString(elementNo);
     }
 }
