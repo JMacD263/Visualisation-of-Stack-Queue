@@ -218,7 +218,8 @@ public class View extends JFrame {
                 stackRepresentation.add(new boxElement(stack.pop()));
             }
 
-            int y = (30);
+            //Draws the boxes with their numbers within them.
+            int y = 30;
             int x = ((this.getWidth() / 2) - 20);
             for(boxElement b: stackRepresentation){
                 FontMetrics fm = graph2.getFontMetrics();
@@ -235,25 +236,22 @@ public class View extends JFrame {
             }
 
 
+            /*
+            This code draws the lines in between the boxes
+             */
             y = 75;
             for(int i = 1; i < stackRepresentation.size(); i++){
                 graph2.drawLine((x + 15), (y), (x + 15), (y - 15));
                 y+=45;
             }
 
-            /*Rectangle rect = new Rectangle(200, 200, 150, 150);
-
-            graph2.draw(rect);
-
-            String test = "This is a test";
-
-            FontMetrics metrics = g.getFontMetrics();
-            // Determine the X coordinate for the text
-            int x = (int)(rect.getX() + (rect.width - metrics.stringWidth(test)) / 2);
-            // Determine the Y coordinate for the text
-            int y = (int)(rect.getY() + ((rect.height - metrics.getHeight()) / 2) + metrics.getAscent());
-            // Draw the String
-            g.drawString(test, x, y);*/
+            //This add top and bottom to the graphics, showing the stack more clearly.
+            if(stackRepresentation.size() > 0){
+                graph2.drawString("Top", (x - 40), 50);
+            }
+            if(stackRepresentation.size() > 1){
+                graph2.drawString("Bottom", (x - 55), ((45 * stackRepresentation.size()) + 5));
+            }
 
         }
 
