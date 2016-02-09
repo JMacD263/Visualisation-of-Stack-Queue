@@ -5,10 +5,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.geom.Rectangle2D;
-import java.util.ArrayList;
-import java.util.EmptyStackException;
-import java.util.LinkedList;
-import java.util.Stack;
+import java.util.*;
 
 /**
  * Created by xnb12162 on 01/02/16.
@@ -47,6 +44,7 @@ public class View extends JFrame {
     private JList previousOperations;
     private JList previousOperationsQueue;
     private LinkedList<String> operationsList = new LinkedList<>();
+    private LinkedList<String> operationsListQueue = new LinkedList<>();
 
 
     View(Model model) {
@@ -56,6 +54,8 @@ public class View extends JFrame {
         this.add(tabbedPane1);
 
         stackDisplay.add(new DrawStuff(model));
+
+        queueDisplay.add(new DrawQueueStuff(model));
 
         /*
         This is from the auto-constructor may be useful
@@ -103,7 +103,7 @@ public class View extends JFrame {
                 while(true){
                     try{
                         int toBePushed = Integer.parseInt(JOptionPane.showInputDialog(null, "Enter the number you want to push on to the Stack", "Push", JOptionPane.DEFAULT_OPTION));
-                        System.out.println(toBePushed); //replace with real code to add to data bit
+                        //System.out.println(toBePushed); //replace with real code to add to data bit
                         addOperation("Pushing: " + toBePushed);
                         model.push(toBePushed);
                         stackDisplay.updateUI();
@@ -184,8 +184,118 @@ public class View extends JFrame {
             }
         });
 
+
+
+         /*
+        Start of the Queue button action listeners
+         */
+
+        addButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                while(true){
+                    try{
+                        int toBeQueued = Integer.parseInt(JOptionPane.showInputDialog(null, "Enter the number you want to add to the Queue", "Add", JOptionPane.DEFAULT_OPTION));
+                        addQueueOperation("Adding: " + toBeQueued);
+                        model.add(toBeQueued);
+                        queueDisplay.updateUI();
+                        break;
+                    }
+                    catch(java.lang.NumberFormatException exception){
+                        if(exception.getMessage().equals("null")){
+                            break;
+                        }
+                        JOptionPane.showMessageDialog(null, "Sorry that was not an Integer, please try again", "Not an Integer", JOptionPane.ERROR_MESSAGE);
+                    }
+                }
+            }
+        });
+
+
+        pollButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try{
+                    int polled = model.poll();
+                    addQueueOperation("Polled: " + polled);
+                    queueDisplay.updateUI();
+                } catch(NullPointerException exception){
+                    addQueueOperation("Cannot Poll - Queue Empty");
+                    JOptionPane.showMessageDialog(null, "Sorry the Queue is empty and therefore cannot be polled", "Queue Empty", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        });
+
+
+        peekButton1.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try{
+                    int peeked = model.peekQueue();
+                    addQueueOperation("Peeked: " + peeked);
+                    queueDisplay.updateUI();
+                } catch(NullPointerException exception){
+                    addQueueOperation("Cannot Peek - Queue Empty");
+                    JOptionPane.showMessageDialog(null, "Sorry the Queue is empty and therefore cannot be peeked", "Queue Empty", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        });
+
+
+        offerButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                while(true){
+                    try{
+                        int toBeOffered = Integer.parseInt(JOptionPane.showInputDialog(null, "Enter the number you want to add to the Queue", "Offer", JOptionPane.DEFAULT_OPTION));
+                        addQueueOperation("Offering: " + toBeOffered);
+                        model.add(toBeOffered);
+                        queueDisplay.updateUI();
+                        break;
+                    }
+                    catch(java.lang.NumberFormatException exception){
+                        if(exception.getMessage().equals("null")){
+                            break;
+                        }
+                        JOptionPane.showMessageDialog(null, "Sorry that was not an Integer, please try again", "Not an Integer", JOptionPane.ERROR_MESSAGE);
+                    }
+                }
+
+            }
+        });
+
+
+        removeButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try{
+                    int removed = model.remove();
+                    addQueueOperation("Removed: " + removed);
+                    queueDisplay.updateUI();
+                } catch(NoSuchElementException exception){
+                    addQueueOperation("Cannot Remove - Queue Empty");
+                    JOptionPane.showMessageDialog(null, "Sorry the Queue is empty and therefore nothing can be removed", "Queue Empty", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        });
+
+
+        elementButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try{
+                    int element = model.element();
+                    addQueueOperation("Element: " + element);
+                    queueDisplay.updateUI();
+                } catch(NoSuchElementException exception){
+                    addQueueOperation("Cannot Element - Queue Empty");
+                    JOptionPane.showMessageDialog(null, "Sorry the Queue is empty and therefore 'element' cannot be performed", "Queue Empty", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        });
     }
 
+    // Add operations to Stack list.
     public void addOperation(String op){
         if(operationsList.size() < 20){
             operationsList.push(op);
@@ -195,6 +305,18 @@ public class View extends JFrame {
         }
         String listData[] = operationsList.toArray(new String[operationsList.size()]);
         previousOperations.setListData(listData);
+    }
+
+    // Add operations to the queue list
+    public void addQueueOperation(String op){
+        if(operationsListQueue.size() < 20){
+            operationsListQueue.push(op);
+        }else{
+            operationsListQueue.removeLast();
+            operationsListQueue.push(op);
+        }
+        String listData[] = operationsListQueue.toArray(new String[operationsListQueue.size()]);
+        previousOperationsQueue.setListData(listData);
     }
 
     private class DrawStuff extends JComponent {
@@ -224,14 +346,15 @@ public class View extends JFrame {
             for(boxElement b: stackRepresentation){
                 FontMetrics fm = graph2.getFontMetrics();
                 int textx;
-                if(b.getText().length() < 2){
-                     textx = (x + 10);
+                if(b.getText().length() == 1){
+                     textx = (x + 12);
+                }else if(b.getText().length() == 2){
+                    textx = (x + 8);
                 } else {
                      textx = (x + 5);
                 }
-                int texty = (y + 20);
                 graph2.draw(new Rectangle(x, y, 30, 30));
-                graph2.drawString(b.getText(), textx, texty);
+                graph2.drawString(b.getText(), textx, (y + 20));
                 y = y + 45;
             }
 
@@ -257,4 +380,62 @@ public class View extends JFrame {
 
     }
 
+    private class DrawQueueStuff extends Component {
+        Model model;
+
+        public DrawQueueStuff(Model model){
+            this.model = model;
+        }
+
+        public void paint(Graphics g) {
+
+            Graphics2D graph2 = (Graphics2D) g;
+            graph2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+
+            Queue<Integer> queue = model.getQueue();
+            ArrayList<boxElement> queueRepresentation = new ArrayList<>();
+
+            for(Integer x: queue){
+                queueRepresentation.add(new boxElement(x));
+            }
+
+            //Draws the boxes with their numbers within them.
+            int y = ((this.getHeight() / 2) - 20);
+            int x = 30;
+            for(boxElement b: queueRepresentation){
+                int textx;
+                FontMetrics fm = graph2.getFontMetrics();
+                if(b.getText().length() < 2){
+                    textx = (x + 12);
+                }else if(b.getText().length() == 2){
+                    textx = (x + 8);
+                } else {
+                    textx = (x + 5);
+                }
+                graph2.draw(new Rectangle(x, y, 30, 30));
+                graph2.drawString(b.getText(), textx, (y + 20));
+                x += 45;
+            }
+
+            /*
+            This code draws the lines in between the boxes
+             */
+            x = 75;
+            for(int i = 1; i < queueRepresentation.size(); i++){
+                graph2.drawLine((x), (y + 15), (x - 15), (y + 15));
+                x+=45;
+            }
+
+            //This add head and tail to the graphics, showing the queue more clearly.
+            if(queueRepresentation.size() > 0){
+                graph2.drawString("Head", 30, (y - 25));
+            }
+            if(queueRepresentation.size() > 1){
+                graph2.drawString("Tail", ((45 * queueRepresentation.size()) - 10), (y - 25));
+            }
+
+
+
+        }
+    }
 }
