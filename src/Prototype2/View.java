@@ -100,20 +100,23 @@ public class View extends JFrame {
         pushButton.addActionListener(new ActionListener() { //anonymous inner class
             @Override
             public void actionPerformed(ActionEvent e) {
-                while(true){
-                    try{
-                        int toBePushed = Integer.parseInt(JOptionPane.showInputDialog(null, "Enter the number you want to push on to the Stack", "Push", JOptionPane.DEFAULT_OPTION));
-                        //System.out.println(toBePushed); //replace with real code to add to data bit
-                        addOperation("Pushing: " + toBePushed);
-                        model.push(toBePushed);
-                        stackDisplay.updateUI();
-                        break;
-                    }
-                    catch(java.lang.NumberFormatException exception){
-                        if(exception.getMessage().equals("null")){
+                if(model.getStack().size() == 10){
+                    JOptionPane.showMessageDialog(null, "Sorry the Stack is full and nothing can be pushed", "Stack Full", JOptionPane.ERROR_MESSAGE);
+                } else{
+                    while(true){
+                        try{
+                            int toBePushed = Integer.parseInt(JOptionPane.showInputDialog(null, "Enter the number you want to push on to the Stack", "Push", JOptionPane.DEFAULT_OPTION));
+                            addOperation("Pushing: " + toBePushed);
+                            model.push(toBePushed);
+                            stackDisplay.updateUI();
                             break;
                         }
-                        JOptionPane.showMessageDialog(null, "Sorry that was not an Integer, please try again", "Not an Integer", JOptionPane.ERROR_MESSAGE);
+                        catch(java.lang.NumberFormatException exception){
+                            if(exception.getMessage().equals("null")){
+                                break;
+                            }
+                            JOptionPane.showMessageDialog(null, "Sorry that was not an Integer, please try again", "Not an Integer", JOptionPane.ERROR_MESSAGE);
+                        }
                     }
                 }
             }
@@ -193,19 +196,23 @@ public class View extends JFrame {
         addButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                while(true){
-                    try{
-                        int toBeQueued = Integer.parseInt(JOptionPane.showInputDialog(null, "Enter the number you want to add to the Queue", "Add", JOptionPane.DEFAULT_OPTION));
-                        addQueueOperation("Adding: " + toBeQueued);
-                        model.add(toBeQueued);
-                        queueDisplay.updateUI();
-                        break;
-                    }
-                    catch(java.lang.NumberFormatException exception){
-                        if(exception.getMessage().equals("null")){
+                if(model.getQueue().size() == 15){
+                    JOptionPane.showMessageDialog(null, "Sorry the Queue is full and nothing can be added", "Queue Full", JOptionPane.ERROR_MESSAGE);
+                } else{
+                    while(true){
+                        try{
+                            int toBeQueued = Integer.parseInt(JOptionPane.showInputDialog(null, "Enter the number you want to add to the Queue", "Add", JOptionPane.DEFAULT_OPTION));
+                            addQueueOperation("Adding: " + toBeQueued);
+                            model.add(toBeQueued);
+                            queueDisplay.updateUI();
                             break;
                         }
-                        JOptionPane.showMessageDialog(null, "Sorry that was not an Integer, please try again", "Not an Integer", JOptionPane.ERROR_MESSAGE);
+                        catch(java.lang.NumberFormatException exception){
+                            if(exception.getMessage().equals("null")){
+                                break;
+                            }
+                            JOptionPane.showMessageDialog(null, "Sorry that was not an Integer, please try again", "Not an Integer", JOptionPane.ERROR_MESSAGE);
+                        }
                     }
                 }
             }
@@ -245,22 +252,25 @@ public class View extends JFrame {
         offerButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                while(true){
-                    try{
-                        int toBeOffered = Integer.parseInt(JOptionPane.showInputDialog(null, "Enter the number you want to add to the Queue", "Offer", JOptionPane.DEFAULT_OPTION));
-                        addQueueOperation("Offering: " + toBeOffered);
-                        model.add(toBeOffered);
-                        queueDisplay.updateUI();
-                        break;
-                    }
-                    catch(java.lang.NumberFormatException exception){
-                        if(exception.getMessage().equals("null")){
+                if(model.getQueue().size() == 15){
+                    JOptionPane.showMessageDialog(null, "Sorry the Queue is full and nothing can be offered", "Queue Full", JOptionPane.ERROR_MESSAGE);
+                } else{
+                    while(true){
+                        try{
+                            int toBeOffered = Integer.parseInt(JOptionPane.showInputDialog(null, "Enter the number you want to add to the Queue", "Offer", JOptionPane.DEFAULT_OPTION));
+                            addQueueOperation("Offering: " + toBeOffered);
+                            model.add(toBeOffered);
+                            queueDisplay.updateUI();
                             break;
                         }
-                        JOptionPane.showMessageDialog(null, "Sorry that was not an Integer, please try again", "Not an Integer", JOptionPane.ERROR_MESSAGE);
+                        catch(java.lang.NumberFormatException exception){
+                            if(exception.getMessage().equals("null")){
+                                break;
+                            }
+                            JOptionPane.showMessageDialog(null, "Sorry that was not an Integer, please try again", "Not an Integer", JOptionPane.ERROR_MESSAGE);
+                        }
                     }
                 }
-
             }
         });
 
@@ -297,7 +307,7 @@ public class View extends JFrame {
 
     // Add operations to Stack list.
     public void addOperation(String op){
-        if(operationsList.size() < 20){
+        if(operationsList.size() < 25){ //Max size of stack operations list
             operationsList.push(op);
         }else{
             operationsList.removeLast();
@@ -309,7 +319,7 @@ public class View extends JFrame {
 
     // Add operations to the queue list
     public void addQueueOperation(String op){
-        if(operationsListQueue.size() < 20){
+        if(operationsListQueue.size() < 25){ //Max size of queue operations list
             operationsListQueue.push(op);
         }else{
             operationsListQueue.removeLast();
