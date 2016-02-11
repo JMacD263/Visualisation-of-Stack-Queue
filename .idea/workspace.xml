@@ -65,18 +65,20 @@
       <file leaf-file-name="View.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Prototype2/View.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-4.1522346">
-              <caret line="128" column="58" selection-start-line="128" selection-start-column="58" selection-end-line="128" selection-end-column="58" />
+            <state vertical-scroll-proportion="0.66480446">
+              <caret line="309" column="44" selection-start-line="309" selection-start-column="44" selection-end-line="309" selection-end-column="44" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#2093#2123#0" expanded="false" />
-                <element signature="class#5751:5935" expanded="false" />
-                <element signature="e#5847#5848#0" expanded="true" />
-                <element signature="e#5924#5925#0" expanded="true" />
+                <element signature="e#2206#2236#0" expanded="false" />
+                <element signature="class#5864:6048" expanded="false" />
+                <element signature="e#5960#5961#0" expanded="true" />
+                <element signature="e#6037#6038#0" expanded="true" />
                 <element signature="method#addOperation#0;class#View#0" expanded="false" />
                 <element signature="method#addQueueOperation#0;class#View#0" expanded="false" />
-                <element signature="e#16053#16054#0" expanded="true" />
-                <element signature="e#16096#16097#0" expanded="true" />
+                <element signature="e#16275#16276#0" expanded="true" />
+                <element signature="e#16318#16319#0" expanded="true" />
+                <element signature="e#18703#18704#0" expanded="true" />
+                <element signature="e#18746#18747#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -581,7 +583,13 @@
       <option name="project" value="LOCAL" />
       <updated>1455199975895</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="When stack is searched the searched for item will be highlighted, when peeked the top element is also highlighted.">
+      <created>1455202951155</created>
+      <option name="number" value="00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1455202951155</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
@@ -641,7 +649,8 @@
     <MESSAGE value="&quot;Top&quot; and &quot;Bottom&quot; now show on the display." />
     <MESSAGE value="Queue now works the same as Stack does, with operations made in the model and the queue displayed on the graphics panel." />
     <MESSAGE value="Minor changes, now a limit is checked when adding to either the Stack or the Queue." />
-    <option name="LAST_COMMIT_MESSAGE" value="Minor changes, now a limit is checked when adding to either the Stack or the Queue." />
+    <MESSAGE value="When stack is searched the searched for item will be highlighted, when peeked the top element is also highlighted." />
+    <option name="LAST_COMMIT_MESSAGE" value="When stack is searched the searched for item will be highlighted, when peeked the top element is also highlighted." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -660,14 +669,16 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#2093#2123#0" expanded="false" />
-            <element signature="class#5751:5935" expanded="false" />
-            <element signature="e#5847#5848#0" expanded="true" />
-            <element signature="e#5924#5925#0" expanded="true" />
+            <element signature="e#2206#2236#0" expanded="false" />
+            <element signature="class#5864:6048" expanded="false" />
+            <element signature="e#5960#5961#0" expanded="true" />
+            <element signature="e#6037#6038#0" expanded="true" />
             <element signature="method#addOperation#0;class#View#0" expanded="false" />
             <element signature="method#addQueueOperation#0;class#View#0" expanded="false" />
-            <element signature="e#16053#16054#0" expanded="true" />
-            <element signature="e#16096#16097#0" expanded="true" />
+            <element signature="e#16275#16276#0" expanded="true" />
+            <element signature="e#16318#16319#0" expanded="true" />
+            <element signature="e#18703#18704#0" expanded="true" />
+            <element signature="e#18746#18747#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -737,14 +748,16 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#2093#2123#0" expanded="false" />
-            <element signature="class#5751:5935" expanded="false" />
-            <element signature="e#5847#5848#0" expanded="true" />
-            <element signature="e#5924#5925#0" expanded="true" />
+            <element signature="e#2206#2236#0" expanded="false" />
+            <element signature="class#5864:6048" expanded="false" />
+            <element signature="e#5960#5961#0" expanded="true" />
+            <element signature="e#6037#6038#0" expanded="true" />
             <element signature="method#addOperation#0;class#View#0" expanded="false" />
             <element signature="method#addQueueOperation#0;class#View#0" expanded="false" />
-            <element signature="e#16053#16054#0" expanded="true" />
-            <element signature="e#16096#16097#0" expanded="true" />
+            <element signature="e#16275#16276#0" expanded="true" />
+            <element signature="e#16318#16319#0" expanded="true" />
+            <element signature="e#18703#18704#0" expanded="true" />
+            <element signature="e#18746#18747#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -814,14 +827,16 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#2093#2123#0" expanded="false" />
-            <element signature="class#5751:5935" expanded="false" />
-            <element signature="e#5847#5848#0" expanded="true" />
-            <element signature="e#5924#5925#0" expanded="true" />
+            <element signature="e#2206#2236#0" expanded="false" />
+            <element signature="class#5864:6048" expanded="false" />
+            <element signature="e#5960#5961#0" expanded="true" />
+            <element signature="e#6037#6038#0" expanded="true" />
             <element signature="method#addOperation#0;class#View#0" expanded="false" />
             <element signature="method#addQueueOperation#0;class#View#0" expanded="false" />
-            <element signature="e#16053#16054#0" expanded="true" />
-            <element signature="e#16096#16097#0" expanded="true" />
+            <element signature="e#16275#16276#0" expanded="true" />
+            <element signature="e#16318#16319#0" expanded="true" />
+            <element signature="e#18703#18704#0" expanded="true" />
+            <element signature="e#18746#18747#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -898,14 +913,16 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#2093#2123#0" expanded="false" />
-            <element signature="class#5751:5935" expanded="false" />
-            <element signature="e#5847#5848#0" expanded="true" />
-            <element signature="e#5924#5925#0" expanded="true" />
+            <element signature="e#2206#2236#0" expanded="false" />
+            <element signature="class#5864:6048" expanded="false" />
+            <element signature="e#5960#5961#0" expanded="true" />
+            <element signature="e#6037#6038#0" expanded="true" />
             <element signature="method#addOperation#0;class#View#0" expanded="false" />
             <element signature="method#addQueueOperation#0;class#View#0" expanded="false" />
-            <element signature="e#16053#16054#0" expanded="true" />
-            <element signature="e#16096#16097#0" expanded="true" />
+            <element signature="e#16275#16276#0" expanded="true" />
+            <element signature="e#16318#16319#0" expanded="true" />
+            <element signature="e#18703#18704#0" expanded="true" />
+            <element signature="e#18746#18747#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -971,14 +988,16 @@
           <caret line="126" column="48" selection-start-line="126" selection-start-column="48" selection-end-line="126" selection-end-column="48" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#2093#2123#0" expanded="false" />
-            <element signature="class#5751:5935" expanded="false" />
-            <element signature="e#5847#5848#0" expanded="true" />
-            <element signature="e#5924#5925#0" expanded="true" />
+            <element signature="e#2206#2236#0" expanded="false" />
+            <element signature="class#5864:6048" expanded="false" />
+            <element signature="e#5960#5961#0" expanded="true" />
+            <element signature="e#6037#6038#0" expanded="true" />
             <element signature="method#addOperation#0;class#View#0" expanded="false" />
             <element signature="method#addQueueOperation#0;class#View#0" expanded="false" />
-            <element signature="e#16053#16054#0" expanded="true" />
-            <element signature="e#16096#16097#0" expanded="true" />
+            <element signature="e#16275#16276#0" expanded="true" />
+            <element signature="e#16318#16319#0" expanded="true" />
+            <element signature="e#18703#18704#0" expanded="true" />
+            <element signature="e#18746#18747#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1169,18 +1188,20 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Prototype2/View.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-4.1522346">
-          <caret line="128" column="58" selection-start-line="128" selection-start-column="58" selection-end-line="128" selection-end-column="58" />
+        <state vertical-scroll-proportion="0.66480446">
+          <caret line="309" column="44" selection-start-line="309" selection-start-column="44" selection-end-line="309" selection-end-column="44" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#2093#2123#0" expanded="false" />
-            <element signature="class#5751:5935" expanded="false" />
-            <element signature="e#5847#5848#0" expanded="true" />
-            <element signature="e#5924#5925#0" expanded="true" />
+            <element signature="e#2206#2236#0" expanded="false" />
+            <element signature="class#5864:6048" expanded="false" />
+            <element signature="e#5960#5961#0" expanded="true" />
+            <element signature="e#6037#6038#0" expanded="true" />
             <element signature="method#addOperation#0;class#View#0" expanded="false" />
             <element signature="method#addQueueOperation#0;class#View#0" expanded="false" />
-            <element signature="e#16053#16054#0" expanded="true" />
-            <element signature="e#16096#16097#0" expanded="true" />
+            <element signature="e#16275#16276#0" expanded="true" />
+            <element signature="e#16318#16319#0" expanded="true" />
+            <element signature="e#18703#18704#0" expanded="true" />
+            <element signature="e#18746#18747#0" expanded="true" />
           </folding>
         </state>
       </provider>

@@ -56,9 +56,13 @@ public class View extends JFrame {
         DrawStuff drawStuff = new DrawStuff(model);
         stackDisplay.add(drawStuff);
 
+        DrawQueueStuff drawQueueStuff = new DrawQueueStuff(model);
+        queueDisplay.add(drawQueueStuff);
+
+
         //stackDisplay.add(new DrawStuff(model));
 
-        queueDisplay.add(new DrawQueueStuff(model));
+        //queueDisplay.add(new DrawQueueStuff(model));
 
         /*
         This is from the auto-constructor may be useful
@@ -245,6 +249,7 @@ public class View extends JFrame {
                 try{
                     int peeked = model.peekQueue();
                     addQueueOperation("Peeked: " + peeked);
+                    drawQueueStuff.highlight(peeked);
                     queueDisplay.updateUI();
                 } catch(NullPointerException exception){
                     addQueueOperation("Cannot Peek - Queue Empty");
@@ -301,6 +306,7 @@ public class View extends JFrame {
                 try{
                     int element = model.element();
                     addQueueOperation("Element: " + element);
+                    drawQueueStuff.highlight(element);
                     queueDisplay.updateUI();
                 } catch(NoSuchElementException exception){
                     addQueueOperation("Cannot Element - Queue Empty");
@@ -414,6 +420,7 @@ public class View extends JFrame {
 
     private class DrawQueueStuff extends Component {
         Model model;
+        int toBeHighlighted = -1;
 
         public DrawQueueStuff(Model model){
             this.model = model;
@@ -426,6 +433,8 @@ public class View extends JFrame {
 
             Queue<Integer> queue = model.getQueue();
             ArrayList<boxElement> queueRepresentation = new ArrayList<>();
+            FontMetrics fm = graph2.getFontMetrics();
+            int textx;
 
             for(Integer x: queue){
                 queueRepresentation.add(new boxElement(x));
@@ -435,15 +444,23 @@ public class View extends JFrame {
             int y = ((this.getHeight() / 2) - 20);
             int x = 30;
             for(boxElement b: queueRepresentation){
-                int textx;
-                FontMetrics fm = graph2.getFontMetrics();
-                if(b.getText().length() < 2){
+                //get correct spacing for boxes
+                if(b.getText().length() == 1){
                     textx = (x + 12);
                 }else if(b.getText().length() == 2){
                     textx = (x + 8);
                 } else {
                     textx = (x + 5);
                 }
+
+                //highlight searched thing
+                if(b.elementNo == toBeHighlighted){
+                    graph2.setColor(new Color(204, 255, 0));
+                    graph2.fillRect(x, y, 30, 30);
+                    graph2.setColor(Color.black);
+                    toBeHighlighted = -1;
+                }
+
                 graph2.draw(new Rectangle(x, y, 30, 30));
                 graph2.drawString(b.getText(), textx, (y + 20));
                 x += 45;
@@ -466,8 +483,10 @@ public class View extends JFrame {
                 graph2.drawString("Tail", ((45 * queueRepresentation.size()) - 10), (y - 25));
             }
 
+        }
 
-
+        public void highlight(int x) {
+            toBeHighlighted = x;
         }
     }
 }
