@@ -53,7 +53,10 @@ public class View extends JFrame {
         this.setSize(1000, 600);
         this.add(tabbedPane1);
 
-        stackDisplay.add(new DrawStuff(model));
+        DrawStuff drawStuff = new DrawStuff(model);
+        stackDisplay.add(drawStuff);
+
+        //stackDisplay.add(new DrawStuff(model));
 
         queueDisplay.add(new DrawQueueStuff(model));
 
@@ -144,6 +147,7 @@ public class View extends JFrame {
                 try{
                     int peeked = model.peek();
                     addOperation("Peeked: " + peeked);
+                    drawStuff.highlight(peeked); //highlight thing
                     stackDisplay.updateUI();
                 } catch(EmptyStackException exception){
                     addOperation("Cannot Peek - Stack Empty");
@@ -170,6 +174,7 @@ public class View extends JFrame {
                         int searched = model.search(toBeSearched);
                         if(searched > -1){
                             addOperation("Searching for " + toBeSearched + " - " + searched + " from the top of the stack");
+                            drawStuff.highlight(toBeSearched);
                         } else{
                             addOperation("Searching for " + toBeSearched + " : " + searched + " therefore not in the stack");
                         }
@@ -331,6 +336,7 @@ public class View extends JFrame {
 
     private class DrawStuff extends JComponent {
         Model model;
+        int toBeHighlighted = -1;
 
         public DrawStuff(Model model){
             this.model = model;
@@ -345,6 +351,8 @@ public class View extends JFrame {
             Stack<Integer> stack = new Stack<>();
             stack.addAll(s);
             ArrayList<boxElement> stackRepresentation = new ArrayList<>();
+            FontMetrics fm = graph2.getFontMetrics();
+            int textx;
 
             for(int i = stack.size(); i > 0; i--){
                 stackRepresentation.add(new boxElement(stack.pop()));
@@ -354,8 +362,7 @@ public class View extends JFrame {
             int y = 30;
             int x = ((this.getWidth() / 2) - 20);
             for(boxElement b: stackRepresentation){
-                FontMetrics fm = graph2.getFontMetrics();
-                int textx;
+                //get correct spacing for boxes
                 if(b.getText().length() == 1){
                      textx = (x + 12);
                 }else if(b.getText().length() == 2){
@@ -363,6 +370,15 @@ public class View extends JFrame {
                 } else {
                      textx = (x + 5);
                 }
+
+                //highlight searched thing
+                if(b.elementNo == toBeHighlighted){
+                    graph2.setColor(new Color(204, 255, 0));
+                    graph2.fillRect(x, y, 30, 30);
+                    graph2.setColor(Color.black);
+                    toBeHighlighted = -1;
+                }
+
                 graph2.draw(new Rectangle(x, y, 30, 30));
                 graph2.drawString(b.getText(), textx, (y + 20));
                 y = y + 45;
@@ -387,6 +403,12 @@ public class View extends JFrame {
             }
 
         }
+
+        public void highlight(int x){
+            toBeHighlighted = x;
+        }
+
+
 
     }
 
