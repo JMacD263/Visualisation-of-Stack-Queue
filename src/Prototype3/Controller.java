@@ -15,6 +15,7 @@ public class Controller {
     private Model theModel;
     private LinkedList<String> operationsList = new LinkedList<>();
     private LinkedList<String> operationsListQueue = new LinkedList<>();
+    private DrawStackRepresentation drawStack = new DrawStackRepresentation();
 
         public Controller(View view, Model model) {
             this.theView = view;
@@ -29,6 +30,12 @@ public class Controller {
             theView.addEnqueueListener(new EnqueueListener());
             theView.addDequeueListener(new DequeueListener());
             theView.addPeekQueueListener(new QueuePeekListener());
+            theView.addOnRadioListener(new RadioOnListener());
+            theView.addOffRadioListener(new RadioOffListener());
+
+
+            drawStack.setStack(theModel.getStack());
+            theView.setStackPanel(drawStack);
 
         }
 
@@ -105,7 +112,7 @@ public class Controller {
             try{
                 int peeked = theModel.peek();
                 addOperation("Peeked: " + peeked);
-                // drawStuff.highlight(peeked); Needs to be changed to MVC HELP
+                drawStack.highlight(peeked);
                 theView.updateStackUI();
             } catch(EmptyStackException exception){
                 addOperation("Can't Peek: Stack Empty");
@@ -165,6 +172,21 @@ public class Controller {
                 addQueueOperation("Can't Peek: Queue Empty");
                 JOptionPane.showMessageDialog(null, "Sorry the Queue is empty and therefore cannot be peeked", "Queue Empty", JOptionPane.ERROR_MESSAGE);
             }
+        }
+    }
+
+    class RadioOnListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            theView.toggleLabels(false);
+            System.out.println("test");
+        }
+    }
+
+    class RadioOffListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            theView.toggleLabels(true);
         }
     }
 
