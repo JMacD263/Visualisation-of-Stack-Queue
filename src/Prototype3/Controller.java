@@ -16,6 +16,7 @@ public class Controller {
     private LinkedList<String> operationsList = new LinkedList<>();
     private LinkedList<String> operationsListQueue = new LinkedList<>();
     private DrawStackRepresentation drawStack = new DrawStackRepresentation();
+    private DrawQueueRepresentation drawQueue = new DrawQueueRepresentation();
 
         public Controller(View view, Model model) {
             this.theView = view;
@@ -37,11 +38,14 @@ public class Controller {
             drawStack.setStack(theModel.getStack());
             theView.setStackPanel(drawStack);
 
+            drawQueue.setQueue(theModel.getQueue());
+            theView.setQueuePanel(drawQueue);
+
         }
 
     // Add operations to Stack list.
     public void addOperation(String op){
-        if(operationsList.size() < 25){ //Max size of stack operations list
+        if(operationsList.size() < 30){ //Max size of stack operations list
             operationsList.push(op);
         }else{
             operationsList.removeLast();
@@ -53,7 +57,7 @@ public class Controller {
 
     // Add operations to the queue list
     public void addQueueOperation(String op){
-        if(operationsListQueue.size() < 25){ //Max size of queue operations list
+        if(operationsListQueue.size() < 30){ //Max size of queue operations list
             operationsListQueue.push(op);
         }else{
             operationsListQueue.removeLast();
@@ -166,7 +170,7 @@ public class Controller {
             try{
                 int peeked = theModel.peekQueue();
                 addQueueOperation("Peeked: " + peeked);
-                //drawQueueStuff.highlight(peeked); This needs to be changed for MVC HELP
+                drawQueue.highlight(peeked);
                 theView.updateQueueUI();
             } catch(NullPointerException exception){
                 addQueueOperation("Can't Peek: Queue Empty");
