@@ -28,8 +28,6 @@ public class DrawStackRepresentation extends JComponent {
             stackRepresentation.add(Integer.toString(ss.pop()));
         }
 
-
-
         //Draws the boxes with their numbers within them.
         int y = 30;
         int x = ((this.getWidth() / 2) - 20);

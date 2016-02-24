@@ -17,6 +17,7 @@ public class Controller {
     private LinkedList<String> operationsListQueue = new LinkedList<>();
     private DrawStackRepresentation drawStack = new DrawStackRepresentation();
     private DrawQueueRepresentation drawQueue = new DrawQueueRepresentation();
+    private boolean isCircular = false;
 
         public Controller(View view, Model model) {
             this.theView = view;
@@ -33,6 +34,8 @@ public class Controller {
             theView.addPeekQueueListener(new QueuePeekListener());
             theView.addOnRadioListener(new RadioOnListener());
             theView.addOffRadioListener(new RadioOffListener());
+            theView.addCircularQueueListener(new CircularQueueListener());
+            theView.addNormalQueueListener(new NormalQueueListener());
 
 
             drawStack.setStack(theModel.getStack());
@@ -135,7 +138,11 @@ public class Controller {
                     try{
                         int toBeQueued = Integer.parseInt(JOptionPane.showInputDialog(null, "Enter the number you want to enqueue to the Queue", "Add", JOptionPane.DEFAULT_OPTION));
                         addQueueOperation("Enqueue: " + toBeQueued);
-                        theModel.enqueue(toBeQueued);
+                        if(isCircular){
+                            theModel.enqueueCircular(toBeQueued);
+                        } else {
+                            theModel.enqueue(toBeQueued);
+                        }
                         theView.updateQueueUI();
                         break;
                     }
@@ -154,7 +161,12 @@ public class Controller {
         @Override
         public void actionPerformed(ActionEvent e) {
             try{
-                int dequeue = theModel.dequeue();
+                int dequeue;
+                if(isCircular){
+                    dequeue = theModel.dequeueCircular();
+                }else{
+                    dequeue = theModel.dequeue();
+                }
                 addQueueOperation("Dequeue: " + dequeue);
                 theView.updateQueueUI();
             } catch(NullPointerException exception){
@@ -168,7 +180,12 @@ public class Controller {
         @Override
         public void actionPerformed(ActionEvent e) {
             try{
-                int peeked = theModel.peekQueue();
+                int peeked;
+                if(isCircular){
+                    peeked = theModel.peekCircular();
+                }else{
+                    peeked = theModel.peekQueue();
+                }
                 addQueueOperation("Peeked: " + peeked);
                 drawQueue.highlight(peeked);
                 theView.updateQueueUI();
@@ -183,7 +200,6 @@ public class Controller {
         @Override
         public void actionPerformed(ActionEvent e) {
             theView.toggleLabels(false);
-            System.out.println("test");
         }
     }
 
@@ -191,6 +207,24 @@ public class Controller {
         @Override
         public void actionPerformed(ActionEvent e) {
             theView.toggleLabels(true);
+        }
+    }
+
+    class CircularQueueListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            drawQueue.toggleCircular(true);
+            drawQueue.setCircularQueue(theModel.getCircularQueue());
+            isCircular = true;
+            theView.updateQueueUI();
+        }
+    }
+
+    class NormalQueueListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            drawQueue.toggleCircular(false);
+            theView.updateQueueUI();
         }
     }
 

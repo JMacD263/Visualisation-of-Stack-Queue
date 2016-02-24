@@ -39,6 +39,8 @@ public class View extends JFrame {
 
     private JRadioButtonMenuItem radioOn;
     private JRadioButtonMenuItem radioOff;
+    private JRadioButtonMenuItem circularQueue;
+    private JRadioButtonMenuItem normalQueue;
 
     public View(){
         super("Stack and Queue Visualisation");
@@ -50,32 +52,44 @@ public class View extends JFrame {
         JMenuBar menuBar = new JMenuBar();
         // Add to the frame
         setJMenuBar(menuBar);
-        // Add drop down menu
+
+        // Add drop down prediction menu
         JMenu predictionMenu = new JMenu("Prediction Mode");
         menuBar.add(predictionMenu);
-        // Add the radio buttons to turn on/off
-        JRadioButtonMenuItem radioOn = new JRadioButtonMenuItem(
+        // Add the radio buttons to turn prediction on/off
+
+        radioOn = new JRadioButtonMenuItem(
                 "On");
-        JRadioButtonMenuItem radioOff = new JRadioButtonMenuItem(
+        radioOff = new JRadioButtonMenuItem(
                 "Off");
         // Group buttons together and set off as default
-        ButtonGroup bg = new ButtonGroup();
-        bg.add(radioOn);
-        bg.add(radioOff);
+        ButtonGroup bgPrediction = new ButtonGroup();
+        bgPrediction.add(radioOn);
+        bgPrediction.add(radioOff);
         radioOff.setSelected(true);
         // Add radio buttons to menu bar
         predictionMenu.add(radioOn);
         predictionMenu.add(radioOff);
 
-        // Set global variable radioOn so a listener can be added in the Controller
-        setRadioButtons(radioOn, radioOff);
+        // Add drop down queue menu
+        JMenu queueMenu = new JMenu("Queue");
+        menuBar.add(queueMenu);
+        // Add the radio buttons to change queue type
+        circularQueue = new JRadioButtonMenuItem(
+                "Circular Queue");
+        normalQueue = new JRadioButtonMenuItem(
+                "Regular Queue");
+        // Group buttons together and set normal as default
+        ButtonGroup bgQueue = new ButtonGroup();
+        bgQueue.add(circularQueue);
+        bgQueue.add(normalQueue);
+        normalQueue.setSelected(true);
+        // Add radio buttons to menu bar
+        queueMenu.add(circularQueue);
+        queueMenu.add(normalQueue);
 
     }
 
-    public void setRadioButtons(JRadioButtonMenuItem rOn, JRadioButtonMenuItem rOff){
-        radioOn = rOn;
-        radioOff = rOff;
-    }
 
     public void setPreviousStackOperations(String listData[]){
         previousStackOperations.setListData(listData);
@@ -93,13 +107,13 @@ public class View extends JFrame {
         queueDisplay.updateUI();
     }
 
-    public void toggleLabels(boolean tf){
-        pushLabel.setVisible(tf);
-        popLabel.setVisible(tf);
-        peekStackLabel.setVisible(tf);
-        enqueueLabel.setVisible(tf);
-        dequeueLabel.setVisible(tf);
-        peekQueueLabel.setVisible(tf);
+    public void toggleLabels(boolean isVisible){
+        pushLabel.setVisible(isVisible);
+        popLabel.setVisible(isVisible);
+        peekStackLabel.setVisible(isVisible);
+        enqueueLabel.setVisible(isVisible);
+        dequeueLabel.setVisible(isVisible);
+        peekQueueLabel.setVisible(isVisible);
     }
 
     public void setStackPanel(DrawStackRepresentation drawStackRepresentation){
@@ -151,6 +165,15 @@ public class View extends JFrame {
     // If the off radio button is selected in the Prediction menu the actionPerformed method is run in the Controller
     void addOffRadioListener(ActionListener listenForOffRadio){
         radioOff.addActionListener(listenForOffRadio);
+    }
+
+    // If the circular queue is selected in the Prediction menu the actionPerformed method is run in the Controller
+    void addCircularQueueListener(ActionListener listenForCircularQueue) {
+        circularQueue.addActionListener(listenForCircularQueue);
+    }
+    // If the normal queue is selected in the Prediction menu the actionPerformed method is run in the Controller
+    void addNormalQueueListener(ActionListener listenForNormalQueue) {
+        normalQueue.addActionListener(listenForNormalQueue);
     }
 
 

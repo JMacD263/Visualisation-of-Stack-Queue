@@ -6,11 +6,13 @@ import java.util.Stack;
 
 /**
  * Created by Jamie on 22/02/2016.
+ *
  */
 public class Model {
 
     private Stack<Integer> stack = new Stack<>();
     private Queue<Integer> queue = new LinkedList<>();
+    private CircularQueue<Integer> circularQueue = new CircularQueue<>();
 
     //Stack Operations
 
@@ -47,4 +49,31 @@ public class Model {
     public Queue<Integer> getQueue(){
         return queue;
     }
+
+    //Circular Queue Operations
+
+    public void enqueueCircular(int x){
+        circularQueue.enqueue(x);
+    }
+
+    public int dequeueCircular(){
+        return circularQueue.dequeue();
+    }
+
+    public int peekCircular(){
+        return circularQueue.peek();
+    }
+
+    public int getFront(){
+        return circularQueue.getFront();
+    }
+
+    public int getRear(){
+        return circularQueue.getRear();
+    }
+
+    public CircularQueue<Integer> getCircularQueue(){
+        return circularQueue;
+    }
+
 }
