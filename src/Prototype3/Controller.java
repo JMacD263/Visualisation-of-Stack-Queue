@@ -8,6 +8,7 @@ import java.util.LinkedList;
 
 /**
  * Created by Jamie on 22/02/2016.
+ *
  */
 public class Controller {
 
@@ -15,17 +16,19 @@ public class Controller {
     private Model theModel;
     private LinkedList<String> operationsList = new LinkedList<>();
     private LinkedList<String> operationsListQueue = new LinkedList<>();
+    private LinkedList<String> operationsListCircularQueue = new LinkedList<>();
     private DrawStackRepresentation drawStack = new DrawStackRepresentation();
     private DrawQueueRepresentation drawQueue = new DrawQueueRepresentation();
     private boolean isCircular = false;
+    private int maxListSize = 35;
 
-        public Controller(View view, Model model) {
+    public Controller(View view, Model model) {
             this.theView = view;
             this.theModel = model;
 
-            // Tell the View that whenever a button is pushed
-            // to execute the actionPerformed method in the
-            // relevant inner class
+            // Tell the View that whenever a button or menu item
+            // is clicked to execute the actionPerformed method
+            // in the relevant inner class.
             theView.addPushListener(new PushListener());
             theView.addPopListener(new PopListener());
             theView.addPeekStackListener(new StackPeekListener());
@@ -36,6 +39,7 @@ public class Controller {
             theView.addOffRadioListener(new RadioOffListener());
             theView.addCircularQueueListener(new CircularQueueListener());
             theView.addNormalQueueListener(new NormalQueueListener());
+            theView.addResetListener(new ResetListener());
 
 
             drawStack.setStack(theModel.getStack());
@@ -48,7 +52,7 @@ public class Controller {
 
     // Add operations to Stack list.
     public void addOperation(String op){
-        if(operationsList.size() < 30){ //Max size of stack operations list
+        if(operationsList.size() < maxListSize){ //Max size of stack operations list
             operationsList.push(op);
         }else{
             operationsList.removeLast();
@@ -60,7 +64,7 @@ public class Controller {
 
     // Add operations to the queue list
     public void addQueueOperation(String op){
-        if(operationsListQueue.size() < 30){ //Max size of queue operations list
+        if(operationsListQueue.size() < maxListSize){ //Max size of queue operations list
             operationsListQueue.push(op);
         }else{
             operationsListQueue.removeLast();
@@ -77,7 +81,8 @@ public class Controller {
     class PushListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            if(theModel.getStack().size() == 10){
+            int maxStackSize = 10;
+            if(theModel.getStack().size() == maxStackSize){
                 JOptionPane.showMessageDialog(null, "Sorry the Stack is full and nothing can be pushed", "Stack Full", JOptionPane.ERROR_MESSAGE);
             } else{
                 while(true){
@@ -131,7 +136,8 @@ public class Controller {
     class EnqueueListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            if(theModel.getQueue().size() == 15){
+            int maxQueueSize = 20;
+            if(theModel.getQueue().size() == maxQueueSize || theModel.getCircularQueue().getSize() == maxQueueSize){
                 JOptionPane.showMessageDialog(null, "Sorry the Queue is full and nothing can be enqueued", "Queue Full", JOptionPane.ERROR_MESSAGE);
             } else{
                 while(true){
@@ -225,6 +231,18 @@ public class Controller {
         public void actionPerformed(ActionEvent e) {
             drawQueue.toggleCircular(false);
             isCircular = false;
+            theView.updateQueueUI();
+        }
+    }
+
+    class ResetListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            theModel.reset(); //clears the data stored in the model
+            operationsList.clear();
+            operationsListQueue.clear();
+            theView.resetPreviousOperations(); //clears the data held within the JList
+            theView.updateStackUI();
             theView.updateQueueUI();
         }
     }

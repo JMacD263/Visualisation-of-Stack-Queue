@@ -8,6 +8,7 @@ import java.util.Queue;
 
 /**
  * Created by xnb12162 on 23/02/16.
+ *
  */
 public class DrawQueueRepresentation extends JComponent {
     String toBeHighlighted = "";
@@ -82,7 +83,7 @@ public class DrawQueueRepresentation extends JComponent {
 
     private void circularQueueSettings(Graphics2D graph2) {
         int y = ((this.getHeight() / 2) - 20);
-        int x = 30;
+        int x;
         int size = 10;
         int head = 0;
         int tail = 0;
@@ -91,16 +92,11 @@ public class DrawQueueRepresentation extends JComponent {
             head = circularQueue.getFront();
             tail = circularQueue.getRear();
 
-            System.out.println("front test " + head);
-            System.out.println("tail test " + tail);
-
             int list[] = circularQueue.getList();
+            size = list.length;
 
-            x = (30);
+            x = 30;
             for(int i = 0; i < list.length; i++){
-                if(x == ((45 * size) + 30)){
-                    x = 30;
-                }
 
                 String s = Integer.toString(list[i]);
 
@@ -111,6 +107,14 @@ public class DrawQueueRepresentation extends JComponent {
                     textx = (x + 8);
                 } else {
                     textx = (x + 5);
+                }
+
+                //highlight peeked
+                if(toBeHighlighted != "" && list[i] == list[head]){
+                    graph2.setColor(new Color(204, 255, 0));
+                    graph2.fillRect(x, y, 30, 30);
+                    graph2.setColor(Color.black);
+                    toBeHighlighted = "";
                 }
 
                 if(!s.equals("0")){

@@ -11,6 +11,7 @@ import java.util.Stack;
 
 /**
  * Created by Jamie on 22/02/2016.
+ *
  */
 public class View extends JFrame {
 
@@ -41,6 +42,7 @@ public class View extends JFrame {
     private JRadioButtonMenuItem radioOff;
     private JRadioButtonMenuItem circularQueue;
     private JRadioButtonMenuItem normalQueue;
+    private JMenuItem resetMenuItem;
 
     public View(){
         super("Stack and Queue Visualisation");
@@ -57,7 +59,6 @@ public class View extends JFrame {
         JMenu predictionMenu = new JMenu("Prediction Mode");
         menuBar.add(predictionMenu);
         // Add the radio buttons to turn prediction on/off
-
         radioOn = new JRadioButtonMenuItem(
                 "On");
         radioOff = new JRadioButtonMenuItem(
@@ -70,6 +71,13 @@ public class View extends JFrame {
         // Add radio buttons to menu bar
         predictionMenu.add(radioOn);
         predictionMenu.add(radioOff);
+
+        // Add edit drop down menu
+        JMenu editMenu = new JMenu("Edit");
+        menuBar.add(editMenu);
+        // Add the reset menu option
+        resetMenuItem = new JMenuItem("Reset");
+        editMenu.add(resetMenuItem);
 
         // Add drop down queue menu
         JMenu queueMenu = new JMenu("Queue");
@@ -97,6 +105,11 @@ public class View extends JFrame {
 
     public void setPreviousQueueOperations(String listData[]){
         previousQueueOperations.setListData(listData);
+    }
+
+    public void resetPreviousOperations(){
+        previousStackOperations.setListData(new Object[0]);
+        previousQueueOperations.setListData(new Object[0]);
     }
 
     public void updateStackUI(){
@@ -176,5 +189,8 @@ public class View extends JFrame {
         normalQueue.addActionListener(listenForNormalQueue);
     }
 
-
+    // If the reset menu option is selected the relevant actionPerformed method is run in the Controller
+    void addResetListener(ActionListener listenForReset){
+        resetMenuItem.addActionListener(listenForReset);
+    }
 }

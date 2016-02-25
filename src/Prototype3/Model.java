@@ -14,6 +14,12 @@ public class Model {
     private Queue<Integer> queue = new LinkedList<>();
     private CircularQueue<Integer> circularQueue = new CircularQueue<>();
 
+    public void reset() {
+        stack.clear();
+        queue.clear();
+        circularQueue.clear();
+    }
+
     //Stack Operations
 
     public void push(int x){
