@@ -27,7 +27,9 @@ public class CircularQueue<Integer> {
         }
         q[rear] = element;
         rear = (rear+1)%no;
-        size++;
+        if(size < 10){
+            size++;
+        }
     }
 
     public int getSize(){
@@ -39,6 +41,7 @@ public class CircularQueue<Integer> {
             throw new NullPointerException();
         }
         int e = q[front];
+        q[front] = 0;
         front=(front+1)%no;
         size--;
         return e;
@@ -64,7 +67,13 @@ public class CircularQueue<Integer> {
     }
 
     public boolean isEmpty() {
-        return (size==0);
+        boolean isEmpty = true;
+        for(int i = 0; i < q.length; i++){
+            if(q[i] > 0){
+                isEmpty = false;
+            }
+        }
+        return isEmpty;
     }
 
 }

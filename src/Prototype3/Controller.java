@@ -224,6 +224,7 @@ public class Controller {
         @Override
         public void actionPerformed(ActionEvent e) {
             drawQueue.toggleCircular(false);
+            isCircular = false;
             theView.updateQueueUI();
         }
     }

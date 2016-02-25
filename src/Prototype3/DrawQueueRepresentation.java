@@ -14,7 +14,7 @@ public class DrawQueueRepresentation extends JComponent {
     Queue<Integer> queue = new LinkedList<>();
     CircularQueue<Integer> circularQueue;
     boolean circular = false;
-    boolean emptyQueue = true;
+    boolean firstRun = true;
 
 
     public void paint(Graphics g){
@@ -86,27 +86,23 @@ public class DrawQueueRepresentation extends JComponent {
         int size = 10;
         int head = 0;
         int tail = 0;
-        ArrayList<Integer> queueList = new ArrayList<>();
 
-        if(!emptyQueue){
+        if(!firstRun){
             head = circularQueue.getFront();
             tail = circularQueue.getRear();
 
-            System.out.println("Head test " + head);
+            System.out.println("front test " + head);
+            System.out.println("tail test " + tail);
 
-            ArrayList<String> queueRepresentation = new ArrayList<>();
+            int list[] = circularQueue.getList();
 
-            for(Integer i: circularQueue.getList()){
-                queueRepresentation.add(Integer.toString(i));
-            }
-
-            //For drawing the text inside the boxes
-            x = (30 + (45 * head));
-            for(String s: queueRepresentation){
-
+            x = (30);
+            for(int i = 0; i < list.length; i++){
                 if(x == ((45 * size) + 30)){
                     x = 30;
                 }
+
+                String s = Integer.toString(list[i]);
 
                 int textx;
                 if(s.length() == 1){
@@ -124,6 +120,7 @@ public class DrawQueueRepresentation extends JComponent {
             }
         }
 
+        //Draw the boxes and index numbers beneath them
         x = 30;
         for(int i = 0; i < size; i++){
             graph2.draw(new Rectangle(x, y, 30, 30));
@@ -142,14 +139,8 @@ public class DrawQueueRepresentation extends JComponent {
         graph2.drawString("Head", ((45 * (head + 1)) - 15), (y - 40));
         graph2.drawString("Tail", ((45 * (tail + 1)) - 10), (y - 15));
 
-        try{
-            for(int i: circularQueue.getList()){
-                queueList.add(i);
-            }
-            emptyQueue = false;
-        }catch (NullPointerException exception){
-            emptyQueue = true;
-        }
+        //Allow the boxes to be filled
+        firstRun = false;
 
     }
 
