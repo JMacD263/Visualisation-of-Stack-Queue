@@ -21,6 +21,7 @@ public class Controller {
     private DrawQueueRepresentation drawQueue = new DrawQueueRepresentation();
     private boolean isCircular = false;
     private int maxListSize = 35;
+    String regex = "^[1-9]\\d{0,2}$";
 
     public Controller(View view, Model model) {
             this.theView = view;
@@ -74,6 +75,30 @@ public class Controller {
         theView.setPreviousQueueOperations(listData);
     }
 
+    // Add operations to the queue list
+    public void addCircularQueueOperation(String op){
+        if(operationsListCircularQueue.size() < maxListSize){
+            operationsListCircularQueue.push(op);
+        }else{
+            operationsListCircularQueue.removeLast();
+            operationsListCircularQueue.push(op);
+        }
+        String listData[] = operationsListCircularQueue.toArray(new String[operationsListCircularQueue.size()]);
+        theView.setPreviousQueueOperations(listData);
+    }
+
+    public void switchQueueOperationsList(String s){
+        theView.setPreviousQueueOperations(new String[0]);
+        String listData[];
+        if(s.equals("Circular")){
+            listData = operationsListCircularQueue.toArray(new String[operationsListCircularQueue.size()]);
+            theView.setPreviousQueueOperations(listData);
+        }else if (s.equals("Normal")){
+            listData = operationsListQueue.toArray(new String[operationsListQueue.size()]);
+            theView.setPreviousQueueOperations(listData);
+        }
+    }
+
     /*
     This is a block of inner classes which create ActionListeners for the buttons
      */
@@ -87,7 +112,11 @@ public class Controller {
             } else{
                 while(true){
                     try{
-                        int toBePushed = Integer.parseInt(JOptionPane.showInputDialog(null, "Enter the number you want to push on to the Stack", "Push", JOptionPane.DEFAULT_OPTION));
+                        String input = JOptionPane.showInputDialog(null, "Enter a positive Integer of maximum 3 digits you want to push on to the Stack", "Push", JOptionPane.DEFAULT_OPTION);
+                        int toBePushed = Integer.parseInt(input);
+                        if(!input.matches(regex)){
+                            throw new java.lang.NumberFormatException("Not positive 3 digit Integer");
+                        }
                         addOperation("Pushing: " + toBePushed);
                         theModel.push(toBePushed);
                         theView.updateStackUI();
@@ -97,7 +126,7 @@ public class Controller {
                         if(exception.getMessage().equals("null")){
                             break;
                         }
-                        JOptionPane.showMessageDialog(null, "Sorry that was not an Integer, please try again", "Not an Integer", JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.showMessageDialog(null, "Sorry that was not a positive Integer, please try again", "Not an Integer", JOptionPane.ERROR_MESSAGE);
                     }
                 }
             }
@@ -142,12 +171,17 @@ public class Controller {
             } else{
                 while(true){
                     try{
-                        int toBeQueued = Integer.parseInt(JOptionPane.showInputDialog(null, "Enter the number you want to enqueue to the Queue", "Add", JOptionPane.DEFAULT_OPTION));
-                        addQueueOperation("Enqueue: " + toBeQueued);
+                        String input = JOptionPane.showInputDialog(null, "Enter a positive Integer of maximum 3 digits you want to enqueue to the Queue", "Enqueue", JOptionPane.DEFAULT_OPTION);
+                        int toBeQueued = Integer.parseInt(input);
+                        if(!input.matches(regex)){
+                            throw new java.lang.NumberFormatException("Not positive 3 digit Integer");
+                        }
                         if(isCircular){
                             theModel.enqueueCircular(toBeQueued);
+                            addCircularQueueOperation("Enqueue: " + toBeQueued);
                         } else {
                             theModel.enqueue(toBeQueued);
+                            addQueueOperation("Enqueue: " + toBeQueued);
                         }
                         theView.updateQueueUI();
                         break;
@@ -156,7 +190,7 @@ public class Controller {
                         if(exception.getMessage().equals("null")){
                             break;
                         }
-                        JOptionPane.showMessageDialog(null, "Sorry that was not an Integer, please try again", "Not an Integer", JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.showMessageDialog(null, "Sorry that was not a positive Integer, please try again", "Not an Integer", JOptionPane.ERROR_MESSAGE);
                     }
                 }
             }
@@ -170,10 +204,11 @@ public class Controller {
                 int dequeue;
                 if(isCircular){
                     dequeue = theModel.dequeueCircular();
+                    addCircularQueueOperation("Dequeue: " + dequeue);
                 }else{
                     dequeue = theModel.dequeue();
+                    addQueueOperation("Dequeue: " + dequeue);
                 }
-                addQueueOperation("Dequeue: " + dequeue);
                 theView.updateQueueUI();
             } catch(NullPointerException exception){
                 addQueueOperation("Can't Dequeue: Queue Empty");
@@ -189,10 +224,11 @@ public class Controller {
                 int peeked;
                 if(isCircular){
                     peeked = theModel.peekCircular();
+                    addCircularQueueOperation("Peeked: " + peeked);
                 }else{
                     peeked = theModel.peekQueue();
+                    addQueueOperation("Peeked: " + peeked);
                 }
-                addQueueOperation("Peeked: " + peeked);
                 drawQueue.highlight(peeked);
                 theView.updateQueueUI();
             } catch(NullPointerException exception){
@@ -222,6 +258,7 @@ public class Controller {
             drawQueue.toggleCircular(true);
             drawQueue.setCircularQueue(theModel.getCircularQueue());
             isCircular = true;
+            switchQueueOperationsList("Circular");
             theView.updateQueueUI();
         }
     }
@@ -231,6 +268,7 @@ public class Controller {
         public void actionPerformed(ActionEvent e) {
             drawQueue.toggleCircular(false);
             isCircular = false;
+            switchQueueOperationsList("Normal");
             theView.updateQueueUI();
         }
     }
@@ -241,6 +279,7 @@ public class Controller {
             theModel.reset(); //clears the data stored in the model
             operationsList.clear();
             operationsListQueue.clear();
+            operationsListCircularQueue.clear();
             theView.resetPreviousOperations(); //clears the data held within the JList
             theView.updateStackUI();
             theView.updateQueueUI();
