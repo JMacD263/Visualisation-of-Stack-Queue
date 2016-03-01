@@ -47,6 +47,7 @@ public class View extends JFrame {
     public View(){
         super("Stack and Queue Visualisation");
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        this.setSize(1200,800);
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         this.add(tabbedPane1);
 
