@@ -211,7 +211,11 @@ public class Controller {
                 }
                 theView.updateQueueUI();
             } catch(NullPointerException exception){
-                addQueueOperation("Can't Dequeue: Queue Empty");
+                if(isCircular){
+                    addCircularQueueOperation("Can't Dequeue: Queue Empty");
+                }else{
+                    addQueueOperation("Can't Dequeue: Queue Empty");
+                }
                 JOptionPane.showMessageDialog(null, "Sorry the Queue is empty and therefore cannot be dequeued", "Queue Empty", JOptionPane.ERROR_MESSAGE);
             }
         }
@@ -232,7 +236,11 @@ public class Controller {
                 drawQueue.highlight(peeked);
                 theView.updateQueueUI();
             } catch(NullPointerException exception){
-                addQueueOperation("Can't Peek: Queue Empty");
+                if(isCircular){
+                    addCircularQueueOperation("Can't Peek: Queue Empty");
+                }else{
+                    addQueueOperation("Can't Peek: Queue Empty");
+                }
                 JOptionPane.showMessageDialog(null, "Sorry the Queue is empty and therefore cannot be peeked", "Queue Empty", JOptionPane.ERROR_MESSAGE);
             }
         }

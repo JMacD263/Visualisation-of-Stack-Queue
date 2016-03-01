@@ -20,20 +20,20 @@ public class CircularQueue<Integer> {
 
     public void enqueue(int element) {
         if (size == q.length){
-            int NewStack[] = new int[(q.length * 2)];
-            System.arraycopy(q, 0, NewStack, 0, q.length);
-            //front=(front+1)%q.length;
-            //front = 0;
+            int NewQueue[] = new int[(q.length * 2)];
+
+            for(int i=0; i < size; i++)
+            {
+                NewQueue[i] = q[front];
+                front=(front+1) % q.length;
+            }
+
+            front = 0;
             rear = size;
             no = no * 2;
-            q = NewStack;
+            q = NewQueue;
         }
         q[rear] = element;
-//        if(rear == 9 && front == 0){
-//            rear = 10;
-//        }else{
-//            rear = (rear+1)%no;
-//        }
         rear = (rear+1)%no;
         size++;
         if (size == q.length && size == 10){

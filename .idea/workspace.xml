@@ -8,6 +8,7 @@
   <component name="ChangeListManager">
     <list default="true" id="19f81c55-b050-4dd0-b82d-43bcb1e555a9" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Prototype3/CircularQueue.java" afterPath="$PROJECT_DIR$/src/Prototype3/CircularQueue.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Prototype3/Controller.java" afterPath="$PROJECT_DIR$/src/Prototype3/Controller.java" />
     </list>
     <ignored path="StackQueueVisu.iws" />
@@ -56,8 +57,8 @@
       <file leaf-file-name="Controller.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Prototype3/Controller.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.33333334">
-              <caret line="114" column="128" selection-start-line="114" selection-start-column="128" selection-end-line="114" selection-end-column="128" />
+            <state vertical-scroll-proportion="1.8109188">
+              <caret line="239" column="73" selection-start-line="239" selection-start-column="73" selection-end-line="239" selection-end-column="73" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -93,7 +94,7 @@
         <entry file="file://$PROJECT_DIR$/src/Prototype3/CircularQueue.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="95" column="0" selection-start-line="95" selection-start-column="0" selection-end-line="95" selection-end-column="0" />
+              <caret line="23" column="0" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -144,10 +145,10 @@
         <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/src/Prototype3/DrawStackRepresentation.java" />
         <option value="$PROJECT_DIR$/src/Prototype3/DrawQueueRepresentation.java" />
-        <option value="$PROJECT_DIR$/src/Prototype3/CircularQueue.java" />
         <option value="$PROJECT_DIR$/src/Prototype3/Model.java" />
         <option value="$PROJECT_DIR$/src/Prototype3/Prototype3.java" />
         <option value="$PROJECT_DIR$/src/Prototype3/View.java" />
+        <option value="$PROJECT_DIR$/src/Prototype3/CircularQueue.java" />
         <option value="$PROJECT_DIR$/src/Prototype3/Controller.java" />
       </list>
     </option>
@@ -207,7 +208,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
+      <pane id="Scratches" />
       <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
@@ -283,7 +284,7 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scratches" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -826,7 +827,8 @@
       <workItem from="1456147363446" duration="11700000" />
       <workItem from="1456318081381" duration="19490000" />
       <workItem from="1456405731313" duration="12942000" />
-      <workItem from="1456495175649" duration="6642000" />
+      <workItem from="1456495175649" duration="6692000" />
+      <workItem from="1456848556901" duration="939000" />
     </task>
     <task id="LOCAL-00001" summary="Setup">
       <created>1453136920053</created>
@@ -924,11 +926,17 @@
       <option name="project" value="LOCAL" />
       <updated>1456422038828</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="Now operation lists switch properly and changed so positive integer up to 3 digits">
+      <created>1456505864303</created>
+      <option name="number" value="00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1456505864303</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="74442000" />
+    <option name="totallyTimeSpent" value="75431000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -941,7 +949,7 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.15709643" sideWeight="0.5042644" order="10" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32980973" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.15709643" sideWeight="0.49573562" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.156013" sideWeight="0.49573562" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.14498934" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -993,7 +1001,8 @@
     <MESSAGE value="Some progress with Circular Queue - lots to be done." />
     <MESSAGE value="Circular Queue Visu complete, currently overwrites rather than extending or throwing an exception." />
     <MESSAGE value="Changed circular from overwriting to expanding then throwing an error. Also added a reset function to clear all data in the model etc." />
-    <option name="LAST_COMMIT_MESSAGE" value="Changed circular from overwriting to expanding then throwing an error. Also added a reset function to clear all data in the model etc." />
+    <MESSAGE value="Now operation lists switch properly and changed so positive integer up to 3 digits" />
+    <option name="LAST_COMMIT_MESSAGE" value="Now operation lists switch properly and changed so positive integer up to 3 digits" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1285,13 +1294,13 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Prototype2/View.form">
-      <provider selected="true" editor-type-id="ui-designer">
-        <state />
-      </provider>
       <provider editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
+      </provider>
+      <provider selected="true" editor-type-id="ui-designer">
+        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Prototype2/View.java">
@@ -1334,39 +1343,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Prototype3/CircularQueue.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="95" column="0" selection-start-line="95" selection-start-column="0" selection-end-line="95" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Prototype3/Prototype3.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="4" column="2" selection-start-line="4" selection-start-column="2" selection-end-line="4" selection-end-column="2" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Prototype3/View.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="109" column="42" selection-start-line="109" selection-start-column="42" selection-end-line="109" selection-end-column="42" />
-          <folding>
-            <element signature="method#addCircularQueueListener#0;class#View#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Prototype3/DrawQueueRepresentation.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="95" column="31" selection-start-line="95" selection-start-column="31" selection-end-line="95" selection-end-column="31" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1380,10 +1361,38 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/Prototype3/CircularQueue.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="23" column="0" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Prototype3/DrawQueueRepresentation.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="95" column="31" selection-start-line="95" selection-start-column="31" selection-end-line="95" selection-end-column="31" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Prototype3/View.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="109" column="42" selection-start-line="109" selection-start-column="42" selection-end-line="109" selection-end-column="42" />
+          <folding>
+            <element signature="method#addCircularQueueListener#0;class#View#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/Prototype3/Controller.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33333334">
-          <caret line="114" column="128" selection-start-line="114" selection-start-column="128" selection-end-line="114" selection-end-column="128" />
+        <state vertical-scroll-proportion="1.8109188">
+          <caret line="239" column="73" selection-start-line="239" selection-start-column="73" selection-end-line="239" selection-end-column="73" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
