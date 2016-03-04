@@ -7,12 +7,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="19f81c55-b050-4dd0-b82d-43bcb1e555a9" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/128.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/16.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/32.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/64.png" afterPath="" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/icons/128.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/icons/16.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/icons/32.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/icons/64.png" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Prototype3/View.java" afterPath="$PROJECT_DIR$/src/Prototype3/View.java" />
     </list>
     <ignored path="StackQueueVisu.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -72,8 +71,8 @@
       <file leaf-file-name="View.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Prototype3/View.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.57104915">
-              <caret line="71" column="43" selection-start-line="71" selection-start-column="43" selection-end-line="71" selection-end-column="43" />
+            <state vertical-scroll-proportion="0.3678619">
+              <caret line="62" column="43" selection-start-line="62" selection-start-column="43" selection-end-line="62" selection-end-column="43" />
               <folding>
                 <element signature="method#addCircularQueueListener#0;class#View#0" expanded="false" />
               </folding>
@@ -837,7 +836,7 @@
       <workItem from="1456848556901" duration="2358000" />
       <workItem from="1456932090065" duration="3133000" />
       <workItem from="1457018509354" duration="699000" />
-      <workItem from="1457098482017" duration="10357000" />
+      <workItem from="1457098482017" duration="10581000" />
     </task>
     <task id="LOCAL-00001" summary="Setup">
       <created>1453136920053</created>
@@ -959,11 +958,17 @@
       <option name="project" value="LOCAL" />
       <updated>1457109815690</updated>
     </task>
-    <option name="localTasksCounter" value="21" />
+    <task id="LOCAL-00021" summary="Icons now in folder">
+      <created>1457110278759</created>
+      <option name="number" value="00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1457110278759</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="91039000" />
+    <option name="totallyTimeSpent" value="91263000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -1007,7 +1012,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Starting prototype 1 - Basic text based Stack and Queue" />
     <MESSAGE value="Text based Stack with default implementation completed." />
     <MESSAGE value="Start of GUI for prototype 2, designed with MVC." />
     <MESSAGE value="Added some more GUI stuff, including source code from IntelliJ" />
@@ -1032,7 +1036,8 @@
     <MESSAGE value="Change default size" />
     <MESSAGE value="Change default size of window." />
     <MESSAGE value="Icons added as well as the start of Prediction Functionality added. Basic prediction for Push is now complete." />
-    <option name="LAST_COMMIT_MESSAGE" value="Icons added as well as the start of Prediction Functionality added. Basic prediction for Push is now complete." />
+    <MESSAGE value="Icons now in folder" />
+    <option name="LAST_COMMIT_MESSAGE" value="Icons now in folder" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1398,8 +1403,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Prototype3/View.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.57104915">
-          <caret line="71" column="43" selection-start-line="71" selection-start-column="43" selection-end-line="71" selection-end-column="43" />
+        <state vertical-scroll-proportion="0.3678619">
+          <caret line="62" column="43" selection-start-line="62" selection-start-column="43" selection-end-line="62" selection-end-column="43" />
           <folding>
             <element signature="method#addCircularQueueListener#0;class#View#0" expanded="false" />
           </folding>
