@@ -6,14 +6,12 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="19f81c55-b050-4dd0-b82d-43bcb1e555a9" name="Default" comment="Change default size of window.">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/128.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/16.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/32.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/64.png" />
+    <list default="true" id="19f81c55-b050-4dd0-b82d-43bcb1e555a9" name="Default" comment="">
+      <change type="DELETED" beforePath="$PROJECT_DIR$/128.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/16.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/32.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/64.png" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Prototype3/Controller.java" afterPath="$PROJECT_DIR$/src/Prototype3/Controller.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Prototype3/View.form" afterPath="$PROJECT_DIR$/src/Prototype3/View.form" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Prototype3/View.java" afterPath="$PROJECT_DIR$/src/Prototype3/View.java" />
     </list>
     <ignored path="StackQueueVisu.iws" />
@@ -59,10 +57,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Controller.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Controller.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Prototype3/Controller.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.45152724">
+            <state vertical-scroll-proportion="0.0">
               <caret line="116" column="9" selection-start-line="116" selection-start-column="9" selection-end-line="116" selection-end-column="9" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -71,11 +69,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="View.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="View.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Prototype3/View.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="61" column="0" selection-start-line="61" selection-start-column="0" selection-end-line="61" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.57104915">
+              <caret line="71" column="43" selection-start-line="71" selection-start-column="43" selection-end-line="71" selection-end-column="43" />
               <folding>
                 <element signature="method#addCircularQueueListener#0;class#View#0" expanded="false" />
               </folding>
@@ -153,8 +151,8 @@
         <option value="$PROJECT_DIR$/src/Prototype3/Prototype3.java" />
         <option value="$PROJECT_DIR$/src/Prototype3/CircularQueue.java" />
         <option value="$PROJECT_DIR$/src/Prototype3/View.form" />
-        <option value="$PROJECT_DIR$/src/Prototype3/View.java" />
         <option value="$PROJECT_DIR$/src/Prototype3/Controller.java" />
+        <option value="$PROJECT_DIR$/src/Prototype3/View.java" />
       </list>
     </option>
   </component>
@@ -839,7 +837,7 @@
       <workItem from="1456848556901" duration="2358000" />
       <workItem from="1456932090065" duration="3133000" />
       <workItem from="1457018509354" duration="699000" />
-      <workItem from="1457098482017" duration="9862000" />
+      <workItem from="1457098482017" duration="10357000" />
     </task>
     <task id="LOCAL-00001" summary="Setup">
       <created>1453136920053</created>
@@ -955,11 +953,17 @@
       <option name="project" value="LOCAL" />
       <updated>1456855774374</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="Icons added as well as the start of Prediction Functionality added. Basic prediction for Push is now complete.">
+      <created>1457109815690</created>
+      <option name="number" value="00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1457109815690</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="90544000" />
+    <option name="totallyTimeSpent" value="91039000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -1003,7 +1007,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Setup" />
     <MESSAGE value="Starting prototype 1 - Basic text based Stack and Queue" />
     <MESSAGE value="Text based Stack with default implementation completed." />
     <MESSAGE value="Start of GUI for prototype 2, designed with MVC." />
@@ -1028,7 +1031,8 @@
     <MESSAGE value="Fixed some minor Circular Queue bugs." />
     <MESSAGE value="Change default size" />
     <MESSAGE value="Change default size of window." />
-    <option name="LAST_COMMIT_MESSAGE" value="Change default size of window." />
+    <MESSAGE value="Icons added as well as the start of Prediction Functionality added. Basic prediction for Push is now complete." />
+    <option name="LAST_COMMIT_MESSAGE" value="Icons added as well as the start of Prediction Functionality added. Basic prediction for Push is now complete." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1041,13 +1045,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/Prototype2/View.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Prototype2/boxElement.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1384,42 +1381,27 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/128.png">
+    <entry file="file://$PROJECT_DIR$/icons/16.png">
       <provider selected="true" editor-type-id="images">
         <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/64.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/32.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/16.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Prototype3/View.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="61" column="0" selection-start-line="61" selection-start-column="0" selection-end-line="61" selection-end-column="0" />
-          <folding>
-            <element signature="method#addCircularQueueListener#0;class#View#0" expanded="false" />
-          </folding>
-        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Prototype3/Controller.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.45152724">
+        <state vertical-scroll-proportion="0.0">
           <caret line="116" column="9" selection-start-line="116" selection-start-column="9" selection-end-line="116" selection-end-column="9" />
           <folding>
             <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Prototype3/View.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.57104915">
+          <caret line="71" column="43" selection-start-line="71" selection-start-column="43" selection-end-line="71" selection-end-column="43" />
+          <folding>
+            <element signature="method#addCircularQueueListener#0;class#View#0" expanded="false" />
           </folding>
         </state>
       </provider>
