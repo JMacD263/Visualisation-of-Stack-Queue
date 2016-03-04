@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.EmptyStackException;
+import java.util.HashMap;
 import java.util.LinkedList;
 
 /**
@@ -20,36 +21,38 @@ public class Controller {
     private DrawStackRepresentation drawStack = new DrawStackRepresentation();
     private DrawQueueRepresentation drawQueue = new DrawQueueRepresentation();
     private boolean isCircular = false;
+    private boolean predictionMode = false;
+    private HashMap<String, Integer> predictionCount = new HashMap<>();
     private int maxListSize = 35;
-    String regex = "^[1-9]\\d{0,2}$";
+    String regex = "^[1-9]\\d{0,2}$"; //Regex for a positive integer, max 3 digits.
 
     public Controller(View view, Model model) {
-            this.theView = view;
-            this.theModel = model;
+        this.theView = view;
+        this.theModel = model;
 
-            // Tell the View that whenever a button or menu item
-            // is clicked to execute the actionPerformed method
-            // in the relevant inner class.
-            theView.addPushListener(new PushListener());
-            theView.addPopListener(new PopListener());
-            theView.addPeekStackListener(new StackPeekListener());
-            theView.addEnqueueListener(new EnqueueListener());
-            theView.addDequeueListener(new DequeueListener());
-            theView.addPeekQueueListener(new QueuePeekListener());
-            theView.addOnRadioListener(new RadioOnListener());
-            theView.addOffRadioListener(new RadioOffListener());
-            theView.addCircularQueueListener(new CircularQueueListener());
-            theView.addNormalQueueListener(new NormalQueueListener());
-            theView.addResetListener(new ResetListener());
+        // Tell the View that whenever a button or menu item
+        // is clicked to execute the actionPerformed method
+        // in the relevant inner class.
+        theView.addPushListener(new PushListener());
+        theView.addPopListener(new PopListener());
+        theView.addPeekStackListener(new StackPeekListener());
+        theView.addEnqueueListener(new EnqueueListener());
+        theView.addDequeueListener(new DequeueListener());
+        theView.addPeekQueueListener(new QueuePeekListener());
+        theView.addOnRadioListener(new RadioOnListener());
+        theView.addOffRadioListener(new RadioOffListener());
+        theView.addCircularQueueListener(new CircularQueueListener());
+        theView.addNormalQueueListener(new NormalQueueListener());
+        theView.addResetListener(new ResetListener());
 
 
-            drawStack.setStack(theModel.getStack());
-            theView.setStackPanel(drawStack);
+        drawStack.setStack(theModel.getStack());
+        theView.setStackPanel(drawStack);
 
-            drawQueue.setQueue(theModel.getQueue());
-            theView.setQueuePanel(drawQueue);
+        drawQueue.setQueue(theModel.getQueue());
+        theView.setQueuePanel(drawQueue);
 
-        }
+    }
 
     // Add operations to Stack list.
     public void addOperation(String op){
@@ -75,7 +78,7 @@ public class Controller {
         theView.setPreviousQueueOperations(listData);
     }
 
-    // Add operations to the queue list
+    // Add operations to the circular queue list
     public void addCircularQueueOperation(String op){
         if(operationsListCircularQueue.size() < maxListSize){
             operationsListCircularQueue.push(op);
@@ -99,6 +102,52 @@ public class Controller {
         }
     }
 
+    //Method for performing predictions
+    public void runPrediction(String type) {
+        int count = predictionCount.get(type);
+        String[] buttons; //For the custom JOptionPane buttons text
+        if (count == 1) {
+            buttons = new String[]{"Progress", "Stay"};
+            int options = JOptionPane.showOptionDialog(null, "You have predicted correctly again, would you like to progress to harder questions?", "Progress?",
+                    JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, buttons, buttons[0]);
+            if (options == 0) {
+                System.out.println("ADD THING FOR HARDER PREDICTIONS");
+                //Add code here for harder predictions
+            }
+        }
+
+        switch (type) {
+            case "Push":
+                buttons = new String[]{"Top", "Bottom"};
+                int answer = JOptionPane.showOptionDialog(null, "Where do you think the element will be added?", "Push Prediction",
+                        JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, buttons, null);
+                if (answer == 0) { //if they select Top (The Correct answer)
+                    JOptionPane.showMessageDialog(null, "You predicted correctly, well done!", "Congratulations", JOptionPane.INFORMATION_MESSAGE);
+                    count++;
+                    predictionCount.put("Push", count);
+                } else { //if they selected Bottom (incorrect)
+                    JOptionPane.showMessageDialog(null, "Sorry that was incorrect, please try again", "Incorrect", JOptionPane.ERROR_MESSAGE);
+                }
+                break;
+            case "Pop":
+
+                break;
+            case "StackPeek":
+
+                break;
+            case "Enqueue":
+
+                break;
+            case "Dequeue":
+
+                break;
+            case "QueuePeek":
+
+                break;
+        }
+
+    }
+
     /*
     This is a block of inner classes which create ActionListeners for the buttons
      */
@@ -119,6 +168,9 @@ public class Controller {
                         }
                         addOperation("Pushing: " + toBePushed);
                         theModel.push(toBePushed);
+                        if(predictionMode){
+                            runPrediction("Push");
+                        }
                         theView.updateStackUI();
                         break;
                     }
@@ -139,6 +191,9 @@ public class Controller {
             try{
                 int popped = theModel.pop();
                 addOperation("Popped: " + popped);
+                if(predictionMode){
+                    runPrediction("Pop");
+                }
                 theView.updateStackUI();
             } catch(EmptyStackException exception){
                 addOperation("Can't Pop: Stack Empty");
@@ -250,6 +305,13 @@ public class Controller {
         @Override
         public void actionPerformed(ActionEvent e) {
             theView.toggleLabels(false);
+            predictionMode = true;
+            predictionCount.put("Push", 0);
+            predictionCount.put("Pop", 0);
+            predictionCount.put("StackPeek", 0);
+            predictionCount.put("Enqueue", 0);
+            predictionCount.put("Dequeue", 0);
+            predictionCount.put("QueuePeek", 0);
         }
     }
 
@@ -257,6 +319,7 @@ public class Controller {
         @Override
         public void actionPerformed(ActionEvent e) {
             theView.toggleLabels(true);
+            predictionMode = false;
         }
     }
 

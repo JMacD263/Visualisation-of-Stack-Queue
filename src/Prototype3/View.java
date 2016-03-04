@@ -51,6 +51,15 @@ public class View extends JFrame {
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         this.add(tabbedPane1);
 
+        // Add all icons to arraylist
+        ArrayList<Image> icons = new ArrayList<>();
+        icons.add(Toolkit.getDefaultToolkit().getImage("16.png"));
+        icons.add(Toolkit.getDefaultToolkit().getImage("32.png"));
+        icons.add(Toolkit.getDefaultToolkit().getImage("64.png"));
+        icons.add(Toolkit.getDefaultToolkit().getImage("128.png"));
+        // Set icons
+        this.setIconImages(icons);
+
         // Create a menu bar for the JFrame
         JMenuBar menuBar = new JMenuBar();
         // Add to the frame
