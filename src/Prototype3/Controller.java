@@ -105,21 +105,13 @@ public class Controller {
     //Method for performing predictions
     public void runPrediction(String type) {
         int count = predictionCount.get(type);
+        int answer;
         String[] buttons; //For the custom JOptionPane buttons text
-        if (count == 1) {
-            buttons = new String[]{"Progress", "Stay"};
-            int options = JOptionPane.showOptionDialog(null, "You have predicted correctly again, would you like to progress to harder questions?", "Progress?",
-                    JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, buttons, buttons[0]);
-            if (options == 0) {
-                System.out.println("ADD THING FOR HARDER PREDICTIONS");
-                //Add code here for harder predictions
-            }
-        }
 
         switch (type) {
             case "Push":
                 buttons = new String[]{"Top", "Bottom"};
-                int answer = JOptionPane.showOptionDialog(null, "Where do you think the element will be added?", "Push Prediction",
+                answer = JOptionPane.showOptionDialog(null, "Where do you think the element will be pushed?", "Push Prediction",
                         JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, buttons, null);
                 if (answer == 0) { //if they select Top (The Correct answer)
                     JOptionPane.showMessageDialog(null, "You predicted correctly, well done!", "Congratulations", JOptionPane.INFORMATION_MESSAGE);
@@ -130,20 +122,76 @@ public class Controller {
                 }
                 break;
             case "Pop":
-
+                buttons = new String[]{"Top", "Bottom"};
+                answer = JOptionPane.showOptionDialog(null, "Where do you think the element will be removed?", "Pop Prediction",
+                        JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, buttons, null);
+                if (answer == 0) { //if they select Top (The Correct answer)
+                    JOptionPane.showMessageDialog(null, "You predicted correctly, well done!", "Congratulations", JOptionPane.INFORMATION_MESSAGE);
+                    count++;
+                    predictionCount.put("Pop", count);
+                } else { //if they selected Bottom (incorrect)
+                    JOptionPane.showMessageDialog(null, "Sorry that was incorrect, please try again", "Incorrect", JOptionPane.ERROR_MESSAGE);
+                }
                 break;
             case "StackPeek":
-
+                buttons = new String[]{"Top", "Bottom"};
+                answer = JOptionPane.showOptionDialog(null, "Where do you think the element will be peeked from?", "Peek Prediction",
+                        JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, buttons, null);
+                if (answer == 0) { //if they select Top (The Correct answer)
+                    JOptionPane.showMessageDialog(null, "You predicted correctly, well done!", "Congratulations", JOptionPane.INFORMATION_MESSAGE);
+                    count++;
+                    predictionCount.put("StackPeek", count);
+                } else { //if they selected Bottom (incorrect)
+                    JOptionPane.showMessageDialog(null, "Sorry that was incorrect, please try again", "Incorrect", JOptionPane.ERROR_MESSAGE);
+                }
                 break;
             case "Enqueue":
-
+                buttons = new String[]{"Head", "Tail"};
+                answer = JOptionPane.showOptionDialog(null, "Where do you think the element will be enqueued?", "Enqueue Prediction",
+                        JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, buttons, null);
+                if (answer == 0) { //if they select Head (The incorrect answer)
+                    JOptionPane.showMessageDialog(null, "Sorry that was incorrect, please try again", "Incorrect", JOptionPane.ERROR_MESSAGE);
+                } else { //if they selected Tail (Correct)
+                    JOptionPane.showMessageDialog(null, "You predicted correctly, well done!", "Congratulations", JOptionPane.INFORMATION_MESSAGE);
+                    count++;
+                    predictionCount.put("Enqueue", count);
+                }
                 break;
             case "Dequeue":
-
+                buttons = new String[]{"Head", "Tail"};
+                answer = JOptionPane.showOptionDialog(null, "Where do you think the element will be dequeued?", "Dequeue Prediction",
+                        JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, buttons, null);
+                if (answer == 0) { //if they select Head (The incorrect answer)
+                    JOptionPane.showMessageDialog(null, "You predicted correctly, well done!", "Congratulations", JOptionPane.INFORMATION_MESSAGE);
+                    count++;
+                    predictionCount.put("Dequeue", count);
+                } else { //if they selected Tail (Correct)
+                    JOptionPane.showMessageDialog(null, "Sorry that was incorrect, please try again", "Incorrect", JOptionPane.ERROR_MESSAGE);
+                }
                 break;
             case "QueuePeek":
-
+                buttons = new String[]{"Head", "Tail"};
+                answer = JOptionPane.showOptionDialog(null, "Where do you think the element will be peeked from?", "Peek Prediction",
+                        JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, buttons, null);
+                if (answer == 0) { //if they select Head (The incorrect answer)
+                    JOptionPane.showMessageDialog(null, "You predicted correctly, well done!", "Congratulations", JOptionPane.INFORMATION_MESSAGE);
+                    count++;
+                    predictionCount.put("QueuePeek", count);
+                } else { //if they selected Tail (Correct)
+                    JOptionPane.showMessageDialog(null, "Sorry that was incorrect, please try again", "Incorrect", JOptionPane.ERROR_MESSAGE);
+                }
                 break;
+        }
+
+        //For starting harder questions after getting 2 correct
+        if (count == 2) {
+            buttons = new String[]{"Progress", "Stay"};
+            int options = JOptionPane.showOptionDialog(null, "You have predicted correctly again, would you like to progress to harder questions?", "Progress?",
+                    JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, buttons, buttons[0]);
+            if (options == 0) {
+                System.out.println("ADD THING FOR HARDER PREDICTIONS");
+                //Add code here for harder predictions
+            }
         }
 
     }
@@ -209,6 +257,9 @@ public class Controller {
                 int peeked = theModel.peek();
                 addOperation("Peeked: " + peeked);
                 drawStack.highlight(peeked);
+                if(predictionMode){
+                    runPrediction("StackPeek");
+                }
                 theView.updateStackUI();
             } catch(EmptyStackException exception){
                 addOperation("Can't Peek: Stack Empty");
@@ -238,6 +289,9 @@ public class Controller {
                             theModel.enqueue(toBeQueued);
                             addQueueOperation("Enqueue: " + toBeQueued);
                         }
+                        if(predictionMode){
+                            runPrediction("Enqueue");
+                        }
                         theView.updateQueueUI();
                         break;
                     }
@@ -264,6 +318,9 @@ public class Controller {
                     dequeue = theModel.dequeue();
                     addQueueOperation("Dequeue: " + dequeue);
                 }
+                if(predictionMode){
+                    runPrediction("Dequeue");
+                }
                 theView.updateQueueUI();
             } catch(NullPointerException exception){
                 if(isCircular){
@@ -289,6 +346,9 @@ public class Controller {
                     addQueueOperation("Peeked: " + peeked);
                 }
                 drawQueue.highlight(peeked);
+                if(predictionMode){
+                    runPrediction("QueuePeek");
+                }
                 theView.updateQueueUI();
             } catch(NullPointerException exception){
                 if(isCircular){
@@ -306,6 +366,15 @@ public class Controller {
         public void actionPerformed(ActionEvent e) {
             theView.toggleLabels(false);
             predictionMode = true;
+
+            // Prediction settings dialog
+            PredictionOptions predictionOptions = new PredictionOptions();
+            predictionOptions.setModal(true);
+            predictionOptions.setLocationRelativeTo(theView);
+            predictionOptions.setVisible(true);
+            System.out.println("Is blank? " + predictionOptions.getIsBlank());
+            System.out.println("No. Options " + predictionOptions.getNoPredictions());
+
             predictionCount.put("Push", 0);
             predictionCount.put("Pop", 0);
             predictionCount.put("StackPeek", 0);
