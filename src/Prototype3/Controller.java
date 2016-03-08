@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 import java.util.EmptyStackException;
 import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.concurrent.ThreadLocalRandom;
 
 /**
  * Created by Jamie on 22/02/2016.
@@ -22,6 +23,8 @@ public class Controller {
     private DrawQueueRepresentation drawQueue = new DrawQueueRepresentation();
     private boolean isCircular = false;
     private boolean predictionMode = false;
+    private int noPredictions;
+    private boolean isBlank;
     private HashMap<String, Integer> predictionCount = new HashMap<>();
     private int maxListSize = 35;
     String regex = "^[1-9]\\d{0,2}$"; //Regex for a positive integer, max 3 digits.
@@ -90,6 +93,7 @@ public class Controller {
         theView.setPreviousQueueOperations(listData);
     }
 
+    // Switch Circular and Regular Queue Operations List
     public void switchQueueOperationsList(String s){
         theView.setPreviousQueueOperations(new String[0]);
         String listData[];
@@ -99,6 +103,23 @@ public class Controller {
         }else if (s.equals("Normal")){
             listData = operationsListQueue.toArray(new String[operationsListQueue.size()]);
             theView.setPreviousQueueOperations(listData);
+        }
+    }
+
+    // creates data for predictions
+    public void createPreMadeData(){
+        int min = 1;
+        int max = 99;
+        for(int i = 0; i < ThreadLocalRandom.current().nextInt(4, 10 + 1); i++){ //run between 4 to 10 times
+            theModel.push(ThreadLocalRandom.current().nextInt(min, max + 1));
+            theModel.enqueue(ThreadLocalRandom.current().nextInt(min, max + 1));
+            theModel.enqueueCircular(ThreadLocalRandom.current().nextInt(min, max + 1));
+        }
+        if(ThreadLocalRandom.current().nextInt(1, 999 + 1) < 700){
+            theModel.enqueueCircular(ThreadLocalRandom.current().nextInt(min, max + 1));
+            theModel.dequeueCircular();
+            theModel.enqueueCircular(ThreadLocalRandom.current().nextInt(min, max + 1));
+            theModel.dequeueCircular();
         }
     }
 
@@ -209,7 +230,7 @@ public class Controller {
             } else{
                 while(true){
                     try{
-                        String input = JOptionPane.showInputDialog(null, "Enter a positive Integer of maximum 3 digits you want to push on to the Stack", "Push", JOptionPane.DEFAULT_OPTION);
+                        String input = JOptionPane.showInputDialog(null, "Enter a positive Integer of maximum 3 digits you want to push on to the Stack", "Push", JOptionPane.QUESTION_MESSAGE);
                         int toBePushed = Integer.parseInt(input);
                         if(!input.matches(regex)){
                             throw new java.lang.NumberFormatException("Not positive 3 digit Integer");
@@ -277,7 +298,7 @@ public class Controller {
             } else{
                 while(true){
                     try{
-                        String input = JOptionPane.showInputDialog(null, "Enter a positive Integer of maximum 3 digits you want to enqueue to the Queue", "Enqueue", JOptionPane.DEFAULT_OPTION);
+                        String input = JOptionPane.showInputDialog(null, "Enter a positive Integer of maximum 3 digits you want to enqueue to the Queue", "Enqueue", JOptionPane.QUESTION_MESSAGE);
                         int toBeQueued = Integer.parseInt(input);
                         if(!input.matches(regex)){
                             throw new java.lang.NumberFormatException("Not positive 3 digit Integer");
@@ -374,6 +395,20 @@ public class Controller {
             predictionOptions.setVisible(true);
             System.out.println("Is blank? " + predictionOptions.getIsBlank());
             System.out.println("No. Options " + predictionOptions.getNoPredictions());
+            isBlank = predictionOptions.getIsBlank();
+            noPredictions = predictionOptions.getNoPredictions();
+
+            if(!isBlank){
+                theModel.reset(); //clears the data stored in the model
+                operationsList.clear();
+                operationsListQueue.clear();
+                operationsListCircularQueue.clear();
+                theView.resetPreviousOperations(); //clears the data held within the JList
+                createPreMadeData();
+                drawQueue.toggleFirstRun();
+                theView.updateStackUI();
+                theView.updateQueueUI();
+            }
 
             predictionCount.put("Push", 0);
             predictionCount.put("Pop", 0);

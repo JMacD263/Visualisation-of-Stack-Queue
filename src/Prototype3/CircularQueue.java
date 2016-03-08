@@ -27,7 +27,6 @@ public class CircularQueue<Integer> {
                 NewQueue[i] = q[front];
                 front=(front+1) % q.length;
             }
-
             front = 0;
             rear = size;
             no = no * 2;
@@ -50,6 +49,9 @@ public class CircularQueue<Integer> {
     public int dequeue() throws NullPointerException{
         if(isEmpty()){
             throw new NullPointerException();
+        }
+        if(rear == 10 && (size == q.length)){
+            rear = front;
         }
         int e = q[front];
         q[front] = 0;

@@ -11,11 +11,11 @@ import java.util.Queue;
  *
  */
 public class DrawQueueRepresentation extends JComponent {
-    String toBeHighlighted = "";
-    Queue<Integer> queue = new LinkedList<>();
-    CircularQueue<Integer> circularQueue;
-    boolean circular = false;
-    boolean firstRun = true;
+    private String toBeHighlighted = "";
+    private Queue<Integer> queue = new LinkedList<>();
+    private CircularQueue<Integer> circularQueue;
+    private boolean circular = false;
+    private boolean firstRun = true;
 
 
     public void paint(Graphics g){
@@ -146,6 +146,10 @@ public class DrawQueueRepresentation extends JComponent {
         //Allow the boxes to be filled
         firstRun = false;
 
+    }
+
+    public void toggleFirstRun(){
+        firstRun = false;
     }
 
     public void setQueue(Queue<Integer> queue){
