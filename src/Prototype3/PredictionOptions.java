@@ -14,12 +14,13 @@ public class PredictionOptions extends JDialog{
     private JRadioButton radioButton1;
     private JRadioButton radioButton2;
     private JButton saveButton;
-    private JButton quitButton;
+    //private JButton defaultsButton;
     private JPanel rootPanel;
     private int noPredictions;
     private boolean isBlank;
 
     public PredictionOptions() {
+        this.setTitle("Prediction Options");
         this.setSize(650, 250);
         this.setLocation(200, 200);
         this.add(rootPanel);
@@ -53,12 +54,12 @@ public class PredictionOptions extends JDialog{
             }
         });
 
-        quitButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                setVisible(false);
-            }
-        });
+//        defaultsButton.addActionListener(new ActionListener() {
+//            @Override
+//            public void actionPerformed(ActionEvent e) {
+//                setVisible(false);
+//            }
+//        });
 
     }
 
