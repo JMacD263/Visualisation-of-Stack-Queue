@@ -6,6 +6,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemListener;
 import java.util.ArrayList;
 import java.util.Stack;
 
@@ -40,6 +41,7 @@ public class View extends JFrame {
 
     private JRadioButtonMenuItem radioOn;
     private JRadioButtonMenuItem radioOff;
+    private JCheckBoxMenuItem harderPredictions;
     private JRadioButtonMenuItem circularQueue;
     private JRadioButtonMenuItem normalQueue;
     private JMenuItem resetMenuItem;
@@ -81,6 +83,12 @@ public class View extends JFrame {
         // Add radio buttons to menu bar
         predictionMenu.add(radioOn);
         predictionMenu.add(radioOff);
+        // Add separator
+        predictionMenu.add(new JSeparator());
+        // Add harder predictions checkbox and disable at start.
+        harderPredictions = new JCheckBoxMenuItem("Harder Predictions");
+        predictionMenu.add(harderPredictions);
+        harderPredictions.setEnabled(false);
 
         // Add edit drop down menu
         JMenu editMenu = new JMenu("Edit");
@@ -147,6 +155,11 @@ public class View extends JFrame {
         queueDisplay.add(drawQueueRepresentation);
     }
 
+    public void toggleHarderPredictions(boolean isHarderPredictions, boolean isChecked){
+        harderPredictions.setEnabled(isHarderPredictions);
+        harderPredictions.setSelected(isChecked);
+    }
+
     /*
     The following block of methods all add ActionListeners so that the controller knows when a button is pressed
      */
@@ -202,5 +215,10 @@ public class View extends JFrame {
     // If the reset menu option is selected the relevant actionPerformed method is run in the Controller
     void addResetListener(ActionListener listenForReset){
         resetMenuItem.addActionListener(listenForReset);
+    }
+
+    // If the harder predictions checkbox is selected the relevant actionPerformed method is run in the Controller
+    void addHarderPredictionsListener(ItemListener listenForHarderPredictions){
+        harderPredictions.addItemListener(listenForHarderPredictions);
     }
 }

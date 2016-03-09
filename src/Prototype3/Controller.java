@@ -3,6 +3,8 @@ package src.Prototype3;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.util.EmptyStackException;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -24,7 +26,6 @@ public class Controller {
     private boolean isCircular = false;
     private boolean predictionMode = false;
     private int noPredictions;
-    private boolean isBlank;
     private HashMap<String, Integer> predictionCount = new HashMap<>();
     private int maxListSize = 35;
     String regex = "^[1-9]\\d{0,2}$"; //Regex for a positive integer, max 3 digits.
@@ -47,6 +48,7 @@ public class Controller {
         theView.addCircularQueueListener(new CircularQueueListener());
         theView.addNormalQueueListener(new NormalQueueListener());
         theView.addResetListener(new ResetListener());
+        theView.addHarderPredictionsListener(new HarderPredictionsListener());
 
 
         drawStack.setStack(theModel.getStack());
@@ -127,91 +129,114 @@ public class Controller {
     public void runPrediction(String type) {
         int count = predictionCount.get(type);
         int answer;
+        boolean answered = false;
         String[] buttons; //For the custom JOptionPane buttons text
 
         switch (type) {
             case "Push":
-                buttons = new String[]{"Top", "Bottom"};
-                answer = JOptionPane.showOptionDialog(null, "Where do you think the element will be pushed?", "Push Prediction",
-                        JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, buttons, null);
-                if (answer == 0) { //if they select Top (The Correct answer)
-                    JOptionPane.showMessageDialog(null, "You predicted correctly, well done!", "Congratulations", JOptionPane.INFORMATION_MESSAGE);
-                    count++;
-                    predictionCount.put("Push", count);
-                } else { //if they selected Bottom (incorrect)
-                    JOptionPane.showMessageDialog(null, "Sorry that was incorrect, please try again", "Incorrect", JOptionPane.ERROR_MESSAGE);
+                if(count < noPredictions){
+                    buttons = new String[]{"Top", "Bottom"};
+                    answer = JOptionPane.showOptionDialog(null, "Where do you think the element will be pushed?", "Push Prediction",
+                            JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, buttons, null);
+                    if (answer == 0) { //if they select Top (The Correct answer)
+                        JOptionPane.showMessageDialog(null, "You predicted correctly, well done!", "Congratulations", JOptionPane.INFORMATION_MESSAGE);
+                        count++;
+                        predictionCount.put("Push", count);
+                    } else { //if they selected Bottom (incorrect)
+                        JOptionPane.showMessageDialog(null, "Sorry that was incorrect, please try again", "Incorrect", JOptionPane.ERROR_MESSAGE);
+                    }
+                    answered = true;
                 }
                 break;
             case "Pop":
-                buttons = new String[]{"Top", "Bottom"};
-                answer = JOptionPane.showOptionDialog(null, "Where do you think the element will be removed?", "Pop Prediction",
-                        JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, buttons, null);
-                if (answer == 0) { //if they select Top (The Correct answer)
-                    JOptionPane.showMessageDialog(null, "You predicted correctly, well done!", "Congratulations", JOptionPane.INFORMATION_MESSAGE);
-                    count++;
-                    predictionCount.put("Pop", count);
-                } else { //if they selected Bottom (incorrect)
-                    JOptionPane.showMessageDialog(null, "Sorry that was incorrect, please try again", "Incorrect", JOptionPane.ERROR_MESSAGE);
+                if(count < noPredictions){
+                    buttons = new String[]{"Top", "Bottom"};
+                    answer = JOptionPane.showOptionDialog(null, "Where do you think the element will be removed?", "Pop Prediction",
+                            JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, buttons, null);
+                    if (answer == 0) { //if they select Top (The Correct answer)
+                        JOptionPane.showMessageDialog(null, "You predicted correctly, well done!", "Congratulations", JOptionPane.INFORMATION_MESSAGE);
+                        count++;
+                        predictionCount.put("Pop", count);
+                    } else { //if they selected Bottom (incorrect)
+                        JOptionPane.showMessageDialog(null, "Sorry that was incorrect, please try again", "Incorrect", JOptionPane.ERROR_MESSAGE);
+                    }
+                    answered = true;
                 }
                 break;
             case "StackPeek":
-                buttons = new String[]{"Top", "Bottom"};
-                answer = JOptionPane.showOptionDialog(null, "Where do you think the element will be peeked from?", "Peek Prediction",
-                        JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, buttons, null);
-                if (answer == 0) { //if they select Top (The Correct answer)
-                    JOptionPane.showMessageDialog(null, "You predicted correctly, well done!", "Congratulations", JOptionPane.INFORMATION_MESSAGE);
-                    count++;
-                    predictionCount.put("StackPeek", count);
-                } else { //if they selected Bottom (incorrect)
-                    JOptionPane.showMessageDialog(null, "Sorry that was incorrect, please try again", "Incorrect", JOptionPane.ERROR_MESSAGE);
+                if(count < noPredictions){
+                    buttons = new String[]{"Top", "Bottom"};
+                    answer = JOptionPane.showOptionDialog(null, "Where do you think the element will be peeked from?", "Peek Prediction",
+                            JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, buttons, null);
+                    if (answer == 0) { //if they select Top (The Correct answer)
+                        JOptionPane.showMessageDialog(null, "You predicted correctly, well done!", "Congratulations", JOptionPane.INFORMATION_MESSAGE);
+                        count++;
+                        predictionCount.put("StackPeek", count);
+                    } else { //if they selected Bottom (incorrect)
+                        JOptionPane.showMessageDialog(null, "Sorry that was incorrect, please try again", "Incorrect", JOptionPane.ERROR_MESSAGE);
+                    }
+                    answered = true;
                 }
                 break;
             case "Enqueue":
-                buttons = new String[]{"Head", "Tail"};
-                answer = JOptionPane.showOptionDialog(null, "Where do you think the element will be enqueued?", "Enqueue Prediction",
-                        JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, buttons, null);
-                if (answer == 0) { //if they select Head (The incorrect answer)
-                    JOptionPane.showMessageDialog(null, "Sorry that was incorrect, please try again", "Incorrect", JOptionPane.ERROR_MESSAGE);
-                } else { //if they selected Tail (Correct)
-                    JOptionPane.showMessageDialog(null, "You predicted correctly, well done!", "Congratulations", JOptionPane.INFORMATION_MESSAGE);
-                    count++;
-                    predictionCount.put("Enqueue", count);
+                if(count < noPredictions){
+                    buttons = new String[]{"Head", "Tail"};
+                    answer = JOptionPane.showOptionDialog(null, "Where do you think the element will be enqueued?", "Enqueue Prediction",
+                            JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, buttons, null);
+                    if (answer == 0) { //if they select Head (The incorrect answer)
+                        JOptionPane.showMessageDialog(null, "Sorry that was incorrect, please try again", "Incorrect", JOptionPane.ERROR_MESSAGE);
+                    } else { //if they selected Tail (Correct)
+                        JOptionPane.showMessageDialog(null, "You predicted correctly, well done!", "Congratulations", JOptionPane.INFORMATION_MESSAGE);
+                        count++;
+                        predictionCount.put("Enqueue", count);
+                    }
+                    answered = true;
                 }
                 break;
             case "Dequeue":
-                buttons = new String[]{"Head", "Tail"};
-                answer = JOptionPane.showOptionDialog(null, "Where do you think the element will be dequeued?", "Dequeue Prediction",
-                        JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, buttons, null);
-                if (answer == 0) { //if they select Head (The incorrect answer)
-                    JOptionPane.showMessageDialog(null, "You predicted correctly, well done!", "Congratulations", JOptionPane.INFORMATION_MESSAGE);
-                    count++;
-                    predictionCount.put("Dequeue", count);
-                } else { //if they selected Tail (Correct)
-                    JOptionPane.showMessageDialog(null, "Sorry that was incorrect, please try again", "Incorrect", JOptionPane.ERROR_MESSAGE);
+                if(count < noPredictions){
+                    buttons = new String[]{"Head", "Tail"};
+                    answer = JOptionPane.showOptionDialog(null, "Where do you think the element will be dequeued?", "Dequeue Prediction",
+                            JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, buttons, null);
+                    if (answer == 0) { //if they select Head (The incorrect answer)
+                        JOptionPane.showMessageDialog(null, "You predicted correctly, well done!", "Congratulations", JOptionPane.INFORMATION_MESSAGE);
+                        count++;
+                        predictionCount.put("Dequeue", count);
+                    } else { //if they selected Tail (Correct)
+                        JOptionPane.showMessageDialog(null, "Sorry that was incorrect, please try again", "Incorrect", JOptionPane.ERROR_MESSAGE);
+                    }
+                    answered = true;
                 }
                 break;
             case "QueuePeek":
-                buttons = new String[]{"Head", "Tail"};
-                answer = JOptionPane.showOptionDialog(null, "Where do you think the element will be peeked from?", "Peek Prediction",
-                        JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, buttons, null);
-                if (answer == 0) { //if they select Head (The incorrect answer)
-                    JOptionPane.showMessageDialog(null, "You predicted correctly, well done!", "Congratulations", JOptionPane.INFORMATION_MESSAGE);
-                    count++;
-                    predictionCount.put("QueuePeek", count);
-                } else { //if they selected Tail (Correct)
-                    JOptionPane.showMessageDialog(null, "Sorry that was incorrect, please try again", "Incorrect", JOptionPane.ERROR_MESSAGE);
+                if(count < noPredictions){
+                    buttons = new String[]{"Head", "Tail"};
+                    answer = JOptionPane.showOptionDialog(null, "Where do you think the element will be peeked from?", "Peek Prediction",
+                            JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, buttons, null);
+                    if (answer == 0) { //if they select Head (The incorrect answer)
+                        JOptionPane.showMessageDialog(null, "You predicted correctly, well done!", "Congratulations", JOptionPane.INFORMATION_MESSAGE);
+                        count++;
+                        predictionCount.put("QueuePeek", count);
+                    } else { //if they selected Tail (Correct)
+                        JOptionPane.showMessageDialog(null, "Sorry that was incorrect, please try again", "Incorrect", JOptionPane.ERROR_MESSAGE);
+                    }
+                    answered = true;
                 }
                 break;
         }
 
-        //For starting harder questions after getting 2 correct
-        if (count == 2) {
+        //For starting harder questions after getting the set number of predictions correct
+        if (count == noPredictions && answered) {
             buttons = new String[]{"Progress", "Stay"};
             int options = JOptionPane.showOptionDialog(null, "You have predicted correctly again, would you like to progress to harder questions?", "Progress?",
                     JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, buttons, buttons[0]);
             if (options == 0) {
                 System.out.println("ADD THING FOR HARDER PREDICTIONS");
                 //Add code here for harder predictions
+                theView.toggleHarderPredictions(false, true);
+            }else{
+                JOptionPane.showMessageDialog(null, "If you wish to access harder questions you can now enable them from the prediction menu", "Progress", JOptionPane.INFORMATION_MESSAGE);
+                theView.toggleHarderPredictions(true, false);
             }
         }
 
@@ -393,12 +418,9 @@ public class Controller {
             predictionOptions.setModal(true);
             predictionOptions.setLocationRelativeTo(theView);
             predictionOptions.setVisible(true);
-            System.out.println("Is blank? " + predictionOptions.getIsBlank());
-            System.out.println("No. Options " + predictionOptions.getNoPredictions());
-            isBlank = predictionOptions.getIsBlank();
             noPredictions = predictionOptions.getNoPredictions();
 
-            if(!isBlank){
+            if(!predictionOptions.getIsBlank()){
                 theModel.reset(); //clears the data stored in the model
                 operationsList.clear();
                 operationsListQueue.clear();
@@ -410,6 +432,10 @@ public class Controller {
                 theView.updateQueueUI();
             }
 
+            //toggle harder predictions to off
+            theView.toggleHarderPredictions(false, false);
+
+            // Set up prediction count
             predictionCount.put("Push", 0);
             predictionCount.put("Pop", 0);
             predictionCount.put("StackPeek", 0);
@@ -423,6 +449,8 @@ public class Controller {
         @Override
         public void actionPerformed(ActionEvent e) {
             theView.toggleLabels(true);
+            //toggle harder predictions to off
+            theView.toggleHarderPredictions(false, false);
             predictionMode = false;
         }
     }
@@ -458,6 +486,17 @@ public class Controller {
             theView.resetPreviousOperations(); //clears the data held within the JList
             theView.updateStackUI();
             theView.updateQueueUI();
+        }
+    }
+
+    class HarderPredictionsListener implements ItemListener {
+        @Override
+        public void itemStateChanged(ItemEvent e) {
+            if(e.getStateChange() == ItemEvent.SELECTED){
+                JOptionPane.showMessageDialog(null, "Harder Questions Enabled", "Harder Questions", JOptionPane.INFORMATION_MESSAGE);
+                //toggle harder predictions to on
+                theView.toggleHarderPredictions(false, true);
+            }
         }
     }
 

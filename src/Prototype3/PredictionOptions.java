@@ -14,7 +14,6 @@ public class PredictionOptions extends JDialog{
     private JRadioButton radioButton1;
     private JRadioButton radioButton2;
     private JButton saveButton;
-    //private JButton defaultsButton;
     private JPanel rootPanel;
     private int noPredictions;
     private boolean isBlank;
@@ -53,13 +52,6 @@ public class PredictionOptions extends JDialog{
                 setVisible(false);
             }
         });
-
-//        defaultsButton.addActionListener(new ActionListener() {
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-//                setVisible(false);
-//            }
-//        });
 
     }
 
