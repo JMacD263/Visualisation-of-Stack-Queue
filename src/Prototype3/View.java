@@ -23,8 +23,8 @@ public class View extends JFrame {
     private JButton pushButton;
     private JButton popButton;
     private JButton peekStackButton;
-    private JList previousStackOperations;
-    private JList list2;
+    private JList<String> previousStackOperations;
+    private JList<String> stackJavaOperations;
     private JLabel pushLabel;
     private JLabel popLabel;
     private JLabel peekStackLabel;
@@ -32,8 +32,8 @@ public class View extends JFrame {
     private JButton enqueueButton;
     private JButton dequeueButton;
     private JButton peekQueueButton;
-    private JList previousQueueOperations;
-    private JList list3;
+    private JList<String> previousQueueOperations;
+    private JList<String> queueJavaOperations;
     private JPanel queueDisplay;
     private JLabel dequeueLabel;
     private JLabel peekQueueLabel;
@@ -114,8 +114,16 @@ public class View extends JFrame {
         queueMenu.add(circularQueue);
         queueMenu.add(normalQueue);
 
+        //Centers the text in the JLists
+        DefaultListCellRenderer renderer =  (DefaultListCellRenderer)previousStackOperations.getCellRenderer();
+        renderer.setHorizontalAlignment(JLabel.CENTER);
+        renderer =  (DefaultListCellRenderer)stackJavaOperations.getCellRenderer();
+        renderer.setHorizontalAlignment(JLabel.CENTER);
+        renderer =  (DefaultListCellRenderer)previousQueueOperations.getCellRenderer();
+        renderer.setHorizontalAlignment(JLabel.CENTER);
+        renderer =  (DefaultListCellRenderer)queueJavaOperations.getCellRenderer();
+        renderer.setHorizontalAlignment(JLabel.CENTER);
     }
-
 
     public void setPreviousStackOperations(String listData[]){
         previousStackOperations.setListData(listData);
@@ -125,9 +133,19 @@ public class View extends JFrame {
         previousQueueOperations.setListData(listData);
     }
 
+    public void setPreviousStackJavaOperations(String listData[]){
+        stackJavaOperations.setListData(listData);
+    }
+
+    public void setPreviousQueueJavaOperations(String listData[]){
+        queueJavaOperations.setListData(listData);
+    }
+
     public void resetPreviousOperations(){
-        previousStackOperations.setListData(new Object[0]);
-        previousQueueOperations.setListData(new Object[0]);
+        previousStackOperations.setListData(new String[0]);
+        previousQueueOperations.setListData(new String[0]);
+        stackJavaOperations.setListData(new String[0]);
+        queueJavaOperations.setListData(new String[0]);
     }
 
     public void updateStackUI(){

@@ -18,9 +18,12 @@ public class Controller {
 
     private View theView;
     private Model theModel;
-    private LinkedList<String> operationsList = new LinkedList<>();
+    private LinkedList<String> operationsListStack = new LinkedList<>();
     private LinkedList<String> operationsListQueue = new LinkedList<>();
     private LinkedList<String> operationsListCircularQueue = new LinkedList<>();
+    private LinkedList<String> operationsListStackJava = new LinkedList<>();
+    private LinkedList<String> operationsListQueueJava = new LinkedList<>();
+    private LinkedList<String> operationsListCircularQueueJava = new LinkedList<>();
     private DrawStackRepresentation drawStack = new DrawStackRepresentation();
     private DrawQueueRepresentation drawQueue = new DrawQueueRepresentation();
     private boolean isCircular = false;
@@ -50,25 +53,35 @@ public class Controller {
         theView.addResetListener(new ResetListener());
         theView.addHarderPredictionsListener(new HarderPredictionsListener());
 
-
         drawStack.setStack(theModel.getStack());
         theView.setStackPanel(drawStack);
 
         drawQueue.setQueue(theModel.getQueue());
         theView.setQueuePanel(drawQueue);
-
     }
 
     // Add operations to Stack list.
-    public void addOperation(String op){
-        if(operationsList.size() < maxListSize){ //Max size of stack operations list
-            operationsList.push(op);
+    public void addStackOperation(String op){
+        if(operationsListStack.size() < maxListSize){ //Max size of stack operations list
+            operationsListStack.push(op);
         }else{
-            operationsList.removeLast();
-            operationsList.push(op);
+            operationsListStack.removeLast();
+            operationsListStack.push(op);
         }
-        String listData[] = operationsList.toArray(new String[operationsList.size()]);
+        String listData[] = operationsListStack.toArray(new String[operationsListStack.size()]);
         theView.setPreviousStackOperations(listData);
+    }
+
+    // Add Java code operations to stack list
+    public void addStackJavaOperations(String op){
+        if(operationsListStackJava.size() < maxListSize){ //Max size of stack operations list
+            operationsListStackJava.push(op);
+        }else{
+            operationsListStackJava.removeLast();
+            operationsListStackJava.push(op);
+        }
+        String listData[] = operationsListStackJava.toArray(new String[operationsListStackJava.size()]);
+        theView.setPreviousStackJavaOperations(listData);
     }
 
     // Add operations to the queue list
@@ -83,6 +96,18 @@ public class Controller {
         theView.setPreviousQueueOperations(listData);
     }
 
+    // Add Java code operations to queue list
+    public void addQueueJavaOperation(String op){
+        if(operationsListQueueJava.size() < maxListSize){ //Max size of stack operations list
+            operationsListQueueJava.push(op);
+        }else{
+            operationsListQueueJava.removeLast();
+            operationsListQueueJava.push(op);
+        }
+        String listData[] = operationsListQueueJava.toArray(new String[operationsListQueueJava.size()]);
+        theView.setPreviousQueueJavaOperations(listData);
+    }
+
     // Add operations to the circular queue list
     public void addCircularQueueOperation(String op){
         if(operationsListCircularQueue.size() < maxListSize){
@@ -95,16 +120,33 @@ public class Controller {
         theView.setPreviousQueueOperations(listData);
     }
 
+    // Add Java code operations to circular queue list
+    public void addCircularQueueJavaOperation(String op){
+        if(operationsListCircularQueueJava.size() < maxListSize){ //Max size of stack operations list
+            operationsListCircularQueueJava.push(op);
+        }else{
+            operationsListCircularQueueJava.removeLast();
+            operationsListCircularQueueJava.push(op);
+        }
+        String listData[] = operationsListCircularQueueJava.toArray(new String[operationsListCircularQueueJava.size()]);
+        theView.setPreviousQueueJavaOperations(listData);
+    }
+
     // Switch Circular and Regular Queue Operations List
     public void switchQueueOperationsList(String s){
         theView.setPreviousQueueOperations(new String[0]);
+        theView.setPreviousQueueJavaOperations(new String[0]);
         String listData[];
         if(s.equals("Circular")){
             listData = operationsListCircularQueue.toArray(new String[operationsListCircularQueue.size()]);
             theView.setPreviousQueueOperations(listData);
+            listData = operationsListCircularQueueJava.toArray(new String[operationsListCircularQueueJava.size()]);
+            theView.setPreviousQueueJavaOperations(listData);
         }else if (s.equals("Normal")){
             listData = operationsListQueue.toArray(new String[operationsListQueue.size()]);
             theView.setPreviousQueueOperations(listData);
+            listData = operationsListQueueJava.toArray(new String[operationsListQueueJava.size()]);
+            theView.setPreviousQueueJavaOperations(listData);
         }
     }
 
@@ -117,11 +159,11 @@ public class Controller {
             theModel.enqueue(ThreadLocalRandom.current().nextInt(min, max + 1));
             theModel.enqueueCircular(ThreadLocalRandom.current().nextInt(min, max + 1));
         }
-        if(ThreadLocalRandom.current().nextInt(1, 999 + 1) < 700){
-            theModel.enqueueCircular(ThreadLocalRandom.current().nextInt(min, max + 1));
-            theModel.dequeueCircular();
-            theModel.enqueueCircular(ThreadLocalRandom.current().nextInt(min, max + 1));
-            theModel.dequeueCircular();
+        if(ThreadLocalRandom.current().nextInt(1, 10 + 1) < 7){ // add some dequeues to move the head and tail around
+            for(int i = 0; i < ThreadLocalRandom.current().nextInt(2, 5 + 1); i++) { //run between 2 to 5 times
+                theModel.enqueueCircular(ThreadLocalRandom.current().nextInt(min, max + 1));
+                theModel.dequeueCircular();
+            }
         }
     }
 
@@ -260,7 +302,8 @@ public class Controller {
                         if(!input.matches(regex)){
                             throw new java.lang.NumberFormatException("Not positive 3 digit Integer");
                         }
-                        addOperation("Pushing: " + toBePushed);
+                        addStackOperation("Pushing: " + toBePushed);
+                        addStackJavaOperations("stack.push(" + toBePushed + ")");
                         theModel.push(toBePushed);
                         if(predictionMode){
                             runPrediction("Push");
@@ -284,13 +327,14 @@ public class Controller {
         public void actionPerformed(ActionEvent e) {
             try{
                 int popped = theModel.pop();
-                addOperation("Popped: " + popped);
+                addStackOperation("Popped: " + popped);
+                addStackJavaOperations("stack.pop() - returns " + popped);
                 if(predictionMode){
                     runPrediction("Pop");
                 }
                 theView.updateStackUI();
             } catch(EmptyStackException exception){
-                addOperation("Can't Pop: Stack Empty");
+                addStackOperation("Cannot Pop: Stack Empty");
                 JOptionPane.showMessageDialog(null, "Sorry the Stack is empty and therefore cannot be popped", "Stack Empty", JOptionPane.ERROR_MESSAGE);
             }
         }
@@ -301,14 +345,15 @@ public class Controller {
         public void actionPerformed(ActionEvent e) {
             try{
                 int peeked = theModel.peek();
-                addOperation("Peeked: " + peeked);
+                addStackOperation("Peeked: " + peeked);
+                addStackJavaOperations("stack.peek() - returns " + peeked);
                 drawStack.highlight(peeked);
                 if(predictionMode){
                     runPrediction("StackPeek");
                 }
                 theView.updateStackUI();
             } catch(EmptyStackException exception){
-                addOperation("Can't Peek: Stack Empty");
+                addStackOperation("Cannot Peek: Stack Empty");
                 JOptionPane.showMessageDialog(null, "Sorry the Stack is empty and therefore cannot be peeked", "Stack Empty", JOptionPane.ERROR_MESSAGE);
             }
         }
@@ -331,9 +376,13 @@ public class Controller {
                         if(isCircular){
                             theModel.enqueueCircular(toBeQueued);
                             addCircularQueueOperation("Enqueue: " + toBeQueued);
+                            addCircularQueueJavaOperation("rear = (rear+1)%queue.length();");
+                            addCircularQueueJavaOperation("queue[rear] = " + toBeQueued + ";");
+                            addCircularQueueJavaOperation("--------------- Enqueue ---------------");
                         } else {
                             theModel.enqueue(toBeQueued);
                             addQueueOperation("Enqueue: " + toBeQueued);
+                            addQueueJavaOperation("queue.add(" + toBeQueued + ")");
                         }
                         if(predictionMode){
                             runPrediction("Enqueue");
@@ -360,9 +409,16 @@ public class Controller {
                 if(isCircular){
                     dequeue = theModel.dequeueCircular();
                     addCircularQueueOperation("Dequeue: " + dequeue);
+                    addCircularQueueJavaOperation("returns - " + dequeue);
+                    addCircularQueueJavaOperation("return temp;");
+                    addCircularQueueJavaOperation("front=(front+1)%queue.length();");
+                    addCircularQueueJavaOperation("queue[front] = 0;");
+                    addCircularQueueJavaOperation("int temp = queue[front];");
+                    addCircularQueueJavaOperation("--------------- Dequeue ---------------");
                 }else{
                     dequeue = theModel.dequeue();
                     addQueueOperation("Dequeue: " + dequeue);
+                    addQueueJavaOperation("queue.poll() - returns " + dequeue);
                 }
                 if(predictionMode){
                     runPrediction("Dequeue");
@@ -370,9 +426,9 @@ public class Controller {
                 theView.updateQueueUI();
             } catch(NullPointerException exception){
                 if(isCircular){
-                    addCircularQueueOperation("Can't Dequeue: Queue Empty");
+                    addCircularQueueOperation("Cannot Dequeue: Queue Empty");
                 }else{
-                    addQueueOperation("Can't Dequeue: Queue Empty");
+                    addQueueOperation("Cannot Dequeue: Queue Empty");
                 }
                 JOptionPane.showMessageDialog(null, "Sorry the Queue is empty and therefore cannot be dequeued", "Queue Empty", JOptionPane.ERROR_MESSAGE);
             }
@@ -387,9 +443,13 @@ public class Controller {
                 if(isCircular){
                     peeked = theModel.peekCircular();
                     addCircularQueueOperation("Peeked: " + peeked);
+                    addCircularQueueJavaOperation("returns - " + peeked);
+                    addCircularQueueJavaOperation("return queue[front];");
+                    addCircularQueueJavaOperation("------------------ Peek ------------------");
                 }else{
                     peeked = theModel.peekQueue();
                     addQueueOperation("Peeked: " + peeked);
+                    addQueueJavaOperation("queue.peek() - returns " + peeked);
                 }
                 drawQueue.highlight(peeked);
                 if(predictionMode){
@@ -398,9 +458,9 @@ public class Controller {
                 theView.updateQueueUI();
             } catch(NullPointerException exception){
                 if(isCircular){
-                    addCircularQueueOperation("Can't Peek: Queue Empty");
+                    addCircularQueueOperation("Cannot Peek: Queue Empty");
                 }else{
-                    addQueueOperation("Can't Peek: Queue Empty");
+                    addQueueOperation("Cannot Peek: Queue Empty");
                 }
                 JOptionPane.showMessageDialog(null, "Sorry the Queue is empty and therefore cannot be peeked", "Queue Empty", JOptionPane.ERROR_MESSAGE);
             }
@@ -422,7 +482,7 @@ public class Controller {
 
             if(!predictionOptions.getIsBlank()){
                 theModel.reset(); //clears the data stored in the model
-                operationsList.clear();
+                operationsListStack.clear();
                 operationsListQueue.clear();
                 operationsListCircularQueue.clear();
                 theView.resetPreviousOperations(); //clears the data held within the JList
@@ -480,7 +540,7 @@ public class Controller {
         @Override
         public void actionPerformed(ActionEvent e) {
             theModel.reset(); //clears the data stored in the model
-            operationsList.clear();
+            operationsListStack.clear();
             operationsListQueue.clear();
             operationsListCircularQueue.clear();
             theView.resetPreviousOperations(); //clears the data held within the JList
