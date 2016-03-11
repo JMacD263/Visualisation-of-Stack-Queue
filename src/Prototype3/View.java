@@ -68,7 +68,7 @@ public class View extends JFrame {
         setJMenuBar(menuBar);
 
         // Add drop down prediction menu
-        JMenu predictionMenu = new JMenu("Prediction Mode");
+        JMenu predictionMenu = new JMenu("Prediction");
         menuBar.add(predictionMenu);
         // Add the radio buttons to turn prediction on/off
         radioOn = new JRadioButtonMenuItem(
@@ -115,13 +115,13 @@ public class View extends JFrame {
         queueMenu.add(normalQueue);
 
         //Centers the text in the JLists
-        DefaultListCellRenderer renderer =  (DefaultListCellRenderer)previousStackOperations.getCellRenderer();
+        DefaultListCellRenderer renderer = (DefaultListCellRenderer)previousStackOperations.getCellRenderer();
         renderer.setHorizontalAlignment(JLabel.CENTER);
-        renderer =  (DefaultListCellRenderer)stackJavaOperations.getCellRenderer();
+        renderer = (DefaultListCellRenderer)stackJavaOperations.getCellRenderer();
         renderer.setHorizontalAlignment(JLabel.CENTER);
-        renderer =  (DefaultListCellRenderer)previousQueueOperations.getCellRenderer();
+        renderer = (DefaultListCellRenderer)previousQueueOperations.getCellRenderer();
         renderer.setHorizontalAlignment(JLabel.CENTER);
-        renderer =  (DefaultListCellRenderer)queueJavaOperations.getCellRenderer();
+        renderer = (DefaultListCellRenderer)queueJavaOperations.getCellRenderer();
         renderer.setHorizontalAlignment(JLabel.CENTER);
     }
 
@@ -176,6 +176,10 @@ public class View extends JFrame {
     public void toggleHarderPredictions(boolean isHarderPredictions, boolean isChecked){
         harderPredictions.setEnabled(isHarderPredictions);
         harderPredictions.setSelected(isChecked);
+    }
+
+    public void toggleTabbedPane(int index){
+        tabbedPane1.setSelectedIndex(index);
     }
 
     /*

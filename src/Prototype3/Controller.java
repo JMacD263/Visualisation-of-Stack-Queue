@@ -660,6 +660,7 @@ public class Controller {
             drawQueue.setCircularQueue(theModel.getCircularQueue());
             isCircular = true;
             switchQueueOperationsList("Circular");
+            theView.toggleTabbedPane(1);
             theView.updateQueueUI();
         }
     }
@@ -670,6 +671,7 @@ public class Controller {
             drawQueue.toggleCircular(false);
             isCircular = false;
             switchQueueOperationsList("Normal");
+            theView.toggleTabbedPane(1);
             theView.updateQueueUI();
         }
     }
