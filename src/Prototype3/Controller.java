@@ -240,11 +240,11 @@ public class Controller {
                     buttons = new String[]{"Head", "Tail"};
                     answer = JOptionPane.showOptionDialog(null, "Where do you think the element will be dequeued?", "Dequeue Prediction",
                             JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, buttons, null);
-                    if (answer == 0) { //if they select Head (The incorrect answer)
+                    if (answer == 0) { //if they select Head (The Correct answer)
                         JOptionPane.showMessageDialog(null, "You predicted correctly, well done!", "Congratulations", JOptionPane.INFORMATION_MESSAGE);
                         count++;
                         predictionCount.put("Dequeue", count);
-                    } else { //if they selected Tail (Correct)
+                    } else { //if they selected Tail (Incorrect)
                         JOptionPane.showMessageDialog(null, "Sorry that was incorrect, please try again", "Incorrect", JOptionPane.ERROR_MESSAGE);
                     }
                     answered = true;
@@ -255,15 +255,141 @@ public class Controller {
                     buttons = new String[]{"Head", "Tail"};
                     answer = JOptionPane.showOptionDialog(null, "Where do you think the element will be peeked from?", "Peek Prediction",
                             JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, buttons, null);
-                    if (answer == 0) { //if they select Head (The incorrect answer)
+                    if (answer == 0) { //if they select Head (The Correct answer)
                         JOptionPane.showMessageDialog(null, "You predicted correctly, well done!", "Congratulations", JOptionPane.INFORMATION_MESSAGE);
                         count++;
                         predictionCount.put("QueuePeek", count);
-                    } else { //if they selected Tail (Correct)
+                    } else { //if they selected Tail (incorrect)
                         JOptionPane.showMessageDialog(null, "Sorry that was incorrect, please try again", "Incorrect", JOptionPane.ERROR_MESSAGE);
                     }
                     answered = true;
                 }
+                break;
+            case "CircularEnqueue":
+                if(count < noPredictions){
+                    int correct = theModel.getRear();
+                    int other;
+                    int correctAnswer;
+                    if(correct != 0 && (correct!=9 && correct!=19)){
+                        if(ThreadLocalRandom.current().nextInt(1, 10 + 1) < 6){
+                            other = correct + 1;
+                        }else{
+                            other = correct - 1;
+                        }
+                    }else if(correct == 9 || correct == 19){
+                        other = correct - 1;
+                    }else{
+                        other = correct + 1;
+                    }
+                    buttons = new String[2];
+                    if(ThreadLocalRandom.current().nextInt(1, 10 + 1) < 6){
+                        buttons[0] = Integer.toString(correct);
+                        buttons[1] = Integer.toString(other);
+                        correctAnswer = 0;
+                    }else{
+                        buttons[1] = Integer.toString(correct);
+                        buttons[0] = Integer.toString(other);
+                        correctAnswer = 1;
+                    }
+                    answer = JOptionPane.showOptionDialog(null, "What location will the element be enqueued too?", "Enqueue Prediction",
+                            JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, buttons, null);
+                    if (answer == 0 && correctAnswer == 0) { //if they select the correct answer
+                        JOptionPane.showMessageDialog(null, "You predicted correctly, well done!", "Congratulations", JOptionPane.INFORMATION_MESSAGE);
+                        count++;
+                        predictionCount.put("CircularEnqueue", count);
+                    } else if(answer == 1 && correctAnswer == 1){ //if they selected the correct answer
+                        JOptionPane.showMessageDialog(null, "You predicted correctly, well done!", "Congratulations", JOptionPane.INFORMATION_MESSAGE);
+                        count++;
+                        predictionCount.put("CircularEnqueue", count);
+                    } else{
+                        JOptionPane.showMessageDialog(null, "Sorry that was incorrect, please try again", "Incorrect", JOptionPane.ERROR_MESSAGE);
+                    }
+                    answered = true;
+                }
+                break;
+            case "CircularDequeue":
+                if(count < noPredictions){
+                    int correct = theModel.getFront();
+                    int other;
+                    int correctAnswer;
+                    if(correct != 0 && (correct!=9 && correct!=19)){
+                        if(ThreadLocalRandom.current().nextInt(1, 100 + 1) < 51){
+                            other = correct + 1;
+                        }else{
+                            other = correct - 1;
+                        }
+                    }else if(correct == 9 || correct == 19){
+                        other = correct - 1;
+                    }else{
+                        other = correct + 1;
+                    }
+                    buttons = new String[2];
+                    if(ThreadLocalRandom.current().nextInt(1, 10 + 1) < 6){
+                        buttons[0] = Integer.toString(correct);
+                        buttons[1] = Integer.toString(other);
+                        correctAnswer = 0;
+                    }else{
+                        buttons[0] = Integer.toString(other);
+                        buttons[1] = Integer.toString(correct);
+                        correctAnswer = 1;
+                    }
+                    answer = JOptionPane.showOptionDialog(null, "What location will the element be dequeued from?", "Dequeue Prediction",
+                            JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, buttons, null);
+                    if (answer == 0 && correctAnswer == 0) { //if they select the correct answer
+                        JOptionPane.showMessageDialog(null, "You predicted correctly, well done!", "Congratulations", JOptionPane.INFORMATION_MESSAGE);
+                        count++;
+                        predictionCount.put("CircularDequeue", count);
+                    } else if(answer == 1 && correctAnswer == 1){ //if they selected the correct answer
+                        JOptionPane.showMessageDialog(null, "You predicted correctly, well done!", "Congratulations", JOptionPane.INFORMATION_MESSAGE);
+                        count++;
+                        predictionCount.put("CircularDequeue", count);
+                    } else{
+                        JOptionPane.showMessageDialog(null, "Sorry that was incorrect, please try again", "Incorrect", JOptionPane.ERROR_MESSAGE);
+                    }
+                    answered = true;
+                }
+                break;
+            case "CircularPeek":
+                int correct = theModel.getFront();
+                int other = theModel.getRear();
+                int correctAnswer;
+                if(correct == other){
+                    if(other == 0){
+                        other += 1;
+                    }else if(other == 9 || other == 19){
+                        other -= 1;
+                    }else{
+                        if(ThreadLocalRandom.current().nextInt(1, 10 + 1) < 6){
+                            other += 1;
+                        }else{
+                            other -= 1;
+                        }
+                    }
+                }
+                buttons = new String[2];
+                if(ThreadLocalRandom.current().nextInt(1, 100 + 1) < 51){
+                    buttons[0] = Integer.toString(correct);
+                    buttons[1] = Integer.toString(other);
+                    correctAnswer = 0;
+                }else{
+                    buttons[0] = Integer.toString(other);
+                    buttons[1] = Integer.toString(correct);
+                    correctAnswer = 1;
+                }
+                answer = JOptionPane.showOptionDialog(null, "What location will the element be peeked from?", "Peek Prediction",
+                        JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, buttons, null);
+                if (answer == 0 && correctAnswer == 0) { //if they select the correct answer
+                    JOptionPane.showMessageDialog(null, "You predicted correctly, well done!", "Congratulations", JOptionPane.INFORMATION_MESSAGE);
+                    count++;
+                    predictionCount.put("CircularPeek", count);
+                } else if(answer == 1 && correctAnswer == 1){ //if they selected the correct answer
+                    JOptionPane.showMessageDialog(null, "You predicted correctly, well done!", "Congratulations", JOptionPane.INFORMATION_MESSAGE);
+                    count++;
+                    predictionCount.put("CircularPeek", count);
+                } else{
+                    JOptionPane.showMessageDialog(null, "Sorry that was incorrect, please try again", "Incorrect", JOptionPane.ERROR_MESSAGE);
+                }
+                answered = true;
                 break;
         }
 
@@ -374,18 +500,21 @@ public class Controller {
                             throw new java.lang.NumberFormatException("Not positive 3 digit Integer");
                         }
                         if(isCircular){
+                            if(predictionMode){
+                                runPrediction("CircularEnqueue");
+                            }
                             theModel.enqueueCircular(toBeQueued);
                             addCircularQueueOperation("Enqueue: " + toBeQueued);
-                            addCircularQueueJavaOperation("rear = (rear+1)%queue.length();");
+                            addCircularQueueJavaOperation("rear = (rear+1)%queue.length;");
                             addCircularQueueJavaOperation("queue[rear] = " + toBeQueued + ";");
                             addCircularQueueJavaOperation("--------------- Enqueue ---------------");
                         } else {
                             theModel.enqueue(toBeQueued);
+                            if(predictionMode){
+                                runPrediction("Enqueue");
+                            }
                             addQueueOperation("Enqueue: " + toBeQueued);
                             addQueueJavaOperation("queue.add(" + toBeQueued + ")");
-                        }
-                        if(predictionMode){
-                            runPrediction("Enqueue");
                         }
                         theView.updateQueueUI();
                         break;
@@ -407,11 +536,14 @@ public class Controller {
             try{
                 int dequeue;
                 if(isCircular){
+                    if(predictionMode){
+                        runPrediction("CircularDequeue");
+                    }
                     dequeue = theModel.dequeueCircular();
                     addCircularQueueOperation("Dequeue: " + dequeue);
-                    addCircularQueueJavaOperation("returns - " + dequeue);
+                    addCircularQueueJavaOperation("returns " + dequeue);
                     addCircularQueueJavaOperation("return temp;");
-                    addCircularQueueJavaOperation("front=(front+1)%queue.length();");
+                    addCircularQueueJavaOperation("front=(front+1)%queue.length;");
                     addCircularQueueJavaOperation("queue[front] = 0;");
                     addCircularQueueJavaOperation("int temp = queue[front];");
                     addCircularQueueJavaOperation("--------------- Dequeue ---------------");
@@ -419,9 +551,9 @@ public class Controller {
                     dequeue = theModel.dequeue();
                     addQueueOperation("Dequeue: " + dequeue);
                     addQueueJavaOperation("queue.poll() - returns " + dequeue);
-                }
-                if(predictionMode){
-                    runPrediction("Dequeue");
+                    if(predictionMode){
+                        runPrediction("Dequeue");
+                    }
                 }
                 theView.updateQueueUI();
             } catch(NullPointerException exception){
@@ -441,20 +573,23 @@ public class Controller {
             try{
                 int peeked;
                 if(isCircular){
+                    if(predictionMode){
+                        runPrediction("CircularPeek");
+                    }
                     peeked = theModel.peekCircular();
                     addCircularQueueOperation("Peeked: " + peeked);
-                    addCircularQueueJavaOperation("returns - " + peeked);
+                    addCircularQueueJavaOperation("returns " + peeked);
                     addCircularQueueJavaOperation("return queue[front];");
                     addCircularQueueJavaOperation("------------------ Peek ------------------");
                 }else{
                     peeked = theModel.peekQueue();
                     addQueueOperation("Peeked: " + peeked);
                     addQueueJavaOperation("queue.peek() - returns " + peeked);
+                    if(predictionMode){
+                        runPrediction("QueuePeek");
+                    }
                 }
                 drawQueue.highlight(peeked);
-                if(predictionMode){
-                    runPrediction("QueuePeek");
-                }
                 theView.updateQueueUI();
             } catch(NullPointerException exception){
                 if(isCircular){
@@ -502,6 +637,9 @@ public class Controller {
             predictionCount.put("Enqueue", 0);
             predictionCount.put("Dequeue", 0);
             predictionCount.put("QueuePeek", 0);
+            predictionCount.put("CircularEnqueue", 0);
+            predictionCount.put("CircularDequeue", 0);
+            predictionCount.put("CircularPeek", 0);
         }
     }
 

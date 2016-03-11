@@ -9,8 +9,6 @@
     <list default="true" id="19f81c55-b050-4dd0-b82d-43bcb1e555a9" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Prototype3/Controller.java" afterPath="$PROJECT_DIR$/src/Prototype3/Controller.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Prototype3/View.form" afterPath="$PROJECT_DIR$/src/Prototype3/View.form" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Prototype3/View.java" afterPath="$PROJECT_DIR$/src/Prototype3/View.java" />
     </list>
     <ignored path="StackQueueVisu.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -47,35 +45,54 @@
         <entry file="file://$PROJECT_DIR$/src/Prototype3/Model.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="42" column="30" selection-start-line="42" selection-start-column="30" selection-end-line="42" selection-end-column="30" />
+              <caret line="78" column="5" selection-start-line="78" selection-start-column="5" selection-end-line="78" selection-end-column="5" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#1078#1079#0" expanded="true" />
-                <element signature="e#1118#1119#0" expanded="true" />
+                <element signature="e#783#784#0" expanded="true" />
+                <element signature="e#811#812#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Controller.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Controller.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Prototype3/Controller.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.7010309">
-              <caret line="447" column="82" selection-start-line="447" selection-start-column="82" selection-end-line="447" selection-end-column="82" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="532" column="0" selection-start-line="532" selection-start-column="0" selection-end-line="532" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="method#addStackOperation#0;class#Controller#0" expanded="false" />
+                <element signature="method#addStackJavaOperations#0;class#Controller#0" expanded="false" />
+                <element signature="method#addQueueOperation#0;class#Controller#0" expanded="false" />
+                <element signature="method#addQueueJavaOperation#0;class#Controller#0" expanded="false" />
+                <element signature="method#addCircularQueueOperation#0;class#Controller#0" expanded="false" />
+                <element signature="method#addCircularQueueJavaOperation#0;class#Controller#0" expanded="false" />
+                <element signature="method#switchQueueOperationsList#0;class#Controller#0" expanded="false" />
                 <element signature="method#createPreMadeData#0;class#Controller#0" expanded="false" />
                 <element signature="method#runPrediction#0;class#Controller#0" expanded="false" />
+                <element signature="class#PushListener#0;class#Controller#0" expanded="false" />
+                <element signature="class#PopListener#0;class#Controller#0" expanded="false" />
+                <element signature="class#StackPeekListener#0;class#Controller#0" expanded="false" />
+                <element signature="class#EnqueueListener#0;class#Controller#0" expanded="false" />
+                <element signature="class#DequeueListener#0;class#Controller#0" expanded="false" />
+                <element signature="class#QueuePeekListener#0;class#Controller#0" expanded="false" />
+                <element signature="class#RadioOnListener#0;class#Controller#0" expanded="false" />
+                <element signature="class#RadioOffListener#0;class#Controller#0" expanded="false" />
+                <element signature="class#CircularQueueListener#0;class#Controller#0" expanded="false" />
+                <element signature="class#NormalQueueListener#0;class#Controller#0" expanded="false" />
+                <element signature="class#ResetListener#0;class#Controller#0" expanded="false" />
+                <element signature="class#HarderPredictionsListener#0;class#Controller#0" expanded="false" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CircularQueue.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="CircularQueue.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Prototype3/CircularQueue.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="74" column="24" selection-start-line="74" selection-start-column="8" selection-end-line="74" selection-end-column="24" />
+            <state vertical-scroll-proportion="0.96391755">
+              <caret line="46" column="5" selection-start-line="46" selection-start-column="5" selection-end-line="46" selection-end-column="5" />
               <folding />
             </state>
           </provider>
@@ -97,8 +114,11 @@
       </file>
       <file leaf-file-name="View.form" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Prototype3/View.form">
-          <provider selected="true" editor-type-id="ui-designer">
-            <state />
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
           </provider>
         </entry>
       </file>
@@ -147,12 +167,12 @@
         <option value="$PROJECT_DIR$/src/Prototype3/DrawStackRepresentation.java" />
         <option value="$PROJECT_DIR$/src/Prototype3/Prototype3.java" />
         <option value="$PROJECT_DIR$/src/Prototype3/DrawQueueRepresentation.java" />
-        <option value="$PROJECT_DIR$/src/Prototype3/CircularQueue.java" />
         <option value="$PROJECT_DIR$/src/Prototype3/PredictionOptions.java" />
         <option value="$PROJECT_DIR$/src/Prototype3/PredictionOptions.form" />
-        <option value="$PROJECT_DIR$/src/Prototype3/Model.java" />
         <option value="$PROJECT_DIR$/src/Prototype3/View.form" />
         <option value="$PROJECT_DIR$/src/Prototype3/View.java" />
+        <option value="$PROJECT_DIR$/src/Prototype3/CircularQueue.java" />
+        <option value="$PROJECT_DIR$/src/Prototype3/Model.java" />
         <option value="$PROJECT_DIR$/src/Prototype3/Controller.java" />
       </list>
     </option>
@@ -212,8 +232,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
       <pane id="Scope" />
+      <pane id="Scratches" />
       <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
@@ -841,7 +861,8 @@
       <workItem from="1457098482017" duration="11190000" />
       <workItem from="1457361059125" duration="10844000" />
       <workItem from="1457533560561" duration="6295000" />
-      <workItem from="1457618872861" duration="7861000" />
+      <workItem from="1457618872861" duration="7899000" />
+      <workItem from="1457706616725" duration="7208000" />
     </task>
     <task id="LOCAL-00001" summary="Setup">
       <created>1453136920053</created>
@@ -987,11 +1008,17 @@
       <option name="project" value="LOCAL" />
       <updated>1457542383462</updated>
     </task>
-    <option name="localTasksCounter" value="25" />
+    <task id="LOCAL-00025" summary="JLists with Java code added.">
+      <created>1457627134323</created>
+      <option name="number" value="00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1457627134323</updated>
+    </task>
+    <option name="localTasksCounter" value="26" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="116872000" />
+    <option name="totallyTimeSpent" value="124118000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -1061,7 +1088,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Added some more GUI stuff, including source code from IntelliJ" />
     <MESSAGE value="GUI now shows and action listener for push is connected" />
     <MESSAGE value="More updates, all buttons added for Stack. Push button has skeleton implementation in." />
     <MESSAGE value="All buttons for Stack now function, added previous operations list box. Now need to figure out how to visualise them with Graphics." />
@@ -1086,11 +1112,12 @@
     <MESSAGE value="Icons now in folder" />
     <MESSAGE value="Circular Queue error fixed and random data for prediction now work." />
     <MESSAGE value="Changes to prediction made, harder predictions checkbox added" />
-    <option name="LAST_COMMIT_MESSAGE" value="Changes to prediction made, harder predictions checkbox added" />
+    <MESSAGE value="JLists with Java code added." />
+    <option name="LAST_COMMIT_MESSAGE" value="JLists with Java code added." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="14" />
+      <option name="time" value="17" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -1103,10 +1130,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="23" column="0" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
-          <folding>
-            <element signature="e#987#988#0" expanded="true" />
-            <element signature="e#1014#1015#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1126,10 +1150,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="23" column="0" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
-          <folding>
-            <element signature="e#987#988#0" expanded="true" />
-            <element signature="e#1014#1015#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1370,13 +1391,13 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Prototype2/View.form">
+      <provider selected="true" editor-type-id="ui-designer">
+        <state />
+      </provider>
       <provider editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
-      </provider>
-      <provider selected="true" editor-type-id="ui-designer">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Prototype2/View.java">
@@ -1407,14 +1428,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Prototype3/Prototype3.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="4" column="2" selection-start-line="4" selection-start-column="2" selection-end-line="4" selection-end-column="2" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Prototype1/Prototype1.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.30357143">
@@ -1440,13 +1453,13 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Prototype3/PredictionOptions.form">
+      <provider selected="true" editor-type-id="ui-designer">
+        <state />
+      </provider>
       <provider editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
-      </provider>
-      <provider selected="true" editor-type-id="ui-designer">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Prototype3/PredictionOptions.java">
@@ -1459,35 +1472,15 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Prototype3/Model.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="42" column="30" selection-start-line="42" selection-start-column="30" selection-end-line="42" selection-end-column="30" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1078#1079#0" expanded="true" />
-            <element signature="e#1118#1119#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Prototype3/CircularQueue.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="74" column="24" selection-start-line="74" selection-start-column="8" selection-end-line="74" selection-end-column="24" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Prototype3/View.form">
-      <provider editor-type-id="text-editor">
+      <provider editor-type-id="ui-designer">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
-      </provider>
-      <provider selected="true" editor-type-id="ui-designer">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Prototype3/View.java">
@@ -1502,15 +1495,62 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Prototype3/Controller.java">
+    <entry file="file://$PROJECT_DIR$/src/Prototype3/Prototype3.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.7010309">
-          <caret line="447" column="82" selection-start-line="447" selection-start-column="82" selection-end-line="447" selection-end-column="82" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="4" column="2" selection-start-line="4" selection-start-column="2" selection-end-line="4" selection-end-column="2" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Prototype3/Model.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="78" column="5" selection-start-line="78" selection-start-column="5" selection-end-line="78" selection-end-column="5" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#783#784#0" expanded="true" />
+            <element signature="e#811#812#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Prototype3/Controller.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="532" column="0" selection-start-line="532" selection-start-column="0" selection-end-line="532" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#addStackOperation#0;class#Controller#0" expanded="false" />
+            <element signature="method#addStackJavaOperations#0;class#Controller#0" expanded="false" />
+            <element signature="method#addQueueOperation#0;class#Controller#0" expanded="false" />
+            <element signature="method#addQueueJavaOperation#0;class#Controller#0" expanded="false" />
+            <element signature="method#addCircularQueueOperation#0;class#Controller#0" expanded="false" />
+            <element signature="method#addCircularQueueJavaOperation#0;class#Controller#0" expanded="false" />
+            <element signature="method#switchQueueOperationsList#0;class#Controller#0" expanded="false" />
             <element signature="method#createPreMadeData#0;class#Controller#0" expanded="false" />
             <element signature="method#runPrediction#0;class#Controller#0" expanded="false" />
+            <element signature="class#PushListener#0;class#Controller#0" expanded="false" />
+            <element signature="class#PopListener#0;class#Controller#0" expanded="false" />
+            <element signature="class#StackPeekListener#0;class#Controller#0" expanded="false" />
+            <element signature="class#EnqueueListener#0;class#Controller#0" expanded="false" />
+            <element signature="class#DequeueListener#0;class#Controller#0" expanded="false" />
+            <element signature="class#QueuePeekListener#0;class#Controller#0" expanded="false" />
+            <element signature="class#RadioOnListener#0;class#Controller#0" expanded="false" />
+            <element signature="class#RadioOffListener#0;class#Controller#0" expanded="false" />
+            <element signature="class#CircularQueueListener#0;class#Controller#0" expanded="false" />
+            <element signature="class#NormalQueueListener#0;class#Controller#0" expanded="false" />
+            <element signature="class#ResetListener#0;class#Controller#0" expanded="false" />
+            <element signature="class#HarderPredictionsListener#0;class#Controller#0" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Prototype3/CircularQueue.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.96391755">
+          <caret line="46" column="5" selection-start-line="46" selection-start-column="5" selection-end-line="46" selection-end-column="5" />
+          <folding />
         </state>
       </provider>
     </entry>
