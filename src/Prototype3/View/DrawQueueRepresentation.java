@@ -113,7 +113,7 @@ public class DrawQueueRepresentation extends JComponent {
                 }
 
                 //highlight peeked
-                if(toBeHighlighted != "" && list[i] == list[head]){
+                if(!toBeHighlighted.equals("") && list[i] == list[head]){
                     graph2.setColor(new Color(204, 255, 0));
                     graph2.fillRect(x, y, 30, 30);
                     graph2.setColor(Color.black);
