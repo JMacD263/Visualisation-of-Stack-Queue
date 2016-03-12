@@ -1,4 +1,4 @@
-package src.Prototype3;
+package src.Prototype3.Model;
 
 
 /**

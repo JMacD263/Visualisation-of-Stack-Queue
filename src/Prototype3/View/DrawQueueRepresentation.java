@@ -1,4 +1,7 @@
-package src.Prototype3;
+package src.Prototype3.View;
+
+import src.Prototype3.Model.CircularQueue;
+import src.Prototype3.Model.Model;
 
 import javax.swing.*;
 import java.awt.*;

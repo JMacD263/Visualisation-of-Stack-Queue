@@ -1,4 +1,4 @@
-package src.Prototype3;
+package src.Prototype3.View;
 
 import javax.swing.*;
 import java.awt.*;

@@ -1,14 +1,10 @@
-package src.Prototype3;
-
-import src.Prototype2.*;
+package src.Prototype3.View;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemListener;
 import java.util.ArrayList;
-import java.util.Stack;
 
 /**
  * Created by Jamie on 22/02/2016.
@@ -187,60 +183,60 @@ public class View extends JFrame {
      */
 
     // If the pushButton is clicked execute actionPerformed method in the Controller
-    void addPushListener(ActionListener listenForPushButton){
+    public void addPushListener(ActionListener listenForPushButton){
         pushButton.addActionListener(listenForPushButton);
     }
 
     // If the popButton is clicked execute actionPerformed method in the Controller
-    void addPopListener(ActionListener listenForPopButton){
+    public void addPopListener(ActionListener listenForPopButton){
         popButton.addActionListener(listenForPopButton);
     }
 
     // If the peekStackButton is clicked execute actionPerformed method in the Controller
-    void addPeekStackListener(ActionListener listenForPeekStackButton){
+    public void addPeekStackListener(ActionListener listenForPeekStackButton){
         peekStackButton.addActionListener(listenForPeekStackButton);
     }
 
     // If the enqueueButton is clicked execute actionPerformed method in the Controller
-    void addEnqueueListener(ActionListener listenForEnqueueButton){
+    public void addEnqueueListener(ActionListener listenForEnqueueButton){
         enqueueButton.addActionListener(listenForEnqueueButton);
     }
 
     // If the dequeueButton is clicked execute actionPerformed method in the Controller
-    void addDequeueListener(ActionListener listenForDequeueButton){
+    public void addDequeueListener(ActionListener listenForDequeueButton){
         dequeueButton.addActionListener(listenForDequeueButton);
     }
 
     // If the peekQueueButton is clicked execute actionPerformed method in the Controller
-    void addPeekQueueListener(ActionListener listenForPeekQueueButton){
+    public void addPeekQueueListener(ActionListener listenForPeekQueueButton){
         peekQueueButton.addActionListener(listenForPeekQueueButton);
     }
 
     // If the on radio button is selected in the Prediction menu the actionPerformed method is run in the Controller
-    void addOnRadioListener(ActionListener listenForOnRadio){
+    public void addOnRadioListener(ActionListener listenForOnRadio){
         radioOn.addActionListener(listenForOnRadio);
     }
     // If the off radio button is selected in the Prediction menu the actionPerformed method is run in the Controller
-    void addOffRadioListener(ActionListener listenForOffRadio){
+    public void addOffRadioListener(ActionListener listenForOffRadio){
         radioOff.addActionListener(listenForOffRadio);
     }
 
     // If the circular queue is selected in the Prediction menu the actionPerformed method is run in the Controller
-    void addCircularQueueListener(ActionListener listenForCircularQueue) {
+    public void addCircularQueueListener(ActionListener listenForCircularQueue) {
         circularQueue.addActionListener(listenForCircularQueue);
     }
     // If the normal queue is selected in the Prediction menu the actionPerformed method is run in the Controller
-    void addNormalQueueListener(ActionListener listenForNormalQueue) {
+    public void addNormalQueueListener(ActionListener listenForNormalQueue) {
         normalQueue.addActionListener(listenForNormalQueue);
     }
 
     // If the reset menu option is selected the relevant actionPerformed method is run in the Controller
-    void addResetListener(ActionListener listenForReset){
+    public void addResetListener(ActionListener listenForReset){
         resetMenuItem.addActionListener(listenForReset);
     }
 
     // If the harder predictions checkbox is selected the relevant actionPerformed method is run in the Controller
-    void addHarderPredictionsListener(ItemListener listenForHarderPredictions){
+    public void addHarderPredictionsListener(ItemListener listenForHarderPredictions){
         harderPredictions.addItemListener(listenForHarderPredictions);
     }
 }

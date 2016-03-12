@@ -1,4 +1,4 @@
-package src.Prototype3;
+package src.Prototype3.GUIDialogs;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;

@@ -1,13 +1,19 @@
-package src.Prototype3;
+package src.Prototype3.Controller;
+
+import src.Prototype3.GUIDialogs.DrawHarderPredictions;
+import src.Prototype3.GUIDialogs.HarderPredictions;
+import src.Prototype3.Model.Model;
+import src.Prototype3.GUIDialogs.PredictionOptions;
+import src.Prototype3.View.DrawQueueRepresentation;
+import src.Prototype3.View.DrawStackRepresentation;
+import src.Prototype3.View.View;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
-import java.util.EmptyStackException;
-import java.util.HashMap;
-import java.util.LinkedList;
+import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
 
 /**
@@ -423,6 +429,46 @@ public class Controller {
             } else{
                 while(true){
                     try{
+
+                        // /*
+                        Stack<Integer> stack = new Stack<>();
+                        stack.add(1);
+                        stack.add(2);
+                        stack.add(3);
+                        stack.add(4);
+                        stack.add(5);
+                        Queue<Integer> queue = new LinkedList<>();
+                        queue.add(1);
+                        queue.add(2);
+                        queue.add(3);
+                        queue.add(4);
+                        queue.add(5);
+                        HarderPredictions harderPredictions = new HarderPredictions();
+                        harderPredictions.setModal(true);
+                        harderPredictions.setLocationRelativeTo(theView);
+                        harderPredictions.setQuestionLabel("Please click on the correct Stack after the following operations are made:");
+                        harderPredictions.setOperationsLabel("stack.add(1); stack.add(2); stack.add(3); stack.add(4); stack.add(5);");
+                        DrawHarderPredictions drawHarderPredictions = new DrawHarderPredictions();
+                        drawHarderPredictions.setVisualisationType("Stack");
+                        drawHarderPredictions.setStack(stack);
+                        DrawHarderPredictions drawHarderPredictions1 = new DrawHarderPredictions();
+                        drawHarderPredictions1.setVisualisationType("Stack");
+                        drawHarderPredictions1.setStack(stack);
+                        DrawHarderPredictions drawHarderPredictions2 = new DrawHarderPredictions();
+                        drawHarderPredictions2.setVisualisationType("Stack");
+                        drawHarderPredictions2.setStack(stack);
+                        DrawHarderPredictions drawHarderPredictions3 = new DrawHarderPredictions();
+                        drawHarderPredictions3.setVisualisationType("Queue");
+                        drawHarderPredictions3.setQueue(queue);
+                        harderPredictions.setPanelA(drawHarderPredictions);
+                        harderPredictions.setPanelB(drawHarderPredictions1);
+                        harderPredictions.setPanelC(drawHarderPredictions2);
+                        harderPredictions.setPanelD(drawHarderPredictions3);
+                        harderPredictions.setVisible(true); // */
+
+                        System.out.println("Answer: " + harderPredictions.getAnswer());
+
+                        //keep all this stuff
                         String input = JOptionPane.showInputDialog(null, "Enter a positive Integer of maximum 3 digits you want to push on to the Stack", "Push", JOptionPane.QUESTION_MESSAGE);
                         int toBePushed = Integer.parseInt(input);
                         if(!input.matches(regex)){
