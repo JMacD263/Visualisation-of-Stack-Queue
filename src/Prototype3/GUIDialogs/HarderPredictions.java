@@ -8,6 +8,7 @@ import java.awt.event.MouseEvent;
 
 /**
  * Created by Jamie on 12/03/2016.
+ *
  */
 public class HarderPredictions extends JDialog{
     private JLabel questionLabel;
@@ -17,13 +18,13 @@ public class HarderPredictions extends JDialog{
     private JPanel dPanel;
     private JPanel rootPanel;
     private JLabel operationsLabel;
-    private JLabel spaceLabel;
     private String answer;
 
     public HarderPredictions(){
         this.setTitle("Harder Prediction");
-        this.setSize(670,650);
+        this.setSize(920,900);
         this.add(rootPanel);
+        this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 
         aPanel.setBorder(BorderFactory.createEtchedBorder(EtchedBorder.RAISED));
         bPanel.setBorder(BorderFactory.createEtchedBorder(EtchedBorder.RAISED));
@@ -35,7 +36,6 @@ public class HarderPredictions extends JDialog{
             public void mouseReleased(MouseEvent e) {
                 super.mouseReleased(e);
                 answer = "a";
-                System.out.println("Panel A");
                 setVisible(false);
             }
         });
@@ -45,7 +45,6 @@ public class HarderPredictions extends JDialog{
             public void mouseReleased(MouseEvent e) {
                 super.mouseReleased(e);
                 answer = "b";
-                System.out.println("Panel B");
                 setVisible(false);
             }
         });
@@ -55,7 +54,6 @@ public class HarderPredictions extends JDialog{
             public void mouseReleased(MouseEvent e) {
                 super.mouseReleased(e);
                 answer = "c";
-                System.out.println("Panel C");
                 setVisible(false);
             }
         });
@@ -66,7 +64,6 @@ public class HarderPredictions extends JDialog{
             public void mouseReleased(MouseEvent e) {
                 super.mouseReleased(e);
                 answer = "d";
-                System.out.println("Panel D");
                 setVisible(false);
             }
         });

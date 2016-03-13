@@ -1,5 +1,6 @@
 package src.Prototype3.Controller;
 
+import src.Prototype3.GUIDialogs.CreateHarderPredictions;
 import src.Prototype3.GUIDialogs.DrawHarderPredictions;
 import src.Prototype3.GUIDialogs.HarderPredictions;
 import src.Prototype3.Model.Model;
@@ -430,43 +431,78 @@ public class Controller {
                 while(true){
                     try{
 
-                        // /*
-                        Stack<Integer> stack = new Stack<>();
-                        stack.add(1);
-                        stack.add(2);
-                        stack.add(3);
-                        stack.add(4);
-                        stack.add(5);
-                        Queue<Integer> queue = new LinkedList<>();
-                        queue.add(1);
-                        queue.add(2);
-                        queue.add(3);
-                        queue.add(4);
-                        queue.add(5);
+                        String type = "Stack";
+
+                        CreateHarderPredictions createHarderPredictions = new CreateHarderPredictions(type);
+
+                        DrawHarderPredictions drawHarderPredictions = new DrawHarderPredictions();
+                        drawHarderPredictions.setVisualisationType(type);
+                        drawHarderPredictions.setStack(createHarderPredictions.getStack());
+
                         HarderPredictions harderPredictions = new HarderPredictions();
                         harderPredictions.setModal(true);
                         harderPredictions.setLocationRelativeTo(theView);
-                        harderPredictions.setQuestionLabel("Please click on the correct Stack after the following operations are made:");
-                        harderPredictions.setOperationsLabel("stack.add(1); stack.add(2); stack.add(3); stack.add(4); stack.add(5);");
-                        DrawHarderPredictions drawHarderPredictions = new DrawHarderPredictions();
-                        drawHarderPredictions.setVisualisationType("Stack");
-                        drawHarderPredictions.setStack(stack);
-                        DrawHarderPredictions drawHarderPredictions1 = new DrawHarderPredictions();
-                        drawHarderPredictions1.setVisualisationType("Stack");
-                        drawHarderPredictions1.setStack(stack);
-                        DrawHarderPredictions drawHarderPredictions2 = new DrawHarderPredictions();
-                        drawHarderPredictions2.setVisualisationType("Stack");
-                        drawHarderPredictions2.setStack(stack);
-                        DrawHarderPredictions drawHarderPredictions3 = new DrawHarderPredictions();
-                        drawHarderPredictions3.setVisualisationType("Queue");
-                        drawHarderPredictions3.setQueue(queue);
-                        harderPredictions.setPanelA(drawHarderPredictions);
-                        harderPredictions.setPanelB(drawHarderPredictions1);
-                        harderPredictions.setPanelC(drawHarderPredictions2);
-                        harderPredictions.setPanelD(drawHarderPredictions3);
-                        harderPredictions.setVisible(true); // */
 
-                        System.out.println("Answer: " + harderPredictions.getAnswer());
+                        harderPredictions.setQuestionLabel("Please click on the correct " + type + " after the following operations are made:");
+                        harderPredictions.setOperationsLabel(createHarderPredictions.getOperationsString());
+
+                        ArrayList<Stack<Integer>> otherStacks = createHarderPredictions.getOtherStacks();
+
+                        DrawHarderPredictions drawHarderPredictions2 = new DrawHarderPredictions();
+                        drawHarderPredictions2.setVisualisationType(type);
+                        drawHarderPredictions2.setStack(otherStacks.get(0));
+
+                        DrawHarderPredictions drawHarderPredictions3 = new DrawHarderPredictions();
+                        drawHarderPredictions3.setVisualisationType(type);
+                        drawHarderPredictions3.setStack(otherStacks.get(1));
+
+                        DrawHarderPredictions drawHarderPredictions4 = new DrawHarderPredictions();
+                        drawHarderPredictions4.setVisualisationType(type);
+                        drawHarderPredictions4.setStack(otherStacks.get(2));
+
+
+
+                        int correctPanel = ThreadLocalRandom.current().nextInt(1, 4 + 1);
+                        String correctAnswer = "";
+
+                        switch (correctPanel){
+                            case 1:
+                                harderPredictions.setPanelA(drawHarderPredictions);
+                                correctAnswer = "a";
+                                harderPredictions.setPanelB(drawHarderPredictions2);
+                                harderPredictions.setPanelC(drawHarderPredictions3);
+                                harderPredictions.setPanelD(drawHarderPredictions4);
+                                break;
+                            case 2:
+                                harderPredictions.setPanelB(drawHarderPredictions);
+                                correctAnswer = "b";
+                                harderPredictions.setPanelC(drawHarderPredictions2);
+                                harderPredictions.setPanelD(drawHarderPredictions3);
+                                harderPredictions.setPanelA(drawHarderPredictions4);
+                                break;
+                            case 3:
+                                harderPredictions.setPanelC(drawHarderPredictions);
+                                correctAnswer = "c";
+                                harderPredictions.setPanelB(drawHarderPredictions2);
+                                harderPredictions.setPanelA(drawHarderPredictions3);
+                                harderPredictions.setPanelD(drawHarderPredictions4);
+                                break;
+                            case 4:
+                                harderPredictions.setPanelD(drawHarderPredictions);
+                                correctAnswer = "d";
+                                harderPredictions.setPanelA(drawHarderPredictions2);
+                                harderPredictions.setPanelB(drawHarderPredictions3);
+                                harderPredictions.setPanelC(drawHarderPredictions4);
+                                break;
+                        }
+
+                        harderPredictions.setVisible(true);
+                        //System.out.println("Answer: " + harderPredictions.getAnswer());
+
+                        if(harderPredictions.getAnswer().equals(correctAnswer)){
+                            JOptionPane.showMessageDialog(null, "Congrats", "congrats", JOptionPane.INFORMATION_MESSAGE);
+                        }
+
 
                         //keep all this stuff
                         String input = JOptionPane.showInputDialog(null, "Enter a positive Integer of maximum 3 digits you want to push on to the Stack", "Push", JOptionPane.QUESTION_MESSAGE);
