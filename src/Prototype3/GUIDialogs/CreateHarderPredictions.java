@@ -12,6 +12,8 @@ public class CreateHarderPredictions {
     String[] stackOperations = {"push", "pop", "peek"};
     String[] queueOperations = {"enqueue", "dequeue", "peek"};
     String operationsString = "";
+    Queue<Integer> globalQueue;
+    Stack<Integer> globalStack;
     int stackSize;
     int queueSize;
 
@@ -87,6 +89,7 @@ public class CreateHarderPredictions {
                     break;
             }
         }
+        globalStack = stack;
         stackSize = stack.size();
         return stack;
     }
@@ -117,6 +120,8 @@ public class CreateHarderPredictions {
                     break;
             }
         }
+        globalQueue = queue;
+        queueSize = queue.size();
         return queue;
     }
 
@@ -141,7 +146,6 @@ public class CreateHarderPredictions {
         for(String operation: tokenizedOperations){
             if(operation.contains("push")){
                 int rand = ThreadLocalRandom.current().nextInt(1, 10 + 1);
-
                 if(rand > 3){
                     stack1.push(Integer.parseInt(operation.replaceAll("[\\D]", "")));
                 }
@@ -174,13 +178,13 @@ public class CreateHarderPredictions {
             }
         }
 
-        if(stack1.empty() || ((stackSize - stack1.size()) > 2)){
+        if(stack1.empty() || ((stackSize - stack1.size()) >= 2)){
             stack1.push(ThreadLocalRandom.current().nextInt(1, 9 + 1));
         }
-        if(stack2.empty() || ((stackSize - stack2.size()) > 2)){
+        if(stack2.empty() || ((stackSize - stack2.size()) >= 2)){
             stack2.push(ThreadLocalRandom.current().nextInt(1, 9 + 1));
         }
-        if(stack3.empty() || ((stackSize - stack3.size()) > 2)){
+        if(stack3.empty() || ((stackSize - stack3.size()) >= 2)){
             stack3.push(ThreadLocalRandom.current().nextInt(1, 9 + 1));
         }
 
@@ -194,6 +198,16 @@ public class CreateHarderPredictions {
             stack3.pop();
         }
 
+        if(stack1.equals(globalStack)){
+            stack1.push(ThreadLocalRandom.current().nextInt(1, 9 + 1));
+        }
+        if(stack2.equals(globalStack)){
+            stack2.push(ThreadLocalRandom.current().nextInt(1, 9 + 1));
+        }
+        if(stack3.equals(globalStack)){
+            stack3.push(ThreadLocalRandom.current().nextInt(1, 9 + 1));
+        }
+
 
         stacksList.add(stack1);
         stacksList.add(stack2);
@@ -203,5 +217,95 @@ public class CreateHarderPredictions {
 
     }
 
+    public ArrayList<Queue<Integer>> getOtherQueues() {
+        ArrayList<Queue<Integer>> queuesList = new ArrayList<>();
+        Queue<Integer> queue1 = new LinkedList<>();
+        Queue<Integer> queue2 = new LinkedList<>();
+        Queue<Integer> queue3 = new LinkedList<>();
+
+        String delimiter = " ";
+        ArrayList<String> tokenizedOperations = new ArrayList<>();
+
+        StringTokenizer st = new StringTokenizer(operationsString, delimiter);
+        while (st.hasMoreElements()) {
+            tokenizedOperations.add(st.nextToken());
+        }
+
+        for (String operation : tokenizedOperations) {
+            if (operation.contains("add")) {
+                int rand = ThreadLocalRandom.current().nextInt(1, 10 + 1);
+                if (rand > 3) {
+                    System.out.println("TEST?");
+                    queue1.add(Integer.parseInt(operation.replaceAll("[\\D]", "")));
+                }
+                if (rand < 6) {
+                    queue2.add(Integer.parseInt(operation.replaceAll("[\\D]", "")));
+                }
+                if (rand > 6) {
+                    queue3.add(Integer.parseInt(operation.replaceAll("[\\D]", "")));
+                }
+                if (ThreadLocalRandom.current().nextInt(1, 10 + 1) > 7) {
+                    queue1.add(ThreadLocalRandom.current().nextInt(1, 9 + 1));
+                    queue2.add(ThreadLocalRandom.current().nextInt(1, 9 + 1));
+                    queue3.add(ThreadLocalRandom.current().nextInt(1, 9 + 1));
+                }
+            } else if (operation.contains("poll")) {
+                try {
+                    int rand = ThreadLocalRandom.current().nextInt(1, 10 + 1);
+                    if (rand < 4) {
+                        queue1.poll();
+                    }
+                    if (rand < 6) {
+                        queue2.poll();
+                    }
+                    if (rand > 7) {
+                        queue3.poll();
+                    }
+                } catch (NullPointerException exception) {
+                    break;
+                }
+            }
+        }
+
+
+        if (queue1.isEmpty() || ((queueSize - queue1.size()) >= 2)) {
+            queue1.add(ThreadLocalRandom.current().nextInt(1, 9 + 1));
+        }
+        if (queue2.isEmpty() || ((queueSize - queue2.size()) >= 2)) {
+            queue2.add(ThreadLocalRandom.current().nextInt(1, 9 + 1));
+        }
+        if (queue3.isEmpty() || ((queueSize - queue3.size()) >= 2)) {
+            queue3.add(ThreadLocalRandom.current().nextInt(1, 9 + 1));
+        }
+
+        if (queue1.size() > 8) {
+            queue1.poll();
+        }
+        if (queue2.size() > 8) {
+            queue2.poll();
+        }
+        if (queue3.size() > 8) {
+            queue3.poll();
+        }
+
+        if(queue1.equals(globalQueue)){
+            queue1.add(ThreadLocalRandom.current().nextInt(1, 9 + 1));
+        }
+        if(queue2.equals(globalQueue)){
+            queue2.add(ThreadLocalRandom.current().nextInt(1, 9 + 1));
+        }
+        if(queue3.equals(globalQueue)){
+            queue3.add(ThreadLocalRandom.current().nextInt(1, 9 + 1));
+        }
+
+
+
+
+        queuesList.add(queue1);
+        queuesList.add(queue2);
+        queuesList.add(queue3);
+
+        return queuesList;
+    }
 
 }

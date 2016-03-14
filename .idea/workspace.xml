@@ -7,11 +7,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="19f81c55-b050-4dd0-b82d-43bcb1e555a9" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Prototype3/GUIDialogs/CreateHarderPredictions.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Prototype3/Controller/Controller.java" afterPath="$PROJECT_DIR$/src/Prototype3/Controller/Controller.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Prototype3/GUIDialogs/CreateHarderPredictions.java" afterPath="$PROJECT_DIR$/src/Prototype3/GUIDialogs/CreateHarderPredictions.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Prototype3/GUIDialogs/HarderPredictions.form" afterPath="$PROJECT_DIR$/src/Prototype3/GUIDialogs/HarderPredictions.form" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Prototype3/GUIDialogs/HarderPredictions.java" afterPath="$PROJECT_DIR$/src/Prototype3/GUIDialogs/HarderPredictions.java" />
     </list>
     <ignored path="StackQueueVisu.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -48,11 +47,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Controller.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Controller.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Prototype3/Controller/Controller.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.3724227">
-              <caret line="485" column="84" selection-start-line="485" selection-start-column="84" selection-end-line="485" selection-end-column="84" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="595" column="0" selection-start-line="595" selection-start-column="0" selection-end-line="595" selection-end-column="0" />
               <folding>
                 <element signature="method#addStackOperation#0;class#Controller#0" expanded="false" />
                 <element signature="method#addStackJavaOperations#0;class#Controller#0" expanded="false" />
@@ -65,7 +64,6 @@
                 <element signature="method#runPrediction#0;class#Controller#0" expanded="false" />
                 <element signature="class#PopListener#0;class#Controller#0" expanded="false" />
                 <element signature="class#StackPeekListener#0;class#Controller#0" expanded="false" />
-                <element signature="method#actionPerformed#0;class#EnqueueListener#0;class#Controller#0" expanded="false" />
                 <element signature="class#DequeueListener#0;class#Controller#0" expanded="false" />
                 <element signature="class#QueuePeekListener#0;class#Controller#0" expanded="false" />
                 <element signature="class#RadioOnListener#0;class#Controller#0" expanded="false" />
@@ -107,11 +105,9 @@
         <entry file="file://$PROJECT_DIR$/src/Prototype3/GUIDialogs/CreateHarderPredictions.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="39" column="55" selection-start-line="39" selection-start-column="55" selection-end-line="39" selection-end-column="55" />
+              <caret line="299" column="0" selection-start-line="299" selection-start-column="0" selection-end-line="299" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#4503#4504#0" expanded="true" />
-                <element signature="e#4542#4543#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -127,7 +123,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="HarderPredictions.form" pinned="false" current-in-tab="false">
+      <file leaf-file-name="HarderPredictions.form" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Prototype3/GUIDialogs/HarderPredictions.form">
           <provider selected="true" editor-type-id="ui-designer">
             <state />
@@ -228,10 +224,10 @@
         <option value="$PROJECT_DIR$/src/Prototype3/GUIDialogs/PredictionOptions.java" />
         <option value="$PROJECT_DIR$/src/Prototype3/GUIDialogs/DrawHarderPredictions.java" />
         <option value="$PROJECT_DIR$/src/Prototype3/View/DrawQueueRepresentation.java" />
-        <option value="$PROJECT_DIR$/src/Prototype3/GUIDialogs/CreateHarderPredictions.java" />
-        <option value="$PROJECT_DIR$/src/Prototype3/GUIDialogs/HarderPredictions.form" />
         <option value="$PROJECT_DIR$/src/Prototype3/GUIDialogs/HarderPredictions.java" />
         <option value="$PROJECT_DIR$/src/Prototype3/Controller/Controller.java" />
+        <option value="$PROJECT_DIR$/src/Prototype3/GUIDialogs/CreateHarderPredictions.java" />
+        <option value="$PROJECT_DIR$/src/Prototype3/GUIDialogs/HarderPredictions.form" />
       </list>
     </option>
   </component>
@@ -995,7 +991,8 @@
       <workItem from="1457706616725" duration="9347000" />
       <workItem from="1457788057713" duration="454000" />
       <workItem from="1457788534501" duration="10347000" />
-      <workItem from="1457883170198" duration="12529000" />
+      <workItem from="1457883170198" duration="12724000" />
+      <workItem from="1457962701990" duration="1613000" />
     </task>
     <task id="LOCAL-00001" summary="Setup">
       <created>1453136920053</created>
@@ -1171,11 +1168,17 @@
       <option name="project" value="LOCAL" />
       <updated>1457802029331</updated>
     </task>
-    <option name="localTasksCounter" value="30" />
+    <task id="LOCAL-00030" summary="Harder predictions for Stack now complete.">
+      <created>1457897310167</created>
+      <option name="number" value="00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1457897310167</updated>
+    </task>
+    <option name="localTasksCounter" value="31" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="149587000" />
+    <option name="totallyTimeSpent" value="151395000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -1219,7 +1222,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="&quot;Top&quot; and &quot;Bottom&quot; now show on the display." />
     <MESSAGE value="Queue now works the same as Stack does, with operations made in the model and the queue displayed on the graphics panel." />
     <MESSAGE value="Minor changes, now a limit is checked when adding to either the Stack or the Queue." />
     <MESSAGE value="When stack is searched the searched for item will be highlighted, when peeked the top element is also highlighted." />
@@ -1244,7 +1246,8 @@
     <MESSAGE value="When circular/normal queue selected the focus switches to the correct tab." />
     <MESSAGE value="Refactored classes into packages and added start of harder predictions." />
     <MESSAGE value="Minor error fix in Draw Queue" />
-    <option name="LAST_COMMIT_MESSAGE" value="Minor error fix in Draw Queue" />
+    <MESSAGE value="Harder predictions for Stack now complete." />
+    <option name="LAST_COMMIT_MESSAGE" value="Harder predictions for Stack now complete." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1509,7 +1512,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.33247423">
           <caret line="812" column="21" selection-start-line="812" selection-start-column="21" selection-end-line="812" selection-end-column="21" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1517,7 +1519,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
       <provider editor-type-id="ui-designer">
@@ -1554,7 +1555,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.33247423">
           <caret line="1126" column="0" selection-start-line="1126" selection-start-column="0" selection-end-line="1126" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1598,25 +1598,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Prototype3/GUIDialogs/HarderPredictions.form">
-      <provider editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-      <provider selected="true" editor-type-id="ui-designer">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Prototype3/View/DrawStackRepresentation.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="46" column="56" selection-start-line="46" selection-start-column="56" selection-end-line="46" selection-end-column="56" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Prototype3/View/DrawQueueRepresentation.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1647,22 +1628,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Prototype3/GUIDialogs/CreateHarderPredictions.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="39" column="55" selection-start-line="39" selection-start-column="55" selection-end-line="39" selection-end-column="55" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#4503#4504#0" expanded="true" />
-            <element signature="e#4542#4543#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Prototype3/Controller/Controller.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3724227">
-          <caret line="485" column="84" selection-start-line="485" selection-start-column="84" selection-end-line="485" selection-end-column="84" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="595" column="0" selection-start-line="595" selection-start-column="0" selection-end-line="595" selection-end-column="0" />
           <folding>
             <element signature="method#addStackOperation#0;class#Controller#0" expanded="false" />
             <element signature="method#addStackJavaOperations#0;class#Controller#0" expanded="false" />
@@ -1675,7 +1644,6 @@
             <element signature="method#runPrediction#0;class#Controller#0" expanded="false" />
             <element signature="class#PopListener#0;class#Controller#0" expanded="false" />
             <element signature="class#StackPeekListener#0;class#Controller#0" expanded="false" />
-            <element signature="method#actionPerformed#0;class#EnqueueListener#0;class#Controller#0" expanded="false" />
             <element signature="class#DequeueListener#0;class#Controller#0" expanded="false" />
             <element signature="class#QueuePeekListener#0;class#Controller#0" expanded="false" />
             <element signature="class#RadioOnListener#0;class#Controller#0" expanded="false" />
@@ -1686,6 +1654,35 @@
             <element signature="class#HarderPredictionsListener#0;class#Controller#0" expanded="false" />
           </folding>
         </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Prototype3/GUIDialogs/CreateHarderPredictions.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="299" column="0" selection-start-line="299" selection-start-column="0" selection-end-line="299" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Prototype3/View/DrawStackRepresentation.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="46" column="56" selection-start-line="46" selection-start-column="56" selection-end-line="46" selection-end-column="56" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Prototype3/GUIDialogs/HarderPredictions.form">
+      <provider editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+      <provider selected="true" editor-type-id="ui-designer">
+        <state />
       </provider>
     </entry>
   </component>

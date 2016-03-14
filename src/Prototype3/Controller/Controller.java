@@ -576,6 +576,87 @@ public class Controller {
             } else{
                 while(true){
                     try{
+
+                        String type = "Queue";
+
+                        CreateHarderPredictions createHarderPredictions = new CreateHarderPredictions(type);
+
+                        DrawHarderPredictions drawHarderPredictions = new DrawHarderPredictions();
+                        drawHarderPredictions.setVisualisationType(type);
+                        drawHarderPredictions.setQueue(createHarderPredictions.getQueue());
+
+                        HarderPredictions harderPredictions = new HarderPredictions();
+                        harderPredictions.setModal(true);
+                        harderPredictions.setLocationRelativeTo(theView);
+
+                        harderPredictions.setQuestionLabel("Please click on the correct " + type + " after the following operations are made:");
+                        harderPredictions.setOperationsLabel(createHarderPredictions.getOperationsString());
+
+                        ArrayList<Queue<Integer>> otherQueues = createHarderPredictions.getOtherQueues();
+
+                        DrawHarderPredictions drawHarderPredictions2 = new DrawHarderPredictions();
+                        drawHarderPredictions2.setVisualisationType(type);
+                        drawHarderPredictions2.setQueue(otherQueues.get(0));
+
+                        DrawHarderPredictions drawHarderPredictions3 = new DrawHarderPredictions();
+                        drawHarderPredictions3.setVisualisationType(type);
+                        drawHarderPredictions3.setQueue(otherQueues.get(1));
+
+                        DrawHarderPredictions drawHarderPredictions4 = new DrawHarderPredictions();
+                        drawHarderPredictions4.setVisualisationType(type);
+                        drawHarderPredictions4.setQueue(otherQueues.get(2));
+
+
+
+                        int correctPanel = ThreadLocalRandom.current().nextInt(1, 4 + 1);
+                        String correctAnswer = "";
+
+                        switch (correctPanel){
+                            case 1:
+                                harderPredictions.setPanelA(drawHarderPredictions);
+                                correctAnswer = "a";
+                                harderPredictions.setPanelB(drawHarderPredictions2);
+                                harderPredictions.setPanelC(drawHarderPredictions3);
+                                harderPredictions.setPanelD(drawHarderPredictions4);
+                                break;
+                            case 2:
+                                harderPredictions.setPanelB(drawHarderPredictions);
+                                correctAnswer = "b";
+                                harderPredictions.setPanelC(drawHarderPredictions2);
+                                harderPredictions.setPanelD(drawHarderPredictions3);
+                                harderPredictions.setPanelA(drawHarderPredictions4);
+                                break;
+                            case 3:
+                                harderPredictions.setPanelC(drawHarderPredictions);
+                                correctAnswer = "c";
+                                harderPredictions.setPanelB(drawHarderPredictions2);
+                                harderPredictions.setPanelA(drawHarderPredictions3);
+                                harderPredictions.setPanelD(drawHarderPredictions4);
+                                break;
+                            case 4:
+                                harderPredictions.setPanelD(drawHarderPredictions);
+                                correctAnswer = "d";
+                                harderPredictions.setPanelA(drawHarderPredictions2);
+                                harderPredictions.setPanelB(drawHarderPredictions3);
+                                harderPredictions.setPanelC(drawHarderPredictions4);
+                                break;
+                        }
+
+                        harderPredictions.setVisible(true);
+                        //System.out.println("Answer: " + harderPredictions.getAnswer());
+
+                        if(harderPredictions.getAnswer().equals(correctAnswer)){
+                            JOptionPane.showMessageDialog(null, "Congrats", "congrats", JOptionPane.INFORMATION_MESSAGE);
+                        }
+
+
+
+
+
+
+
+
+
                         String input = JOptionPane.showInputDialog(null, "Enter a positive Integer of maximum 3 digits you want to enqueue to the Queue", "Enqueue", JOptionPane.QUESTION_MESSAGE);
                         int toBeQueued = Integer.parseInt(input);
                         if(!input.matches(regex)){
