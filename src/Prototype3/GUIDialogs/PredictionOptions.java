@@ -20,7 +20,7 @@ public class PredictionOptions extends JDialog{
 
     public PredictionOptions() {
         this.setTitle("Prediction Options");
-        this.setSize(780, 250);
+        this.setSize(800, 250);
         this.setLocation(200, 200);
         this.add(rootPanel);
 

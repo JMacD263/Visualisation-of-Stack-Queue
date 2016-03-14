@@ -420,19 +420,9 @@ public class Controller {
                         && answered){
             JOptionPane.showMessageDialog(null, "If you wish to access harder questions you can now enable them from the prediction menu", "Progress", JOptionPane.INFORMATION_MESSAGE);
             theView.toggleHarderPredictions(true, false);
-//            buttons = new String[]{"Progress", "Stay"};
-//            int options = JOptionPane.showOptionDialog(null, "You have predicted correctly, would you like to progress to harder questions?", "Progress?",
-//                    JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, buttons, buttons[0]);
-//            if (options == 0) {
-//
-////                harderPredictions = true;
-////                theView.toggleHarderPredictions(false, true);
-//            }else{
-////                JOptionPane.showMessageDialog(null, "If you wish to access harder questions you can now enable them from the prediction menu", "Progress", JOptionPane.INFORMATION_MESSAGE);
-////                theView.toggleHarderPredictions(true, false);
-//            }
         }
 
+        // This is for testing
 //        if (count == noPredictions && answered) {
 //            buttons = new String[]{"Progress", "Stay"};
 //            int options = JOptionPane.showOptionDialog(null, "You have predicted correctly, would you like to progress to harder questions?", "Progress?",
@@ -888,13 +878,6 @@ public class Controller {
         @Override
         public void actionPerformed(ActionEvent e) {
             reset();
-//            theModel.reset(); //clears the data stored in the model
-//            operationsListStack.clear();
-//            operationsListQueue.clear();
-//            operationsListCircularQueue.clear();
-//            theView.resetPreviousOperations(); //clears the data held within the JList
-//            theView.updateStackUI();
-//            theView.updateQueueUI();
         }
     }
 
