@@ -35,6 +35,7 @@ public class Controller {
     private DrawQueueRepresentation drawQueue = new DrawQueueRepresentation();
     private boolean isCircular = false;
     private boolean predictionMode = false;
+    private boolean harderPredictions = false;
     private int noPredictions;
     private HashMap<String, Integer> predictionCount = new HashMap<>();
     private int maxListSize = 35;
@@ -155,6 +156,17 @@ public class Controller {
             listData = operationsListQueueJava.toArray(new String[operationsListQueueJava.size()]);
             theView.setPreviousQueueJavaOperations(listData);
         }
+    }
+
+    // Reset all data
+    public void reset(){
+        theModel.reset(); //clears the data stored in the model
+        operationsListStack.clear();
+        operationsListQueue.clear();
+        operationsListCircularQueue.clear();
+        theView.resetPreviousOperations(); //clears the data held within the JList
+        theView.updateStackUI();
+        theView.updateQueueUI();
     }
 
     // creates data for predictions
@@ -401,20 +413,187 @@ public class Controller {
         }
 
         //For starting harder questions after getting the set number of predictions correct
-        if (count == noPredictions && answered) {
-            buttons = new String[]{"Progress", "Stay"};
-            int options = JOptionPane.showOptionDialog(null, "You have predicted correctly again, would you like to progress to harder questions?", "Progress?",
-                    JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, buttons, buttons[0]);
-            if (options == 0) {
-                System.out.println("ADD THING FOR HARDER PREDICTIONS");
-                //Add code here for harder predictions
-                theView.toggleHarderPredictions(false, true);
-            }else{
-                JOptionPane.showMessageDialog(null, "If you wish to access harder questions you can now enable them from the prediction menu", "Progress", JOptionPane.INFORMATION_MESSAGE);
-                theView.toggleHarderPredictions(true, false);
-            }
+
+        if((predictionCount.get("Push") == noPredictions && predictionCount.get("Pop") == noPredictions && predictionCount.get("StackPeek") == noPredictions) ||
+                (predictionCount.get("Enqueue") == noPredictions && predictionCount.get("Dequeue") == noPredictions && predictionCount.get("QueuePeek") == noPredictions) ||
+                (predictionCount.get("CircularEnqueue") == noPredictions && predictionCount.get("CircularDequeue") == noPredictions && predictionCount.get("CircularPeek") == noPredictions)
+                        && answered){
+            JOptionPane.showMessageDialog(null, "If you wish to access harder questions you can now enable them from the prediction menu", "Progress", JOptionPane.INFORMATION_MESSAGE);
+            theView.toggleHarderPredictions(true, false);
+//            buttons = new String[]{"Progress", "Stay"};
+//            int options = JOptionPane.showOptionDialog(null, "You have predicted correctly, would you like to progress to harder questions?", "Progress?",
+//                    JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, buttons, buttons[0]);
+//            if (options == 0) {
+//
+////                harderPredictions = true;
+////                theView.toggleHarderPredictions(false, true);
+//            }else{
+////                JOptionPane.showMessageDialog(null, "If you wish to access harder questions you can now enable them from the prediction menu", "Progress", JOptionPane.INFORMATION_MESSAGE);
+////                theView.toggleHarderPredictions(true, false);
+//            }
         }
 
+//        if (count == noPredictions && answered) {
+//            buttons = new String[]{"Progress", "Stay"};
+//            int options = JOptionPane.showOptionDialog(null, "You have predicted correctly, would you like to progress to harder questions?", "Progress?",
+//                    JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, buttons, buttons[0]);
+//            if (options == 0) {
+//                harderPredictions = true;
+//                theView.toggleHarderPredictions(false, true);
+//            }else{
+//                JOptionPane.showMessageDialog(null, "If you wish to access harder questions you can now enable them from the prediction menu", "Progress", JOptionPane.INFORMATION_MESSAGE);
+//                theView.toggleHarderPredictions(true, false);
+//            }
+//        }
+
+    }
+
+    //Method for harder predicitions
+    public void runHarderPredictions(String type){
+        if(type.equals("Stack")){
+            CreateHarderPredictions createHarderPredictions = new CreateHarderPredictions(type);
+
+            DrawHarderPredictions drawHarderPredictions = new DrawHarderPredictions();
+            drawHarderPredictions.setVisualisationType(type);
+            drawHarderPredictions.setStack(createHarderPredictions.getStack());
+
+            HarderPredictions harderPredictions = new HarderPredictions();
+            harderPredictions.setModal(true);
+            harderPredictions.setLocationRelativeTo(theView);
+
+            harderPredictions.setQuestionLabel("Please click on the correct " + type + " after the following operations are made:");
+            harderPredictions.setOperationsLabel(createHarderPredictions.getOperationsString());
+
+            ArrayList<Stack<Integer>> otherStacks = createHarderPredictions.getOtherStacks();
+
+            DrawHarderPredictions drawHarderPredictions2 = new DrawHarderPredictions();
+            drawHarderPredictions2.setVisualisationType(type);
+            drawHarderPredictions2.setStack(otherStacks.get(0));
+
+            DrawHarderPredictions drawHarderPredictions3 = new DrawHarderPredictions();
+            drawHarderPredictions3.setVisualisationType(type);
+            drawHarderPredictions3.setStack(otherStacks.get(1));
+
+            DrawHarderPredictions drawHarderPredictions4 = new DrawHarderPredictions();
+            drawHarderPredictions4.setVisualisationType(type);
+            drawHarderPredictions4.setStack(otherStacks.get(2));
+
+
+            int correctPanel = ThreadLocalRandom.current().nextInt(1, 4 + 1);
+            String correctAnswer = "";
+
+            switch (correctPanel){
+                case 1:
+                    harderPredictions.setPanelA(drawHarderPredictions);
+                    correctAnswer = "a";
+                    harderPredictions.setPanelB(drawHarderPredictions2);
+                    harderPredictions.setPanelC(drawHarderPredictions3);
+                    harderPredictions.setPanelD(drawHarderPredictions4);
+                    break;
+                case 2:
+                    harderPredictions.setPanelB(drawHarderPredictions);
+                    correctAnswer = "b";
+                    harderPredictions.setPanelC(drawHarderPredictions2);
+                    harderPredictions.setPanelD(drawHarderPredictions3);
+                    harderPredictions.setPanelA(drawHarderPredictions4);
+                    break;
+                case 3:
+                    harderPredictions.setPanelC(drawHarderPredictions);
+                    correctAnswer = "c";
+                    harderPredictions.setPanelD(drawHarderPredictions2);
+                    harderPredictions.setPanelA(drawHarderPredictions3);
+                    harderPredictions.setPanelB(drawHarderPredictions4);
+                    break;
+                case 4:
+                    harderPredictions.setPanelD(drawHarderPredictions);
+                    correctAnswer = "d";
+                    harderPredictions.setPanelA(drawHarderPredictions2);
+                    harderPredictions.setPanelB(drawHarderPredictions3);
+                    harderPredictions.setPanelC(drawHarderPredictions4);
+                    break;
+            }
+
+            harderPredictions.setVisible(true);
+
+            if(harderPredictions.getAnswer().equals(correctAnswer)){
+                JOptionPane.showMessageDialog(null, "Congrats", "congrats", JOptionPane.INFORMATION_MESSAGE);
+            }else{
+                JOptionPane.showMessageDialog(null, "Sorry that was incorrect, please try again", "Incorrect", JOptionPane.ERROR_MESSAGE);
+            }
+
+        }else if(type.equals("Queue")){
+            CreateHarderPredictions createHarderPredictions = new CreateHarderPredictions(type);
+
+            DrawHarderPredictions drawHarderPredictions = new DrawHarderPredictions();
+            drawHarderPredictions.setVisualisationType(type);
+            drawHarderPredictions.setQueue(createHarderPredictions.getQueue());
+
+            HarderPredictions harderPredictions = new HarderPredictions();
+            harderPredictions.setModal(true);
+            harderPredictions.setLocationRelativeTo(theView);
+
+            harderPredictions.setQuestionLabel("Please click on the correct " + type + " after the following operations are made:");
+            harderPredictions.setOperationsLabel(createHarderPredictions.getOperationsString());
+
+            ArrayList<Queue<Integer>> otherQueues = createHarderPredictions.getOtherQueues();
+
+            DrawHarderPredictions drawHarderPredictions2 = new DrawHarderPredictions();
+            drawHarderPredictions2.setVisualisationType(type);
+            drawHarderPredictions2.setQueue(otherQueues.get(0));
+
+            DrawHarderPredictions drawHarderPredictions3 = new DrawHarderPredictions();
+            drawHarderPredictions3.setVisualisationType(type);
+            drawHarderPredictions3.setQueue(otherQueues.get(1));
+
+            DrawHarderPredictions drawHarderPredictions4 = new DrawHarderPredictions();
+            drawHarderPredictions4.setVisualisationType(type);
+            drawHarderPredictions4.setQueue(otherQueues.get(2));
+
+
+
+            int correctPanel = ThreadLocalRandom.current().nextInt(1, 4 + 1);
+            String correctAnswer = "";
+
+            switch (correctPanel){
+                case 1:
+                    harderPredictions.setPanelA(drawHarderPredictions);
+                    correctAnswer = "a";
+                    harderPredictions.setPanelB(drawHarderPredictions2);
+                    harderPredictions.setPanelC(drawHarderPredictions3);
+                    harderPredictions.setPanelD(drawHarderPredictions4);
+                    break;
+                case 2:
+                    harderPredictions.setPanelB(drawHarderPredictions);
+                    correctAnswer = "b";
+                    harderPredictions.setPanelC(drawHarderPredictions2);
+                    harderPredictions.setPanelD(drawHarderPredictions3);
+                    harderPredictions.setPanelA(drawHarderPredictions4);
+                    break;
+                case 3:
+                    harderPredictions.setPanelC(drawHarderPredictions);
+                    correctAnswer = "c";
+                    harderPredictions.setPanelD(drawHarderPredictions2);
+                    harderPredictions.setPanelA(drawHarderPredictions3);
+                    harderPredictions.setPanelB(drawHarderPredictions4);
+                    break;
+                case 4:
+                    harderPredictions.setPanelD(drawHarderPredictions);
+                    correctAnswer = "d";
+                    harderPredictions.setPanelA(drawHarderPredictions2);
+                    harderPredictions.setPanelB(drawHarderPredictions3);
+                    harderPredictions.setPanelC(drawHarderPredictions4);
+                    break;
+            }
+
+            harderPredictions.setVisible(true);
+
+            if(harderPredictions.getAnswer().equals(correctAnswer)){
+                JOptionPane.showMessageDialog(null, "Congrats", "congrats", JOptionPane.INFORMATION_MESSAGE);
+            }else{
+                JOptionPane.showMessageDialog(null, "Sorry that was incorrect, please try again", "Incorrect", JOptionPane.ERROR_MESSAGE);
+            }
+
+        }
     }
 
     /*
@@ -430,88 +609,17 @@ public class Controller {
             } else{
                 while(true){
                     try{
-
-                        String type = "Stack";
-
-                        CreateHarderPredictions createHarderPredictions = new CreateHarderPredictions(type);
-
-                        DrawHarderPredictions drawHarderPredictions = new DrawHarderPredictions();
-                        drawHarderPredictions.setVisualisationType(type);
-                        drawHarderPredictions.setStack(createHarderPredictions.getStack());
-
-                        HarderPredictions harderPredictions = new HarderPredictions();
-                        harderPredictions.setModal(true);
-                        harderPredictions.setLocationRelativeTo(theView);
-
-                        harderPredictions.setQuestionLabel("Please click on the correct " + type + " after the following operations are made:");
-                        harderPredictions.setOperationsLabel(createHarderPredictions.getOperationsString());
-
-                        ArrayList<Stack<Integer>> otherStacks = createHarderPredictions.getOtherStacks();
-
-                        DrawHarderPredictions drawHarderPredictions2 = new DrawHarderPredictions();
-                        drawHarderPredictions2.setVisualisationType(type);
-                        drawHarderPredictions2.setStack(otherStacks.get(0));
-
-                        DrawHarderPredictions drawHarderPredictions3 = new DrawHarderPredictions();
-                        drawHarderPredictions3.setVisualisationType(type);
-                        drawHarderPredictions3.setStack(otherStacks.get(1));
-
-                        DrawHarderPredictions drawHarderPredictions4 = new DrawHarderPredictions();
-                        drawHarderPredictions4.setVisualisationType(type);
-                        drawHarderPredictions4.setStack(otherStacks.get(2));
-
-
-
-                        int correctPanel = ThreadLocalRandom.current().nextInt(1, 4 + 1);
-                        String correctAnswer = "";
-
-                        switch (correctPanel){
-                            case 1:
-                                harderPredictions.setPanelA(drawHarderPredictions);
-                                correctAnswer = "a";
-                                harderPredictions.setPanelB(drawHarderPredictions2);
-                                harderPredictions.setPanelC(drawHarderPredictions3);
-                                harderPredictions.setPanelD(drawHarderPredictions4);
-                                break;
-                            case 2:
-                                harderPredictions.setPanelB(drawHarderPredictions);
-                                correctAnswer = "b";
-                                harderPredictions.setPanelC(drawHarderPredictions2);
-                                harderPredictions.setPanelD(drawHarderPredictions3);
-                                harderPredictions.setPanelA(drawHarderPredictions4);
-                                break;
-                            case 3:
-                                harderPredictions.setPanelC(drawHarderPredictions);
-                                correctAnswer = "c";
-                                harderPredictions.setPanelB(drawHarderPredictions2);
-                                harderPredictions.setPanelA(drawHarderPredictions3);
-                                harderPredictions.setPanelD(drawHarderPredictions4);
-                                break;
-                            case 4:
-                                harderPredictions.setPanelD(drawHarderPredictions);
-                                correctAnswer = "d";
-                                harderPredictions.setPanelA(drawHarderPredictions2);
-                                harderPredictions.setPanelB(drawHarderPredictions3);
-                                harderPredictions.setPanelC(drawHarderPredictions4);
-                                break;
+                        if(harderPredictions){
+                            runHarderPredictions("Stack");
+                            break;
                         }
-
-                        harderPredictions.setVisible(true);
-                        //System.out.println("Answer: " + harderPredictions.getAnswer());
-
-                        if(harderPredictions.getAnswer().equals(correctAnswer)){
-                            JOptionPane.showMessageDialog(null, "Congrats", "congrats", JOptionPane.INFORMATION_MESSAGE);
-                        }
-
-
-                        //keep all this stuff
                         String input = JOptionPane.showInputDialog(null, "Enter a positive Integer of maximum 3 digits you want to push on to the Stack", "Push", JOptionPane.QUESTION_MESSAGE);
                         int toBePushed = Integer.parseInt(input);
                         if(!input.matches(regex)){
                             throw new java.lang.NumberFormatException("Not positive 3 digit Integer");
                         }
                         addStackOperation("Pushing: " + toBePushed);
-                        addStackJavaOperations("stack.push(" + toBePushed + ")");
+                        addStackJavaOperations("stack.push(" + toBePushed + ");");
                         theModel.push(toBePushed);
                         if(predictionMode){
                             runPrediction("Push");
@@ -523,7 +631,7 @@ public class Controller {
                         if(exception.getMessage().equals("null")){
                             break;
                         }
-                        JOptionPane.showMessageDialog(null, "Sorry that was not a positive Integer, please try again", "Not an Integer", JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.showMessageDialog(null, "Sorry that was not the correct format, please try again", "Not an Integer", JOptionPane.ERROR_MESSAGE);
                     }
                 }
             }
@@ -534,13 +642,17 @@ public class Controller {
         @Override
         public void actionPerformed(ActionEvent e) {
             try{
-                int popped = theModel.pop();
-                addStackOperation("Popped: " + popped);
-                addStackJavaOperations("stack.pop() - returns " + popped);
-                if(predictionMode){
-                    runPrediction("Pop");
+                if(harderPredictions){
+                    runHarderPredictions("Stack");
+                }else{
+                    int popped = theModel.pop();
+                    addStackOperation("Popped: " + popped);
+                    addStackJavaOperations("stack.pop(); - returns " + popped);
+                    if(predictionMode){
+                        runPrediction("Pop");
+                    }
+                    theView.updateStackUI();
                 }
-                theView.updateStackUI();
             } catch(EmptyStackException exception){
                 addStackOperation("Cannot Pop: Stack Empty");
                 JOptionPane.showMessageDialog(null, "Sorry the Stack is empty and therefore cannot be popped", "Stack Empty", JOptionPane.ERROR_MESSAGE);
@@ -552,12 +664,16 @@ public class Controller {
         @Override
         public void actionPerformed(ActionEvent e) {
             try{
-                int peeked = theModel.peek();
-                addStackOperation("Peeked: " + peeked);
-                addStackJavaOperations("stack.peek() - returns " + peeked);
-                drawStack.highlight(peeked);
-                if(predictionMode){
-                    runPrediction("StackPeek");
+                if(harderPredictions){
+                    runHarderPredictions("Stack");
+                }else{
+                    int peeked = theModel.peek();
+                    addStackOperation("Peeked: " + peeked);
+                    addStackJavaOperations("stack.peek(); - returns " + peeked);
+                    drawStack.highlight(peeked);
+                    if(predictionMode){
+                        runPrediction("StackPeek");
+                    }
                 }
                 theView.updateStackUI();
             } catch(EmptyStackException exception){
@@ -576,87 +692,10 @@ public class Controller {
             } else{
                 while(true){
                     try{
-
-                        String type = "Queue";
-
-                        CreateHarderPredictions createHarderPredictions = new CreateHarderPredictions(type);
-
-                        DrawHarderPredictions drawHarderPredictions = new DrawHarderPredictions();
-                        drawHarderPredictions.setVisualisationType(type);
-                        drawHarderPredictions.setQueue(createHarderPredictions.getQueue());
-
-                        HarderPredictions harderPredictions = new HarderPredictions();
-                        harderPredictions.setModal(true);
-                        harderPredictions.setLocationRelativeTo(theView);
-
-                        harderPredictions.setQuestionLabel("Please click on the correct " + type + " after the following operations are made:");
-                        harderPredictions.setOperationsLabel(createHarderPredictions.getOperationsString());
-
-                        ArrayList<Queue<Integer>> otherQueues = createHarderPredictions.getOtherQueues();
-
-                        DrawHarderPredictions drawHarderPredictions2 = new DrawHarderPredictions();
-                        drawHarderPredictions2.setVisualisationType(type);
-                        drawHarderPredictions2.setQueue(otherQueues.get(0));
-
-                        DrawHarderPredictions drawHarderPredictions3 = new DrawHarderPredictions();
-                        drawHarderPredictions3.setVisualisationType(type);
-                        drawHarderPredictions3.setQueue(otherQueues.get(1));
-
-                        DrawHarderPredictions drawHarderPredictions4 = new DrawHarderPredictions();
-                        drawHarderPredictions4.setVisualisationType(type);
-                        drawHarderPredictions4.setQueue(otherQueues.get(2));
-
-
-
-                        int correctPanel = ThreadLocalRandom.current().nextInt(1, 4 + 1);
-                        String correctAnswer = "";
-
-                        switch (correctPanel){
-                            case 1:
-                                harderPredictions.setPanelA(drawHarderPredictions);
-                                correctAnswer = "a";
-                                harderPredictions.setPanelB(drawHarderPredictions2);
-                                harderPredictions.setPanelC(drawHarderPredictions3);
-                                harderPredictions.setPanelD(drawHarderPredictions4);
-                                break;
-                            case 2:
-                                harderPredictions.setPanelB(drawHarderPredictions);
-                                correctAnswer = "b";
-                                harderPredictions.setPanelC(drawHarderPredictions2);
-                                harderPredictions.setPanelD(drawHarderPredictions3);
-                                harderPredictions.setPanelA(drawHarderPredictions4);
-                                break;
-                            case 3:
-                                harderPredictions.setPanelC(drawHarderPredictions);
-                                correctAnswer = "c";
-                                harderPredictions.setPanelB(drawHarderPredictions2);
-                                harderPredictions.setPanelA(drawHarderPredictions3);
-                                harderPredictions.setPanelD(drawHarderPredictions4);
-                                break;
-                            case 4:
-                                harderPredictions.setPanelD(drawHarderPredictions);
-                                correctAnswer = "d";
-                                harderPredictions.setPanelA(drawHarderPredictions2);
-                                harderPredictions.setPanelB(drawHarderPredictions3);
-                                harderPredictions.setPanelC(drawHarderPredictions4);
-                                break;
+                        if(harderPredictions){
+                            runHarderPredictions("Queue");
+                            break;
                         }
-
-                        harderPredictions.setVisible(true);
-                        //System.out.println("Answer: " + harderPredictions.getAnswer());
-
-                        if(harderPredictions.getAnswer().equals(correctAnswer)){
-                            JOptionPane.showMessageDialog(null, "Congrats", "congrats", JOptionPane.INFORMATION_MESSAGE);
-                        }
-
-
-
-
-
-
-
-
-
                         String input = JOptionPane.showInputDialog(null, "Enter a positive Integer of maximum 3 digits you want to enqueue to the Queue", "Enqueue", JOptionPane.QUESTION_MESSAGE);
                         int toBeQueued = Integer.parseInt(input);
                         if(!input.matches(regex)){
@@ -677,7 +716,7 @@ public class Controller {
                                 runPrediction("Enqueue");
                             }
                             addQueueOperation("Enqueue: " + toBeQueued);
-                            addQueueJavaOperation("queue.add(" + toBeQueued + ")");
+                            addQueueJavaOperation("queue.add(" + toBeQueued + ");");
                         }
                         theView.updateQueueUI();
                         break;
@@ -686,7 +725,7 @@ public class Controller {
                         if(exception.getMessage().equals("null")){
                             break;
                         }
-                        JOptionPane.showMessageDialog(null, "Sorry that was not a positive Integer, please try again", "Not an Integer", JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.showMessageDialog(null, "Sorry that was not the correct format, please try again", "Not an Integer", JOptionPane.ERROR_MESSAGE);
                     }
                 }
             }
@@ -697,25 +736,29 @@ public class Controller {
         @Override
         public void actionPerformed(ActionEvent e) {
             try{
-                int dequeue;
-                if(isCircular){
-                    if(predictionMode){
-                        runPrediction("CircularDequeue");
-                    }
-                    dequeue = theModel.dequeueCircular();
-                    addCircularQueueOperation("Dequeue: " + dequeue);
-                    addCircularQueueJavaOperation("returns " + dequeue);
-                    addCircularQueueJavaOperation("return temp;");
-                    addCircularQueueJavaOperation("front=(front+1)%queue.length;");
-                    addCircularQueueJavaOperation("queue[front] = 0;");
-                    addCircularQueueJavaOperation("int temp = queue[front];");
-                    addCircularQueueJavaOperation("--------------- Dequeue ---------------");
+                if(harderPredictions){
+                    runHarderPredictions("Queue");
                 }else{
-                    dequeue = theModel.dequeue();
-                    addQueueOperation("Dequeue: " + dequeue);
-                    addQueueJavaOperation("queue.poll() - returns " + dequeue);
-                    if(predictionMode){
-                        runPrediction("Dequeue");
+                    int dequeue;
+                    if(isCircular){
+                        if(predictionMode){
+                            runPrediction("CircularDequeue");
+                        }
+                        dequeue = theModel.dequeueCircular();
+                        addCircularQueueOperation("Dequeue: " + dequeue);
+                        addCircularQueueJavaOperation("returns " + dequeue);
+                        addCircularQueueJavaOperation("return temp;");
+                        addCircularQueueJavaOperation("front=(front+1)%queue.length;");
+                        addCircularQueueJavaOperation("queue[front] = 0;");
+                        addCircularQueueJavaOperation("int temp = queue[front];");
+                        addCircularQueueJavaOperation("--------------- Dequeue ---------------");
+                    }else{
+                        dequeue = theModel.dequeue();
+                        addQueueOperation("Dequeue: " + dequeue);
+                        addQueueJavaOperation("queue.poll(); - returns " + dequeue);
+                        if(predictionMode){
+                            runPrediction("Dequeue");
+                        }
                     }
                 }
                 theView.updateQueueUI();
@@ -734,26 +777,30 @@ public class Controller {
         @Override
         public void actionPerformed(ActionEvent e) {
             try{
-                int peeked;
-                if(isCircular){
-                    if(predictionMode){
-                        runPrediction("CircularPeek");
-                    }
-                    peeked = theModel.peekCircular();
-                    addCircularQueueOperation("Peeked: " + peeked);
-                    addCircularQueueJavaOperation("returns " + peeked);
-                    addCircularQueueJavaOperation("return queue[front];");
-                    addCircularQueueJavaOperation("------------------ Peek ------------------");
+                if(harderPredictions){
+                    runHarderPredictions("Queue");
                 }else{
-                    peeked = theModel.peekQueue();
-                    addQueueOperation("Peeked: " + peeked);
-                    addQueueJavaOperation("queue.peek() - returns " + peeked);
-                    if(predictionMode){
-                        runPrediction("QueuePeek");
+                    int peeked;
+                    if(isCircular){
+                        if(predictionMode){
+                            runPrediction("CircularPeek");
+                        }
+                        peeked = theModel.peekCircular();
+                        addCircularQueueOperation("Peeked: " + peeked);
+                        addCircularQueueJavaOperation("returns " + peeked);
+                        addCircularQueueJavaOperation("return queue[front];");
+                        addCircularQueueJavaOperation("------------------ Peek ------------------");
+                    }else{
+                        peeked = theModel.peekQueue();
+                        addQueueOperation("Peeked: " + peeked);
+                        addQueueJavaOperation("queue.peek(); - returns " + peeked);
+                        if(predictionMode){
+                            runPrediction("QueuePeek");
+                        }
                     }
+                    drawQueue.highlight(peeked);
+                    theView.updateQueueUI();
                 }
-                drawQueue.highlight(peeked);
-                theView.updateQueueUI();
             } catch(NullPointerException exception){
                 if(isCircular){
                     addCircularQueueOperation("Cannot Peek: Queue Empty");
@@ -779,11 +826,7 @@ public class Controller {
             noPredictions = predictionOptions.getNoPredictions();
 
             if(!predictionOptions.getIsBlank()){
-                theModel.reset(); //clears the data stored in the model
-                operationsListStack.clear();
-                operationsListQueue.clear();
-                operationsListCircularQueue.clear();
-                theView.resetPreviousOperations(); //clears the data held within the JList
+                reset();
                 createPreMadeData();
                 drawQueue.toggleFirstRun();
                 theView.updateStackUI();
@@ -812,7 +855,9 @@ public class Controller {
             theView.toggleLabels(true);
             //toggle harder predictions to off
             theView.toggleHarderPredictions(false, false);
+            theView.toggleCircularQueue(true);
             predictionMode = false;
+            harderPredictions = false;
         }
     }
 
@@ -842,13 +887,14 @@ public class Controller {
     class ResetListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            theModel.reset(); //clears the data stored in the model
-            operationsListStack.clear();
-            operationsListQueue.clear();
-            operationsListCircularQueue.clear();
-            theView.resetPreviousOperations(); //clears the data held within the JList
-            theView.updateStackUI();
-            theView.updateQueueUI();
+            reset();
+//            theModel.reset(); //clears the data stored in the model
+//            operationsListStack.clear();
+//            operationsListQueue.clear();
+//            operationsListCircularQueue.clear();
+//            theView.resetPreviousOperations(); //clears the data held within the JList
+//            theView.updateStackUI();
+//            theView.updateQueueUI();
         }
     }
 
@@ -856,9 +902,12 @@ public class Controller {
         @Override
         public void itemStateChanged(ItemEvent e) {
             if(e.getStateChange() == ItemEvent.SELECTED){
-                JOptionPane.showMessageDialog(null, "Harder Questions Enabled", "Harder Questions", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Harder Questions are now enabled, simply click any operation button for Stack or Queue to try them out!", "Harder Questions Enabled", JOptionPane.INFORMATION_MESSAGE);
+                theView.toggleCircularQueue(false);
+                harderPredictions = true;
                 //toggle harder predictions to on
                 theView.toggleHarderPredictions(false, true);
+                reset();
             }
         }
     }

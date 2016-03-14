@@ -174,6 +174,17 @@ public class View extends JFrame {
         harderPredictions.setSelected(isChecked);
     }
 
+    public void toggleCircularQueue(boolean circularEnabled){
+        if(circularEnabled){
+            circularQueue.setEnabled(true);
+        }else{
+            if(circularQueue.isSelected()){
+                normalQueue.doClick();
+            }
+            circularQueue.setEnabled(false);
+        }
+    }
+
     public void toggleTabbedPane(int index){
         tabbedPane1.setSelectedIndex(index);
     }

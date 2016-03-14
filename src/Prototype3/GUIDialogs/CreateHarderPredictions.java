@@ -235,7 +235,6 @@ public class CreateHarderPredictions {
             if (operation.contains("add")) {
                 int rand = ThreadLocalRandom.current().nextInt(1, 10 + 1);
                 if (rand > 3) {
-                    System.out.println("TEST?");
                     queue1.add(Integer.parseInt(operation.replaceAll("[\\D]", "")));
                 }
                 if (rand < 6) {
