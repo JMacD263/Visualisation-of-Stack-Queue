@@ -38,7 +38,7 @@ public class Controller {
     private boolean harderPredictions = false;
     private int noPredictions;
     private HashMap<String, Integer> predictionCount = new HashMap<>();
-    private int maxListSize = 35;
+    private int maxListSize = 45;
     String regex = "^[1-9]\\d{0,2}$"; //Regex for a positive integer, max 3 digits.
 
     public Controller(View view, Model model) {
@@ -506,7 +506,7 @@ public class Controller {
             harderPredictions.setVisible(true);
 
             if(harderPredictions.getAnswer().equals(correctAnswer)){
-                JOptionPane.showMessageDialog(null, "Congrats", "congrats", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(null, "You answered correctly! Click another operation button to try another", "Congratulations", JOptionPane.INFORMATION_MESSAGE);
             }else{
                 JOptionPane.showMessageDialog(null, "Sorry that was incorrect, please try again", "Incorrect", JOptionPane.ERROR_MESSAGE);
             }
