@@ -40,6 +40,8 @@ public class View extends JFrame {
     private JCheckBoxMenuItem harderPredictions;
     private JRadioButtonMenuItem circularQueue;
     private JRadioButtonMenuItem normalQueue;
+    private JRadioButtonMenuItem arrayStack;
+    private JRadioButtonMenuItem normalStack;
     private JMenuItem resetMenuItem;
 
     public View(){
@@ -90,8 +92,26 @@ public class View extends JFrame {
         JMenu editMenu = new JMenu("Edit");
         menuBar.add(editMenu);
         // Add the reset menu option
-        resetMenuItem = new JMenuItem("Reset");
+        resetMenuItem = new JMenuItem("Clear");
         editMenu.add(resetMenuItem);
+
+        // Add drop down stack menu
+        JMenu stackMenu = new JMenu("Stack");
+        menuBar.add(stackMenu);
+        // Add the radio buttons to change stack type
+        arrayStack = new JRadioButtonMenuItem(
+                "Array Stack");
+        normalStack = new JRadioButtonMenuItem(
+                "Regular Stack");
+        // Group buttons together and set normal as default
+        ButtonGroup bgStack = new ButtonGroup();
+        bgStack.add(arrayStack);
+        bgStack.add(normalStack);
+        normalStack.setSelected(true);
+        // Add radio buttons to menu bar
+        stackMenu.add(arrayStack);
+        stackMenu.add(normalStack);
+
 
         // Add drop down queue menu
         JMenu queueMenu = new JMenu("Queue");
@@ -185,6 +205,17 @@ public class View extends JFrame {
         }
     }
 
+    public void toggleArrayStack(boolean arrayEnabled){
+        if(arrayEnabled){
+            arrayStack.setEnabled(true);
+        }else{
+            if(arrayStack.isSelected()){
+                normalStack.doClick();
+            }
+            arrayStack.setEnabled(false);
+        }
+    }
+
     public void toggleTabbedPane(int index){
         tabbedPane1.setSelectedIndex(index);
     }
@@ -239,6 +270,16 @@ public class View extends JFrame {
     // If the normal queue is selected in the Prediction menu the actionPerformed method is run in the Controller
     public void addNormalQueueListener(ActionListener listenForNormalQueue) {
         normalQueue.addActionListener(listenForNormalQueue);
+    }
+
+    // If the array stack is selected in the Prediction menu the actionPerformed method is run in the Controller
+    public void addArrayStackListener(ActionListener listenForArrayStack) {
+        arrayStack.addActionListener(listenForArrayStack);
+    }
+
+    // If the normal stack is selected in the Prediction menu the actionPerformed method is run in the Controller
+    public void addNormalStackListener(ActionListener listenForNormalStack) {
+        normalStack.addActionListener(listenForNormalStack);
     }
 
     // If the reset menu option is selected the relevant actionPerformed method is run in the Controller

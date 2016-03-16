@@ -26,14 +26,17 @@ public class Controller {
     private View theView;
     private Model theModel;
     private LinkedList<String> operationsListStack = new LinkedList<>();
+    private LinkedList<String> operationsListArrayStack = new LinkedList<>();
     private LinkedList<String> operationsListQueue = new LinkedList<>();
     private LinkedList<String> operationsListCircularQueue = new LinkedList<>();
     private LinkedList<String> operationsListStackJava = new LinkedList<>();
+    private LinkedList<String> operationsListArrayStackJava = new LinkedList<>();
     private LinkedList<String> operationsListQueueJava = new LinkedList<>();
     private LinkedList<String> operationsListCircularQueueJava = new LinkedList<>();
     private DrawStackRepresentation drawStack = new DrawStackRepresentation();
     private DrawQueueRepresentation drawQueue = new DrawQueueRepresentation();
     private boolean isCircular = false;
+    private boolean isArray = false;
     private boolean predictionMode = false;
     private boolean harderPredictions = false;
     private int noPredictions;
@@ -58,6 +61,8 @@ public class Controller {
         theView.addOffRadioListener(new RadioOffListener());
         theView.addCircularQueueListener(new CircularQueueListener());
         theView.addNormalQueueListener(new NormalQueueListener());
+        theView.addArrayStackListener(new ArrayStackListener());
+        theView.addNormalStackListener(new NormalStackListener());
         theView.addResetListener(new ResetListener());
         theView.addHarderPredictionsListener(new HarderPredictionsListener());
 
@@ -89,6 +94,29 @@ public class Controller {
             operationsListStackJava.push(op);
         }
         String listData[] = operationsListStackJava.toArray(new String[operationsListStackJava.size()]);
+        theView.setPreviousStackJavaOperations(listData);
+    }
+
+    // Add operations to Array Stack list.
+    public void addArrayStackOperation(String op){
+        if(operationsListArrayStack.size() < maxListSize) { //Max size of stack operations list
+            operationsListArrayStack.push(op);
+        }else{
+            operationsListArrayStack.removeLast();
+            operationsListArrayStack.push(op);
+        }
+        String listData[] = operationsListArrayStack.toArray(new String[operationsListArrayStack.size()]);
+        theView.setPreviousStackOperations(listData);
+    }
+
+    public void addArrayStackJavaOperation(String op){
+        if(operationsListArrayStackJava.size() < maxListSize){ //max size of stack operations list
+            operationsListArrayStackJava.push(op);
+        }else{
+            operationsListArrayStackJava.removeLast();
+            operationsListArrayStackJava.push(op);
+        }
+        String listData[] = operationsListArrayStackJava.toArray(new String[operationsListArrayStackJava.size()]);
         theView.setPreviousStackJavaOperations(listData);
     }
 
@@ -158,12 +186,32 @@ public class Controller {
         }
     }
 
+    public void switchStackOperationsList(String s){
+        theView.setPreviousStackOperations(new String[0]);
+        theView.setPreviousStackJavaOperations(new String[0]);
+        String listData[];
+        if(s.equals("Array")){
+            listData = operationsListArrayStack.toArray(new String[operationsListArrayStack.size()]);
+            theView.setPreviousStackOperations(listData);
+            listData = operationsListArrayStackJava.toArray(new String[operationsListArrayStackJava.size()]);
+            theView.setPreviousStackJavaOperations(listData);
+        }else if(s.equals("Normal")){
+            listData = operationsListStack.toArray(new String[operationsListStack.size()]);
+            theView.setPreviousStackOperations(listData);
+            listData = operationsListStackJava.toArray(new String[operationsListStackJava.size()]);
+            theView.setPreviousStackJavaOperations(listData);
+        }
+    }
+
     // Reset all data
     public void reset(){
         theModel.reset(); //clears the data stored in the model
         operationsListStack.clear();
         operationsListQueue.clear();
         operationsListCircularQueue.clear();
+        operationsListStackJava.clear();
+        operationsListQueueJava.clear();
+        operationsListCircularQueueJava.clear();
         theView.resetPreviousOperations(); //clears the data held within the JList
         theView.updateStackUI();
         theView.updateQueueUI();
@@ -175,6 +223,7 @@ public class Controller {
         int max = 99;
         for(int i = 0; i < ThreadLocalRandom.current().nextInt(4, 10 + 1); i++){ //run between 4 to 10 times
             theModel.push(ThreadLocalRandom.current().nextInt(min, max + 1));
+            theModel.arrayPush(ThreadLocalRandom.current().nextInt(min, max + 1));
             theModel.enqueue(ThreadLocalRandom.current().nextInt(min, max + 1));
             theModel.enqueueCircular(ThreadLocalRandom.current().nextInt(min, max + 1));
         }
@@ -369,54 +418,170 @@ public class Controller {
                 }
                 break;
             case "CircularPeek":
-                int correct = theModel.getFront();
-                int other = theModel.getRear();
-                int correctAnswer;
-                if(correct == other){
-                    if(other == 0){
-                        other += 1;
-                    }else if(other == 9 || other == 19){
-                        other -= 1;
-                    }else{
-                        if(ThreadLocalRandom.current().nextInt(1, 10 + 1) < 6){
+                if(count < noPredictions){
+                    int correct = theModel.getFront();
+                    int other = theModel.getRear();
+                    int correctAnswer;
+                    if(correct == other){
+                        if(other == 0){
                             other += 1;
-                        }else{
+                        }else if(other == 9 || other == 19){
                             other -= 1;
+                        }else{
+                            if(ThreadLocalRandom.current().nextInt(1, 10 + 1) < 6){
+                                other += 1;
+                            }else{
+                                other -= 1;
+                            }
                         }
                     }
+                    buttons = new String[2];
+                    if(ThreadLocalRandom.current().nextInt(1, 100 + 1) < 51){
+                        buttons[0] = Integer.toString(correct);
+                        buttons[1] = Integer.toString(other);
+                        correctAnswer = 0;
+                    }else{
+                        buttons[0] = Integer.toString(other);
+                        buttons[1] = Integer.toString(correct);
+                        correctAnswer = 1;
+                    }
+                    answer = JOptionPane.showOptionDialog(null, "What location will the element be peeked from?", "Peek Prediction",
+                            JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, buttons, null);
+                    if (answer == 0 && correctAnswer == 0) { //if they select the correct answer
+                        JOptionPane.showMessageDialog(null, "You predicted correctly, well done!", "Congratulations", JOptionPane.INFORMATION_MESSAGE);
+                        count++;
+                        predictionCount.put("CircularPeek", count);
+                    } else if(answer == 1 && correctAnswer == 1){ //if they selected the correct answer
+                        JOptionPane.showMessageDialog(null, "You predicted correctly, well done!", "Congratulations", JOptionPane.INFORMATION_MESSAGE);
+                        count++;
+                        predictionCount.put("CircularPeek", count);
+                    } else{
+                        JOptionPane.showMessageDialog(null, "Sorry that was incorrect, please try again", "Incorrect", JOptionPane.ERROR_MESSAGE);
+                    }
+                    answered = true;
                 }
-                buttons = new String[2];
-                if(ThreadLocalRandom.current().nextInt(1, 100 + 1) < 51){
-                    buttons[0] = Integer.toString(correct);
-                    buttons[1] = Integer.toString(other);
-                    correctAnswer = 0;
-                }else{
-                    buttons[0] = Integer.toString(other);
-                    buttons[1] = Integer.toString(correct);
-                    correctAnswer = 1;
+                break;
+            case "ArrayPush":
+                if(count < noPredictions) {
+                    int correct = theModel.getTop() + 1;
+                    int other;
+                    int correctAnswer;
+                    if (correct > 0 && correct != 9) {
+                        if (ThreadLocalRandom.current().nextInt(1, 10 + 1) < 6) {
+                            other = correct + 1;
+                        } else {
+                            other = correct - 1;
+                        }
+                    } else if (correct == 9) {
+                        other = correct - 1;
+                    } else {
+                        other = correct + 1;
+                    }
+                    buttons = new String[2];
+                    if (ThreadLocalRandom.current().nextInt(1, 10 + 1) < 6) {
+                        buttons[0] = Integer.toString(correct);
+                        buttons[1] = Integer.toString(other);
+                        correctAnswer = 0;
+                    } else {
+                        buttons[1] = Integer.toString(correct);
+                        buttons[0] = Integer.toString(other);
+                        correctAnswer = 1;
+                    }
+                    answer = JOptionPane.showOptionDialog(null, "What location will the element be pushed too?", "Push Prediction",
+                            JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, buttons, null);
+                    if (answer == 0 && correctAnswer == 0) { //if they select the correct answer
+                        JOptionPane.showMessageDialog(null, "You predicted correctly, well done!", "Congratulations", JOptionPane.INFORMATION_MESSAGE);
+                        count++;
+                        predictionCount.put("ArrayPush", count);
+                    } else if (answer == 1 && correctAnswer == 1) { //if they selected the correct answer
+                        JOptionPane.showMessageDialog(null, "You predicted correctly, well done!", "Congratulations", JOptionPane.INFORMATION_MESSAGE);
+                        count++;
+                        predictionCount.put("ArrayPush", count);
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Sorry that was incorrect, please try again", "Incorrect", JOptionPane.ERROR_MESSAGE);
+                    }
+                    answered = true;
                 }
-                answer = JOptionPane.showOptionDialog(null, "What location will the element be peeked from?", "Peek Prediction",
-                        JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, buttons, null);
-                if (answer == 0 && correctAnswer == 0) { //if they select the correct answer
-                    JOptionPane.showMessageDialog(null, "You predicted correctly, well done!", "Congratulations", JOptionPane.INFORMATION_MESSAGE);
-                    count++;
-                    predictionCount.put("CircularPeek", count);
-                } else if(answer == 1 && correctAnswer == 1){ //if they selected the correct answer
-                    JOptionPane.showMessageDialog(null, "You predicted correctly, well done!", "Congratulations", JOptionPane.INFORMATION_MESSAGE);
-                    count++;
-                    predictionCount.put("CircularPeek", count);
-                } else{
-                    JOptionPane.showMessageDialog(null, "Sorry that was incorrect, please try again", "Incorrect", JOptionPane.ERROR_MESSAGE);
+                break;
+            case "ArrayPop":
+                if(count < noPredictions) {
+                    int correct = 0;
+                    int other = theModel.getTop();
+                    if(other == correct){
+                        other++;
+                    }else if(other == -1){
+                        other+=2;
+                    }
+                    int correctAnswer;
+                    buttons = new String[2];
+                    if (ThreadLocalRandom.current().nextInt(1, 10 + 1) < 6) {
+                        buttons[0] = Integer.toString(correct);
+                        buttons[1] = Integer.toString(other);
+                        correctAnswer = 0;
+                    } else {
+                        buttons[1] = Integer.toString(correct);
+                        buttons[0] = Integer.toString(other);
+                        correctAnswer = 1;
+                    }
+                    answer = JOptionPane.showOptionDialog(null, "What location will the element be popped from?", "Pop Prediction",
+                            JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, buttons, null);
+                    if (answer == 0 && correctAnswer == 0) { //if they select the correct answer
+                        JOptionPane.showMessageDialog(null, "You predicted correctly, well done!", "Congratulations", JOptionPane.INFORMATION_MESSAGE);
+                        count++;
+                        predictionCount.put("ArrayPop", count);
+                    } else if (answer == 1 && correctAnswer == 1) { //if they selected the correct answer
+                        JOptionPane.showMessageDialog(null, "You predicted correctly, well done!", "Congratulations", JOptionPane.INFORMATION_MESSAGE);
+                        count++;
+                        predictionCount.put("ArrayPop", count);
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Sorry that was incorrect, please try again", "Incorrect", JOptionPane.ERROR_MESSAGE);
+                    }
                 }
-                answered = true;
+                    answered = true;
+                break;
+            case "ArrayPeek":
+                if(count < noPredictions) {
+                    int correct = 0;
+                    int other = theModel.getTop();
+                    if(other == correct){
+                        other++;
+                    }else if(other == -1){
+                        other+=2;
+                    }
+                    int correctAnswer;
+                    buttons = new String[2];
+                    if (ThreadLocalRandom.current().nextInt(1, 10 + 1) < 6) {
+                        buttons[0] = Integer.toString(correct);
+                        buttons[1] = Integer.toString(other);
+                        correctAnswer = 0;
+                    } else {
+                        buttons[1] = Integer.toString(correct);
+                        buttons[0] = Integer.toString(other);
+                        correctAnswer = 1;
+                    }
+                    answer = JOptionPane.showOptionDialog(null, "What location will the element be peeked from?", "Peek Prediction",
+                            JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, buttons, null);
+                    if (answer == 0 && correctAnswer == 0) { //if they select the correct answer
+                        JOptionPane.showMessageDialog(null, "You predicted correctly, well done!", "Congratulations", JOptionPane.INFORMATION_MESSAGE);
+                        count++;
+                        predictionCount.put("ArrayPeek", count);
+                    } else if (answer == 1 && correctAnswer == 1) { //if they selected the correct answer
+                        JOptionPane.showMessageDialog(null, "You predicted correctly, well done!", "Congratulations", JOptionPane.INFORMATION_MESSAGE);
+                        count++;
+                        predictionCount.put("ArrayPeek", count);
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Sorry that was incorrect, please try again", "Incorrect", JOptionPane.ERROR_MESSAGE);
+                    }
+                    answered = true;
+                }
                 break;
         }
 
         //For starting harder questions after getting the set number of predictions correct
-
-        if((predictionCount.get("Push") == noPredictions && predictionCount.get("Pop") == noPredictions && predictionCount.get("StackPeek") == noPredictions) ||
+        if(((predictionCount.get("Push") == noPredictions && predictionCount.get("Pop") == noPredictions && predictionCount.get("StackPeek") == noPredictions) ||
                 (predictionCount.get("Enqueue") == noPredictions && predictionCount.get("Dequeue") == noPredictions && predictionCount.get("QueuePeek") == noPredictions) ||
-                (predictionCount.get("CircularEnqueue") == noPredictions && predictionCount.get("CircularDequeue") == noPredictions && predictionCount.get("CircularPeek") == noPredictions)
+                (predictionCount.get("CircularEnqueue") == noPredictions && predictionCount.get("CircularDequeue") == noPredictions && predictionCount.get("CircularPeek") == noPredictions) ||
+                (predictionCount.get("ArrayPush") == noPredictions && predictionCount.get("ArrayPop") == noPredictions && predictionCount.get("ArrayPeek") == noPredictions))
                         && answered){
             JOptionPane.showMessageDialog(null, "If you wish to access harder questions you can now enable them from the prediction menu", "Progress", JOptionPane.INFORMATION_MESSAGE);
             theView.toggleHarderPredictions(true, false);
@@ -438,7 +603,7 @@ public class Controller {
 
     }
 
-    //Method for harder predicitions
+    //Method for harder predictions
     public void runHarderPredictions(String type){
         if(type.equals("Stack")){
             CreateHarderPredictions createHarderPredictions = new CreateHarderPredictions(type);
@@ -508,7 +673,7 @@ public class Controller {
             if(harderPredictions.getAnswer().equals(correctAnswer)){
                 JOptionPane.showMessageDialog(null, "You answered correctly! Click another operation button to try another", "Congratulations", JOptionPane.INFORMATION_MESSAGE);
             }else{
-                JOptionPane.showMessageDialog(null, "Sorry that was incorrect, please try again", "Incorrect", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Sorry that was incorrect, Click another operation button to try another", "Incorrect", JOptionPane.ERROR_MESSAGE);
             }
 
         }else if(type.equals("Queue")){
@@ -580,7 +745,7 @@ public class Controller {
             if(harderPredictions.getAnswer().equals(correctAnswer)){
                 JOptionPane.showMessageDialog(null, "Congrats", "congrats", JOptionPane.INFORMATION_MESSAGE);
             }else{
-                JOptionPane.showMessageDialog(null, "Sorry that was incorrect, please try again", "Incorrect", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Sorry that was incorrect, Click another operation button to try another", "Incorrect", JOptionPane.ERROR_MESSAGE);
             }
 
         }
@@ -594,7 +759,7 @@ public class Controller {
         @Override
         public void actionPerformed(ActionEvent e) {
             int maxStackSize = 10;
-            if(theModel.getStack().size() == maxStackSize){
+            if(theModel.getStack().size() == maxStackSize || theModel.getArrayStack().getTop()  == (maxStackSize - 1)){
                 JOptionPane.showMessageDialog(null, "Sorry the Stack is full and nothing can be pushed", "Stack Full", JOptionPane.ERROR_MESSAGE);
             } else{
                 while(true){
@@ -608,11 +773,22 @@ public class Controller {
                         if(!input.matches(regex)){
                             throw new java.lang.NumberFormatException("Not positive 3 digit Integer");
                         }
-                        addStackOperation("Pushing: " + toBePushed);
-                        addStackJavaOperations("stack.push(" + toBePushed + ");");
-                        theModel.push(toBePushed);
-                        if(predictionMode){
-                            runPrediction("Push");
+                        if(isArray){
+                            if(predictionMode){
+                                runPrediction("ArrayPush");
+                            }
+                            addArrayStackOperation("Pushing: " + toBePushed);
+                            addArrayStackJavaOperation("top++;");
+                            addArrayStackJavaOperation("stack[top] = " + toBePushed + ";");
+                            addArrayStackJavaOperation("---------------- Push ----------------");
+                            theModel.arrayPush(toBePushed);
+                        }else{
+                            if(predictionMode){
+                                runPrediction("Push");
+                            }
+                            addStackOperation("Pushing: " + toBePushed);
+                            addStackJavaOperations("stack.push(" + toBePushed + ");");
+                            theModel.push(toBePushed);
                         }
                         theView.updateStackUI();
                         break;
@@ -635,16 +811,33 @@ public class Controller {
                 if(harderPredictions){
                     runHarderPredictions("Stack");
                 }else{
-                    int popped = theModel.pop();
-                    addStackOperation("Popped: " + popped);
-                    addStackJavaOperations("stack.pop(); - returns " + popped);
-                    if(predictionMode){
-                        runPrediction("Pop");
+                    if(isArray){
+                        int popped = theModel.arrayPop();
+                        if(predictionMode){
+                            runPrediction("ArrayPop");
+                        }
+                        addArrayStackOperation("Popped: " + popped);
+                        addArrayStackJavaOperation("returns " + popped);
+                        addArrayStackJavaOperation("return temp;");
+                        addArrayStackJavaOperation("top--;");
+                        addArrayStackJavaOperation("int temp = stack[top];");
+                        addArrayStackJavaOperation("---------------- Pop ----------------");
+                    }else{
+                        int popped = theModel.pop();
+                        if(predictionMode){
+                            runPrediction("Pop");
+                        }
+                        addStackOperation("Popped: " + popped);
+                        addStackJavaOperations("stack.pop(); - returns " + popped);
                     }
                     theView.updateStackUI();
                 }
             } catch(EmptyStackException exception){
-                addStackOperation("Cannot Pop: Stack Empty");
+                if(isArray){
+                    addArrayStackOperation("Cannot Pop: Stack Empty");
+                }else{
+                    addStackOperation("Cannot Pop: Stack Empty");
+                }
                 JOptionPane.showMessageDialog(null, "Sorry the Stack is empty and therefore cannot be popped", "Stack Empty", JOptionPane.ERROR_MESSAGE);
             }
         }
@@ -657,17 +850,34 @@ public class Controller {
                 if(harderPredictions){
                     runHarderPredictions("Stack");
                 }else{
-                    int peeked = theModel.peek();
-                    addStackOperation("Peeked: " + peeked);
-                    addStackJavaOperations("stack.peek(); - returns " + peeked);
-                    drawStack.highlight(peeked);
-                    if(predictionMode){
-                        runPrediction("StackPeek");
+                    if(isArray){
+                        int peeked = theModel.arrayPeek();
+                        if(predictionMode){
+                            runPrediction("ArrayPeek");
+                        }
+                        addArrayStackOperation("Peeked: " + peeked);
+                        addArrayStackJavaOperation("returns " + peeked);
+                        addArrayStackJavaOperation("return stack[top];");
+                        addArrayStackJavaOperation("---------------- Peek ----------------");
+                        drawStack.highlight(peeked);
+
+                    }else{
+                        int peeked = theModel.peek();
+                        if(predictionMode){
+                            runPrediction("StackPeek");
+                        }
+                        addStackOperation("Peeked: " + peeked);
+                        addStackJavaOperations("stack.peek(); - returns " + peeked);
+                        drawStack.highlight(peeked);
                     }
                 }
                 theView.updateStackUI();
             } catch(EmptyStackException exception){
-                addStackOperation("Cannot Peek: Stack Empty");
+                if(isArray){
+                    addArrayStackOperation("Cannot Peek: Stack Empty");
+                }else{
+                    addStackOperation("Cannot Peek: Stack Empty");
+                }
                 JOptionPane.showMessageDialog(null, "Sorry the Stack is empty and therefore cannot be peeked", "Stack Empty", JOptionPane.ERROR_MESSAGE);
             }
         }
@@ -697,8 +907,8 @@ public class Controller {
                             }
                             theModel.enqueueCircular(toBeQueued);
                             addCircularQueueOperation("Enqueue: " + toBeQueued);
-                            addCircularQueueJavaOperation("rear = (rear+1)%queue.length;");
-                            addCircularQueueJavaOperation("queue[rear] = " + toBeQueued + ";");
+                            addCircularQueueJavaOperation("tail = (tail+1)%queue.length;");
+                            addCircularQueueJavaOperation("queue[tail] = " + toBeQueued + ";");
                             addCircularQueueJavaOperation("--------------- Enqueue ---------------");
                         } else {
                             theModel.enqueue(toBeQueued);
@@ -731,6 +941,7 @@ public class Controller {
                 }else{
                     int dequeue;
                     if(isCircular){
+                        theModel.peekCircular();
                         if(predictionMode){
                             runPrediction("CircularDequeue");
                         }
@@ -738,17 +949,18 @@ public class Controller {
                         addCircularQueueOperation("Dequeue: " + dequeue);
                         addCircularQueueJavaOperation("returns " + dequeue);
                         addCircularQueueJavaOperation("return temp;");
-                        addCircularQueueJavaOperation("front=(front+1)%queue.length;");
-                        addCircularQueueJavaOperation("queue[front] = 0;");
-                        addCircularQueueJavaOperation("int temp = queue[front];");
+                        addCircularQueueJavaOperation("head=(head+1)%queue.length;");
+                        addCircularQueueJavaOperation("queue[head] = 0;");
+                        addCircularQueueJavaOperation("int temp = queue[head];");
                         addCircularQueueJavaOperation("--------------- Dequeue ---------------");
                     }else{
-                        dequeue = theModel.dequeue();
-                        addQueueOperation("Dequeue: " + dequeue);
-                        addQueueJavaOperation("queue.poll(); - returns " + dequeue);
+                        theModel.peekQueue();
                         if(predictionMode){
                             runPrediction("Dequeue");
                         }
+                        dequeue = theModel.dequeue();
+                        addQueueOperation("Dequeue: " + dequeue);
+                        addQueueJavaOperation("queue.poll(); - returns " + dequeue);
                     }
                 }
                 theView.updateQueueUI();
@@ -772,21 +984,21 @@ public class Controller {
                 }else{
                     int peeked;
                     if(isCircular){
+                        peeked = theModel.peekCircular();
                         if(predictionMode){
                             runPrediction("CircularPeek");
                         }
-                        peeked = theModel.peekCircular();
                         addCircularQueueOperation("Peeked: " + peeked);
                         addCircularQueueJavaOperation("returns " + peeked);
-                        addCircularQueueJavaOperation("return queue[front];");
+                        addCircularQueueJavaOperation("return queue[head];");
                         addCircularQueueJavaOperation("------------------ Peek ------------------");
                     }else{
                         peeked = theModel.peekQueue();
-                        addQueueOperation("Peeked: " + peeked);
-                        addQueueJavaOperation("queue.peek(); - returns " + peeked);
                         if(predictionMode){
                             runPrediction("QueuePeek");
                         }
+                        addQueueOperation("Peeked: " + peeked);
+                        addQueueJavaOperation("queue.peek(); - returns " + peeked);
                     }
                     drawQueue.highlight(peeked);
                     theView.updateQueueUI();
@@ -819,6 +1031,7 @@ public class Controller {
                 reset();
                 createPreMadeData();
                 drawQueue.toggleFirstRun();
+                drawStack.toggleFirstRun();
                 theView.updateStackUI();
                 theView.updateQueueUI();
             }
@@ -830,6 +1043,9 @@ public class Controller {
             predictionCount.put("Push", 0);
             predictionCount.put("Pop", 0);
             predictionCount.put("StackPeek", 0);
+            predictionCount.put("ArrayPush", 0);
+            predictionCount.put("ArrayPop", 0);
+            predictionCount.put("ArrayPeek", 0);
             predictionCount.put("Enqueue", 0);
             predictionCount.put("Dequeue", 0);
             predictionCount.put("QueuePeek", 0);
@@ -846,6 +1062,7 @@ public class Controller {
             //toggle harder predictions to off
             theView.toggleHarderPredictions(false, false);
             theView.toggleCircularQueue(true);
+            theView.toggleArrayStack(true);
             predictionMode = false;
             harderPredictions = false;
         }
@@ -874,6 +1091,29 @@ public class Controller {
         }
     }
 
+    class ArrayStackListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            drawStack.toggleArray(true);
+            drawStack.setArrayStack(theModel.getArrayStack());
+            isArray = true;
+            switchStackOperationsList("Array");
+            theView.toggleTabbedPane(0);
+            theView.updateStackUI();
+        }
+    }
+
+    class NormalStackListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            drawStack.toggleArray(false);
+            isArray = false;
+            switchStackOperationsList("Normal");
+            theView.toggleTabbedPane(0);
+            theView.updateStackUI();
+        }
+    }
+
     class ResetListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -887,6 +1127,7 @@ public class Controller {
             if(e.getStateChange() == ItemEvent.SELECTED){
                 JOptionPane.showMessageDialog(null, "Harder Questions are now enabled, simply click any operation button for Stack or Queue to try them out!", "Harder Questions Enabled", JOptionPane.INFORMATION_MESSAGE);
                 theView.toggleCircularQueue(false);
+                theView.toggleArrayStack(false);
                 harderPredictions = true;
                 //toggle harder predictions to on
                 theView.toggleHarderPredictions(false, true);

@@ -13,11 +13,13 @@ public class Model {
     private Stack<Integer> stack = new Stack<>();
     private Queue<Integer> queue = new LinkedList<>();
     private CircularQueue<Integer> circularQueue = new CircularQueue<>();
+    private ArrayStack<Integer> arrayStack = new ArrayStack<>();
 
     public void reset() {
         stack.clear();
         queue.clear();
         circularQueue.clear();
+        arrayStack.clear();
     }
 
     //Stack Operations
@@ -36,6 +38,28 @@ public class Model {
 
     public Stack<Integer> getStack(){
         return  stack;
+    }
+
+    //ArrayStack Operations
+
+    public void arrayPush(int x){
+        arrayStack.push(x);
+    }
+
+    public int arrayPop(){
+        return arrayStack.pop();
+    }
+
+    public int arrayPeek(){
+        return arrayStack.peek();
+    }
+
+    public int getTop(){
+        return arrayStack.getTop();
+    }
+
+    public ArrayStack<Integer> getArrayStack(){
+        return arrayStack;
     }
 
     //Queue Operations
