@@ -61,4 +61,9 @@ public class ArrayStack<Integer> {
         stack = new int[size];
     }
 
+    public boolean isEmpty(){
+        return top == -1;
+    }
+
+
 }
