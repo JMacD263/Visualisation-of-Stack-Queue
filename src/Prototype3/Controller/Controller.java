@@ -3,8 +3,8 @@ package src.Prototype3.Controller;
 import src.Prototype3.GUIDialogs.CreateHarderPredictions;
 import src.Prototype3.GUIDialogs.DrawHarderPredictions;
 import src.Prototype3.GUIDialogs.HarderPredictions;
-import src.Prototype3.Model.Model;
 import src.Prototype3.GUIDialogs.PredictionOptions;
+import src.Prototype3.Model.Model;
 import src.Prototype3.View.DrawQueueRepresentation;
 import src.Prototype3.View.DrawStackRepresentation;
 import src.Prototype3.View.View;
@@ -186,6 +186,7 @@ public class Controller {
         }
     }
 
+    // Switch Array and Regular Stack Operations List
     public void switchStackOperationsList(String s){
         theView.setPreviousStackOperations(new String[0]);
         theView.setPreviousStackJavaOperations(new String[0]);
@@ -758,6 +759,10 @@ public class Controller {
     class PushListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
+            if(!isArray && operationsListStackJava.size() == 0 && theModel.getStack().size() == 0){
+                addStackJavaOperations("Stack<Integer> stack = new Stack<>();");
+                addStackOperation("Create Stack");
+            }
             int maxStackSize = 10;
             if(theModel.getStack().size() == maxStackSize || theModel.getArrayStack().getTop()  == (maxStackSize - 1)){
                 JOptionPane.showMessageDialog(null, "Sorry the Stack is full and nothing can be pushed", "Stack Full", JOptionPane.ERROR_MESSAGE);
@@ -835,8 +840,10 @@ public class Controller {
             } catch(EmptyStackException exception){
                 if(isArray){
                     addArrayStackOperation("Cannot Pop: Stack Empty");
+                    addArrayStackJavaOperation("EmptyStackException");
                 }else{
                     addStackOperation("Cannot Pop: Stack Empty");
+                    addStackJavaOperations("EmptyStackException");
                 }
                 JOptionPane.showMessageDialog(null, "Sorry the Stack is empty and therefore cannot be popped", "Stack Empty", JOptionPane.ERROR_MESSAGE);
             }
@@ -875,8 +882,10 @@ public class Controller {
             } catch(EmptyStackException exception){
                 if(isArray){
                     addArrayStackOperation("Cannot Peek: Stack Empty");
+                    addArrayStackJavaOperation("EmptyStackException");
                 }else{
                     addStackOperation("Cannot Peek: Stack Empty");
+                    addStackJavaOperations("EmptyStackException");
                 }
                 JOptionPane.showMessageDialog(null, "Sorry the Stack is empty and therefore cannot be peeked", "Stack Empty", JOptionPane.ERROR_MESSAGE);
             }
@@ -886,6 +895,10 @@ public class Controller {
     class EnqueueListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
+            if(!isCircular && operationsListQueueJava.size() == 0 && theModel.getQueue().size() == 0){
+                addQueueJavaOperation("Queue<Integer> queue = new LinkedList<>();");
+                addQueueOperation("Create Queue");
+            }
             int maxQueueSize = 20;
             if(theModel.getQueue().size() == maxQueueSize || theModel.getCircularQueue().getSize() == maxQueueSize){
                 JOptionPane.showMessageDialog(null, "Sorry the Queue is full and nothing can be enqueued", "Queue Full", JOptionPane.ERROR_MESSAGE);
@@ -905,11 +918,26 @@ public class Controller {
                             if(predictionMode){
                                 runPrediction("CircularEnqueue");
                             }
-                            theModel.enqueueCircular(toBeQueued);
-                            addCircularQueueOperation("Enqueue: " + toBeQueued);
-                            addCircularQueueJavaOperation("tail = (tail+1)%queue.length;");
-                            addCircularQueueJavaOperation("queue[tail] = " + toBeQueued + ";");
-                            addCircularQueueJavaOperation("--------------- Enqueue ---------------");
+                            if(theModel.getCircularQueue().getSize() == 10){
+                                theModel.enqueueCircular(toBeQueued);
+                                addCircularQueueOperation("Enqueue: " + toBeQueued);
+                                addCircularQueueJavaOperation("size++;");
+                                addCircularQueueJavaOperation("tail = (tail+1)%queue.length;");
+                                addCircularQueueJavaOperation("queue[tail] = " + toBeQueued + ";");
+                                addCircularQueueJavaOperation("queue = newQ");
+                                addCircularQueueJavaOperation("head = 0;");
+                                addCircularQueueJavaOperation("head=(head+1) % queue.length;}");
+                                addCircularQueueJavaOperation("newQ[i] = queue[head];");
+                                addCircularQueueJavaOperation("for(int i=0; i < size; i++){");
+                                addCircularQueueJavaOperation("int newQ[] = new int[(queue.length * 2)];");
+                                addCircularQueueJavaOperation("--------------- Enqueue ---------------");
+                            }else{
+                                theModel.enqueueCircular(toBeQueued);
+                                addCircularQueueOperation("Enqueue: " + toBeQueued);
+                                addCircularQueueJavaOperation("tail = (tail+1)%queue.length;");
+                                addCircularQueueJavaOperation("queue[tail] = " + toBeQueued + ";");
+                                addCircularQueueJavaOperation("--------------- Enqueue ---------------");
+                            }
                         } else {
                             theModel.enqueue(toBeQueued);
                             if(predictionMode){
@@ -967,8 +995,10 @@ public class Controller {
             } catch(NullPointerException exception){
                 if(isCircular){
                     addCircularQueueOperation("Cannot Dequeue: Queue Empty");
+                    addCircularQueueJavaOperation("NullPointerException");
                 }else{
                     addQueueOperation("Cannot Dequeue: Queue Empty");
+                    addQueueJavaOperation("NullPointerException");
                 }
                 JOptionPane.showMessageDialog(null, "Sorry the Queue is empty and therefore cannot be dequeued", "Queue Empty", JOptionPane.ERROR_MESSAGE);
             }
@@ -1006,8 +1036,10 @@ public class Controller {
             } catch(NullPointerException exception){
                 if(isCircular){
                     addCircularQueueOperation("Cannot Peek: Queue Empty");
+                    addCircularQueueJavaOperation("NullPointerException");
                 }else{
                     addQueueOperation("Cannot Peek: Queue Empty");
+                    addQueueJavaOperation("NullPointerException");
                 }
                 JOptionPane.showMessageDialog(null, "Sorry the Queue is empty and therefore cannot be peeked", "Queue Empty", JOptionPane.ERROR_MESSAGE);
             }

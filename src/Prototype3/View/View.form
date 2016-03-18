@@ -97,7 +97,7 @@
               <component id="c1b4a" class="javax.swing.JList" binding="stackJavaOperations">
                 <constraints>
                   <grid row="1" column="3" row-span="3" col-span="1" vsize-policy="6" hsize-policy="2" anchor="0" fill="3" indent="0" use-parent-layout="false">
-                    <preferred-size width="200" height="50"/>
+                    <preferred-size width="250" height="50"/>
                   </grid>
                 </constraints>
                 <properties/>
@@ -184,7 +184,7 @@
               <component id="8f0b3" class="javax.swing.JList" binding="queueJavaOperations">
                 <constraints>
                   <grid row="1" column="3" row-span="3" col-span="1" vsize-policy="6" hsize-policy="2" anchor="0" fill="3" indent="0" use-parent-layout="false">
-                    <preferred-size width="200" height="50"/>
+                    <preferred-size width="250" height="50"/>
                   </grid>
                 </constraints>
                 <properties/>

@@ -2,15 +2,12 @@ package src.Prototype3.View;
 
 import org.junit.Before;
 import org.junit.Test;
-import src.Prototype3.Controller.Controller;
-import src.Prototype3.Controller.Prototype3;
-import src.Prototype3.Model.Model;
 
 import javax.swing.*;
 import java.lang.reflect.Field;
-import java.lang.reflect.Method;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 /**
  * Created by Jamie on 17/03/2016.

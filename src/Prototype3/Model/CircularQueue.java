@@ -21,14 +21,11 @@ public class CircularQueue<Integer> {
     public void enqueue(int element) {
         if (size == q.length){
             int NewQueue[] = new int[(q.length * 2)];
-
-            for(int i=0; i < size; i++)
-            {
+            for(int i=0; i < size; i++) {
                 NewQueue[i] = q[front];
                 front=(front+1) % q.length;
             }
             front = 0;
-            rear = size;
             no = no * 2;
             q = NewQueue;
         }
