@@ -210,9 +210,11 @@ public class Controller {
         operationsListStack.clear();
         operationsListQueue.clear();
         operationsListCircularQueue.clear();
+        operationsListArrayStack.clear();
         operationsListStackJava.clear();
         operationsListQueueJava.clear();
         operationsListCircularQueueJava.clear();
+        operationsListArrayStackJava.clear();
         theView.resetPreviousOperations(); //clears the data held within the JList
         theView.updateStackUI();
         theView.updateQueueUI();
@@ -506,12 +508,18 @@ public class Controller {
                 break;
             case "ArrayPop":
                 if(count < noPredictions) {
-                    int correct = 0;
-                    int other = theModel.getTop();
-                    if(other == correct){
-                        other++;
-                    }else if(other == -1){
-                        other+=2;
+                    int correct = theModel.getTop() + 1;
+                    int other;
+                    if (correct > 0 && correct != 9) {
+                        if (ThreadLocalRandom.current().nextInt(1, 10 + 1) < 6) {
+                            other = correct + 1;
+                        } else {
+                            other = correct - 1;
+                        }
+                    } else if (correct == 9) {
+                        other = correct - 1;
+                    } else {
+                        other = correct + 1;
                     }
                     int correctAnswer;
                     buttons = new String[2];
@@ -542,12 +550,18 @@ public class Controller {
                 break;
             case "ArrayPeek":
                 if(count < noPredictions) {
-                    int correct = 0;
-                    int other = theModel.getTop();
-                    if(other == correct){
-                        other++;
-                    }else if(other == -1){
-                        other+=2;
+                    int correct = theModel.getTop();
+                    int other;
+                    if (correct > 0 && correct != 9) {
+                        if (ThreadLocalRandom.current().nextInt(1, 10 + 1) < 6) {
+                            other = correct + 1;
+                        } else {
+                            other = correct - 1;
+                        }
+                    } else if (correct == 9) {
+                        other = correct - 1;
+                    } else {
+                        other = correct + 1;
                     }
                     int correctAnswer;
                     buttons = new String[2];
@@ -783,8 +797,8 @@ public class Controller {
                                 runPrediction("ArrayPush");
                             }
                             addArrayStackOperation("Pushing: " + toBePushed);
-                            addArrayStackJavaOperation("top++;");
                             addArrayStackJavaOperation("stack[top] = " + toBePushed + ";");
+                            addArrayStackJavaOperation("top++;");
                             addArrayStackJavaOperation("---------------- Push ----------------");
                             theModel.arrayPush(toBePushed);
                         }else{

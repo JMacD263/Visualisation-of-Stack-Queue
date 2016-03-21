@@ -45,9 +45,8 @@ public class DrawStackRepresentation extends JComponent {
 
         if(!firstRun){
             //Draws numbers within the boxes.
-            y = 30;
+            y = 30 + ((9 * 45) -(arrayStack.getTop() * 45));
             x = ((this.getWidth() / 2) - 20);
-            int index = 0;
             for(String string: stackRepresentation){
                 //get correct spacing for boxes
                 int textx;
@@ -72,14 +71,13 @@ public class DrawStackRepresentation extends JComponent {
                 y = y + 45;
 
             }
-
         }
 
 
         //Draw the boxes and index numbers beneath them
         x = ((this.getWidth() / 2) - 20);
         y = 30;
-        for(int i = 0; i < arrayStack.size(); i++){
+        for(int i = 9; i > -1; i--){
             graph2.draw(new Rectangle(x, y, 30, 30));
             graph2.drawString(Integer.toString(i), (x - 32), (y + 20));
             y += 45;
@@ -95,13 +93,15 @@ public class DrawStackRepresentation extends JComponent {
         }
 
         //This add top and bottom to the graphics, showing the stack more clearly.
-        graph2.drawString("Top", (x + 55), 50);
-        if(arrayStack.getTop() == -1 || arrayStack.getTop() == 0){
-            graph2.drawString("Bottom", (x + 85), 50);
-        }else{
-            graph2.drawString("Bottom", (x + 45), ((45 * (stackRepresentation.size())) + 5));
-        }
 
+
+        if(arrayStack.getTop() == -1){
+            graph2.drawString("Top", (x + 55), ((45 * stack.length) + 5));
+        }else if(arrayStack.getTop() == 9){
+            graph2.drawString("Top", (x + 55), (50));
+        }else{
+            graph2.drawString("Top", (x + 55), (((10 * 45)) - (arrayStack.getTop() * 45)) + 5);
+        }
 
         //Allow the boxes to be filled
         firstRun = false;
