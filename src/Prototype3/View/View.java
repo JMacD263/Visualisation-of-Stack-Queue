@@ -102,7 +102,7 @@ public class View extends JFrame {
         arrayStack = new JRadioButtonMenuItem(
                 "Array Stack");
         normalStack = new JRadioButtonMenuItem(
-                "Regular Stack");
+                "Stack<Integer>");
         // Group buttons together and set normal as default
         ButtonGroup bgStack = new ButtonGroup();
         bgStack.add(arrayStack);
@@ -120,7 +120,7 @@ public class View extends JFrame {
         circularQueue = new JRadioButtonMenuItem(
                 "Circular Queue");
         normalQueue = new JRadioButtonMenuItem(
-                "Regular Queue");
+                "Queue<Integer>");
         // Group buttons together and set normal as default
         ButtonGroup bgQueue = new ButtonGroup();
         bgQueue.add(circularQueue);

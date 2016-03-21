@@ -96,7 +96,7 @@ public class DrawStackRepresentation extends JComponent {
 
 
         if(arrayStack.getTop() == -1){
-            graph2.drawString("Top", (x + 55), ((45 * stack.length) + 5));
+            graph2.drawString("Top", (x + 55), ((45 * stack.length) + 5) + 45);
         }else if(arrayStack.getTop() == 9){
             graph2.drawString("Top", (x + 55), (50));
         }else{

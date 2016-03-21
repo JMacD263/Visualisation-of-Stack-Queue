@@ -9,10 +9,10 @@
     <list default="true" id="19f81c55-b050-4dd0-b82d-43bcb1e555a9" name="Default" comment="Testing for View, Model and Controller completed. Minor changes to Java Code JLists.">
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/META-INF/MANIFEST.MF" />
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/artifacts/StackQueueVisu_jar.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Prototype3/Controller/Controller.java" afterPath="$PROJECT_DIR$/src/Prototype3/Controller/Controller.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Prototype3/View/DrawStackRepresentation.java" afterPath="$PROJECT_DIR$/src/Prototype3/View/DrawStackRepresentation.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Prototype3/Model/ModelTest.java" afterPath="$PROJECT_DIR$/src/Prototype3/Model/ModelTest.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Prototype3/Controller/Prototype3Test.java" afterPath="$PROJECT_DIR$/src/Prototype3/Controller/Prototype3Test.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Prototype3/View/View.java" afterPath="$PROJECT_DIR$/src/Prototype3/View/View.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Prototype3/View/ViewTest.java" afterPath="$PROJECT_DIR$/src/Prototype3/View/ViewTest.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
@@ -68,10 +68,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="Controller.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Controller.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Prototype3/Controller/Controller.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.91318864">
+            <state vertical-scroll-proportion="0.0">
               <caret line="800" column="65" selection-start-line="800" selection-start-column="65" selection-end-line="800" selection-end-column="65" />
               <folding>
                 <element signature="method#addStackJavaOperations#0;class#Controller#0" expanded="false" />
@@ -155,11 +155,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="DrawStackRepresentation.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="DrawStackRepresentation.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Prototype3/View/DrawStackRepresentation.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="102" column="52" selection-start-line="102" selection-start-column="52" selection-end-line="102" selection-end-column="52" />
+            <state vertical-scroll-proportion="0.3739566">
+              <caret line="98" column="77" selection-start-line="98" selection-start-column="77" selection-end-line="98" selection-end-column="77" />
               <folding />
             </state>
           </provider>
@@ -179,7 +179,7 @@
         <entry file="file://$PROJECT_DIR$/src/Prototype3/View/View.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="12" column="13" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
+              <caret line="104" column="30" selection-start-line="104" selection-start-column="30" selection-end-line="104" selection-end-column="30" />
               <folding />
             </state>
           </provider>
@@ -253,14 +253,14 @@
         <option value="$PROJECT_DIR$/src/Prototype3/Model/Model.java" />
         <option value="$PROJECT_DIR$/src/Prototype3/Model/ArrayStack.java" />
         <option value="$PROJECT_DIR$/src/Prototype3/Controller/ControllerTest.java" />
-        <option value="$PROJECT_DIR$/src/Prototype3/View/View.java" />
         <option value="$PROJECT_DIR$/src/Prototype3/Model/CircularQueue.java" />
         <option value="$PROJECT_DIR$/src/Prototype3/View/View.form" />
         <option value="$PROJECT_DIR$/src/Prototype3/View/ViewTest.java" />
         <option value="$PROJECT_DIR$/src/Prototype3/Controller/Prototype3Test.java" />
         <option value="$PROJECT_DIR$/src/Prototype3/Model/ModelTest.java" />
-        <option value="$PROJECT_DIR$/src/Prototype3/View/DrawStackRepresentation.java" />
         <option value="$PROJECT_DIR$/src/Prototype3/Controller/Controller.java" />
+        <option value="$PROJECT_DIR$/src/Prototype3/View/View.java" />
+        <option value="$PROJECT_DIR$/src/Prototype3/View/DrawStackRepresentation.java" />
       </list>
     </option>
   </component>
@@ -1112,7 +1112,13 @@
       <option name="project" value="LOCAL" />
       <updated>1458233400190</updated>
     </task>
-    <option name="localTasksCounter" value="32" />
+    <task id="LOCAL-00032" summary="Array Stack changes so it's now correct.">
+      <created>1458581987795</created>
+      <option name="number" value="00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1458581987795</updated>
+    </task>
+    <option name="localTasksCounter" value="33" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -1193,7 +1199,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Prototype3 now in MVC, buttons hooked up to Controller. Yet to add visualisation." />
     <MESSAGE value="Visualisation for Stack now works and is in MVC." />
     <MESSAGE value="Commit due to having to leave lab." />
     <MESSAGE value="due to having to leave lab." />
@@ -1218,7 +1223,8 @@
     <MESSAGE value="Added Array Stack with predictions. Some minor cosmetic changes too." />
     <MESSAGE value="Added more JUnit testing." />
     <MESSAGE value="Testing for View, Model and Controller completed. Minor changes to Java Code JLists." />
-    <option name="LAST_COMMIT_MESSAGE" value="Testing for View, Model and Controller completed. Minor changes to Java Code JLists." />
+    <MESSAGE value="Array Stack changes so it's now correct." />
+    <option name="LAST_COMMIT_MESSAGE" value="Array Stack changes so it's now correct." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1574,14 +1580,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Prototype3/View/View.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="12" column="13" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Prototype3/Controller/Prototype3.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1598,17 +1596,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Prototype3/View/DrawStackRepresentation.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="102" column="52" selection-start-line="102" selection-start-column="52" selection-end-line="102" selection-end-column="52" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Prototype3/Controller/Controller.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.91318864">
+        <state vertical-scroll-proportion="0.0">
           <caret line="800" column="65" selection-start-line="800" selection-start-column="65" selection-end-line="800" selection-end-column="65" />
           <folding>
             <element signature="method#addStackJavaOperations#0;class#Controller#0" expanded="false" />
@@ -1636,6 +1626,22 @@
             <element signature="class#HarderPredictionsListener#0;class#Controller#0" expanded="false" />
             <element signature="method#itemStateChanged#0;class#HarderPredictionsListener#0;class#Controller#0" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Prototype3/View/View.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="104" column="30" selection-start-line="104" selection-start-column="30" selection-end-line="104" selection-end-column="30" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Prototype3/View/DrawStackRepresentation.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.3739566">
+          <caret line="98" column="77" selection-start-line="98" selection-start-column="77" selection-end-line="98" selection-end-column="77" />
+          <folding />
         </state>
       </provider>
     </entry>
