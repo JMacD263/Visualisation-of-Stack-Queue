@@ -362,7 +362,7 @@ public class Controller {
                         buttons[0] = Integer.toString(other);
                         correctAnswer = 1;
                     }
-                    answer = JOptionPane.showOptionDialog(null, "What location will the element be enqueued too?", "Enqueue Prediction",
+                    answer = JOptionPane.showOptionDialog(null, "What location will the element be enqueued to?", "Enqueue Prediction",
                             JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, buttons, null);
                     if (answer == 0 && correctAnswer == 0) { //if they select the correct answer
                         JOptionPane.showMessageDialog(null, "You predicted correctly, well done!", "Congratulations", JOptionPane.INFORMATION_MESSAGE);
@@ -490,7 +490,7 @@ public class Controller {
                         buttons[0] = Integer.toString(other);
                         correctAnswer = 1;
                     }
-                    answer = JOptionPane.showOptionDialog(null, "What location will the element be pushed too?", "Push Prediction",
+                    answer = JOptionPane.showOptionDialog(null, "What location will the element be pushed to?", "Push Prediction",
                             JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, buttons, null);
                     if (answer == 0 && correctAnswer == 0) { //if they select the correct answer
                         JOptionPane.showMessageDialog(null, "You predicted correctly, well done!", "Congratulations", JOptionPane.INFORMATION_MESSAGE);

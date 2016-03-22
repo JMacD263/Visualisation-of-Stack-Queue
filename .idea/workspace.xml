@@ -9,6 +9,7 @@
     <list default="true" id="19f81c55-b050-4dd0-b82d-43bcb1e555a9" name="Default" comment="Testing for View, Model and Controller completed. Minor changes to Java Code JLists.">
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/META-INF/MANIFEST.MF" />
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/artifacts/StackQueueVisu_jar.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Prototype3/Model/CircularQueue.java" afterPath="$PROJECT_DIR$/src/Prototype3/Model/CircularQueue.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Prototype3/Controller/Controller.java" afterPath="$PROJECT_DIR$/src/Prototype3/Controller/Controller.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Prototype3/Model/ModelTest.java" afterPath="$PROJECT_DIR$/src/Prototype3/Model/ModelTest.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Prototype3/Controller/Prototype3Test.java" afterPath="$PROJECT_DIR$/src/Prototype3/Controller/Prototype3Test.java" />
@@ -70,8 +71,8 @@
       <file leaf-file-name="Controller.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Prototype3/Controller/Controller.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.43365696">
-              <caret line="760" column="177" selection-start-line="760" selection-start-column="177" selection-end-line="760" selection-end-column="177" />
+            <state vertical-scroll-proportion="3.006791">
+              <caret line="492" column="107" selection-start-line="492" selection-start-column="107" selection-end-line="492" selection-end-column="107" />
               <folding>
                 <element signature="method#addStackJavaOperations#0;class#Controller#0" expanded="false" />
                 <element signature="method#addArrayStackOperation#0;class#Controller#0" expanded="false" />
@@ -82,7 +83,6 @@
                 <element signature="method#addCircularQueueJavaOperation#0;class#Controller#0" expanded="false" />
                 <element signature="method#switchQueueOperationsList#0;class#Controller#0" expanded="false" />
                 <element signature="method#switchStackOperationsList#0;class#Controller#0" expanded="false" />
-                <element signature="method#runPrediction#0;class#Controller#0" expanded="false" />
                 <element signature="class#StackPeekListener#0;class#Controller#0" expanded="false" />
                 <element signature="class#EnqueueListener#0;class#Controller#0" expanded="false" />
                 <element signature="class#DequeueListener#0;class#Controller#0" expanded="false" />
@@ -104,8 +104,8 @@
       <file leaf-file-name="ArrayStack.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Prototype3/Model/ArrayStack.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="40" column="41" selection-start-line="40" selection-start-column="22" selection-end-line="40" selection-end-column="41" />
+            <state vertical-scroll-proportion="-8.931034">
+              <caret line="45" column="20" selection-start-line="45" selection-start-column="18" selection-end-line="45" selection-end-column="20" />
               <folding />
             </state>
           </provider>
@@ -147,7 +147,7 @@
         <entry file="file://$PROJECT_DIR$/src/Prototype3/Model/CircularQueue.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="28" column="14" selection-start-line="28" selection-start-column="12" selection-end-line="28" selection-end-column="14" />
+              <caret line="49" column="25" selection-start-line="49" selection-start-column="25" selection-end-line="49" selection-end-column="25" />
               <folding />
             </state>
           </provider>
@@ -168,7 +168,9 @@
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
               <caret line="10" column="13" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
-              <folding />
+              <folding>
+                <element signature="imports" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -251,13 +253,13 @@
         <option value="$PROJECT_DIR$/src/Prototype3/Model/Model.java" />
         <option value="$PROJECT_DIR$/src/Prototype3/Model/ArrayStack.java" />
         <option value="$PROJECT_DIR$/src/Prototype3/Controller/ControllerTest.java" />
-        <option value="$PROJECT_DIR$/src/Prototype3/Model/CircularQueue.java" />
         <option value="$PROJECT_DIR$/src/Prototype3/View/View.form" />
         <option value="$PROJECT_DIR$/src/Prototype3/View/ViewTest.java" />
         <option value="$PROJECT_DIR$/src/Prototype3/Controller/Prototype3Test.java" />
         <option value="$PROJECT_DIR$/src/Prototype3/Model/ModelTest.java" />
         <option value="$PROJECT_DIR$/src/Prototype3/View/View.java" />
         <option value="$PROJECT_DIR$/src/Prototype3/View/DrawStackRepresentation.java" />
+        <option value="$PROJECT_DIR$/src/Prototype3/Model/CircularQueue.java" />
         <option value="$PROJECT_DIR$/src/Prototype3/Controller/Controller.java" />
       </list>
     </option>
@@ -1148,7 +1150,13 @@
       <option name="project" value="LOCAL" />
       <updated>1458582307340</updated>
     </task>
-    <option name="localTasksCounter" value="34" />
+    <task id="LOCAL-00034" summary="Minor change, Harder Qestions Queue now has correct message.">
+      <created>1458657605773</created>
+      <option name="number" value="00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1458657605773</updated>
+    </task>
+    <option name="localTasksCounter" value="35" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -1229,7 +1237,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Commit due to having to leave lab." />
     <MESSAGE value="due to having to leave lab." />
     <MESSAGE value="Queue now has visualisation implemented in MVC." />
     <MESSAGE value="Some progress with Circular Queue - lots to be done." />
@@ -1254,7 +1261,8 @@
     <MESSAGE value="Testing for View, Model and Controller completed. Minor changes to Java Code JLists." />
     <MESSAGE value="Array Stack changes so it's now correct." />
     <MESSAGE value="Top starts at -1 now. Changed &quot;regular&quot; to implementation detail, e.g. Stack&lt;Integer&gt;" />
-    <option name="LAST_COMMIT_MESSAGE" value="Top starts at -1 now. Changed &quot;regular&quot; to implementation detail, e.g. Stack&lt;Integer&gt;" />
+    <MESSAGE value="Minor change, Harder Qestions Queue now has correct message." />
+    <option name="LAST_COMMIT_MESSAGE" value="Minor change, Harder Qestions Queue now has correct message." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1592,27 +1600,13 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Prototype3/Model/CircularQueue.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="28" column="14" selection-start-line="28" selection-start-column="12" selection-end-line="28" selection-end-column="14" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Prototype3/Controller/Prototype3.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="10" column="13" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Prototype3/Model/ArrayStack.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="40" column="41" selection-start-line="40" selection-start-column="22" selection-end-line="40" selection-end-column="41" />
-          <folding />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1640,10 +1634,26 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/Prototype3/Model/CircularQueue.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="49" column="25" selection-start-line="49" selection-start-column="25" selection-end-line="49" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Prototype3/Model/ArrayStack.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-8.931034">
+          <caret line="45" column="20" selection-start-line="45" selection-start-column="18" selection-end-line="45" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/Prototype3/Controller/Controller.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.43365696">
-          <caret line="760" column="177" selection-start-line="760" selection-start-column="177" selection-end-line="760" selection-end-column="177" />
+        <state vertical-scroll-proportion="3.006791">
+          <caret line="492" column="107" selection-start-line="492" selection-start-column="107" selection-end-line="492" selection-end-column="107" />
           <folding>
             <element signature="method#addStackJavaOperations#0;class#Controller#0" expanded="false" />
             <element signature="method#addArrayStackOperation#0;class#Controller#0" expanded="false" />
@@ -1654,7 +1664,6 @@
             <element signature="method#addCircularQueueJavaOperation#0;class#Controller#0" expanded="false" />
             <element signature="method#switchQueueOperationsList#0;class#Controller#0" expanded="false" />
             <element signature="method#switchStackOperationsList#0;class#Controller#0" expanded="false" />
-            <element signature="method#runPrediction#0;class#Controller#0" expanded="false" />
             <element signature="class#StackPeekListener#0;class#Controller#0" expanded="false" />
             <element signature="class#EnqueueListener#0;class#Controller#0" expanded="false" />
             <element signature="class#DequeueListener#0;class#Controller#0" expanded="false" />
