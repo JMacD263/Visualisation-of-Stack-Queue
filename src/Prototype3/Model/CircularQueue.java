@@ -6,7 +6,6 @@ package src.Prototype3.Model;
  *
  */
 public class CircularQueue<Integer> {
-    private int no; //number of elements in array
     private int q[];
     private int front;
     private int rear;
@@ -15,7 +14,6 @@ public class CircularQueue<Integer> {
     public CircularQueue(){
         size = 0;
         q = new int[10];
-        no = 10;
     }
 
     public void enqueue(int element) {
@@ -26,11 +24,10 @@ public class CircularQueue<Integer> {
                 front=(front+1) % q.length;
             }
             front = 0;
-            no = no * 2;
             q = NewQueue;
         }
         q[rear] = element;
-        rear = (rear+1)%no;
+        rear = (rear+1)%q.length;
         size++;
         if (size == q.length && size == 10){
             rear = 10;
@@ -52,7 +49,7 @@ public class CircularQueue<Integer> {
         }
         int e = q[front];
         q[front] = 0;
-        front=(front+1)%no;
+        front=(front+1)%q.length;
         size--;
         return e;
     }
@@ -89,7 +86,6 @@ public class CircularQueue<Integer> {
     public void clear(){
         size = 0;
         q = new int[10];
-        no = 10;
         front = rear = 0;
     }
 
