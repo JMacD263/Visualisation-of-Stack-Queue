@@ -4,6 +4,7 @@ package src.Prototype3.Model;
 /**
  * Created by Jamie on 24/02/2016.
  *
+ *
  */
 public class CircularQueue<Integer> {
     private int q[];
