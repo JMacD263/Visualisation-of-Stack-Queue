@@ -758,7 +758,7 @@ public class Controller {
             harderPredictions.setVisible(true);
 
             if(harderPredictions.getAnswer().equals(correctAnswer)){
-                JOptionPane.showMessageDialog(null, "Congrats", "congrats", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(null, "You answered correctly! Click another operation button to try another", "Congratulations", JOptionPane.INFORMATION_MESSAGE);
             }else{
                 JOptionPane.showMessageDialog(null, "Sorry that was incorrect, Click another operation button to try another", "Incorrect", JOptionPane.ERROR_MESSAGE);
             }
