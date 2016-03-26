@@ -59,10 +59,10 @@ public class View extends JFrame {
 
         // Add all icons to arraylist
         ArrayList<Image> icons = new ArrayList<>();
-        icons.add(Toolkit.getDefaultToolkit().getImage("icons/16.png"));
-        icons.add(Toolkit.getDefaultToolkit().getImage("icons/32.png"));
-        icons.add(Toolkit.getDefaultToolkit().getImage("icons/64.png"));
-        icons.add(Toolkit.getDefaultToolkit().getImage("icons/128.png"));
+        icons.add(Toolkit.getDefaultToolkit().getImage(getClass().getClassLoader().getResource("icons/16.png")));
+        icons.add(Toolkit.getDefaultToolkit().getImage(getClass().getClassLoader().getResource("icons/32.png")));
+        icons.add(Toolkit.getDefaultToolkit().getImage(getClass().getClassLoader().getResource("icons/64.png")));
+        icons.add(Toolkit.getDefaultToolkit().getImage(getClass().getClassLoader().getResource("icons/128.png")));
         // Set icons
         this.setIconImages(icons);
 
