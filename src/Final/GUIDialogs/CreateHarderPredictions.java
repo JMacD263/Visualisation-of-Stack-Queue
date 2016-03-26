@@ -1,11 +1,10 @@
-package src.Prototype3.GUIDialogs;
+package src.Final.GUIDialogs;
 
 import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
 
 /**
- * Created by Jamie on 13/03/2016.
- *
+ * This class is used to create the Harder Predictions.
  */
 public class CreateHarderPredictions {
     ArrayList<String> operationsList;
@@ -17,12 +16,22 @@ public class CreateHarderPredictions {
     int stackSize;
     int queueSize;
 
-
+    /**
+     * Initialises the operations list and runs the populateOperationsList method.
+     *
+     * @param type Specifies if the Harder Prediction is for Stack or Queue.
+     */
     public CreateHarderPredictions(String type){
         operationsList =  new ArrayList<>();
         populateOperationsList(type);
     }
 
+    /**
+     * This method creates the operation list for the harder prediction.
+     * Depending on the type passed in a list for Stack or Queue is made.
+     *
+     * @param type Specifies if the Harder Prediction is for Stack or Queue.
+     */
     private void populateOperationsList(String type) {
         int min = 4;
         int max = 5;
@@ -63,6 +72,12 @@ public class CreateHarderPredictions {
         }
     }
 
+    /**
+     * This method creates a Stack from the operations list and
+     * populates it with random numbers between 1 and 9.
+     *
+     * @return Returns the Stack made from the operations list.
+     */
     public Stack<Integer> getStack(){
         Stack<Integer> stack = new Stack<>();
         int[] values = {1,2,3,4,5,6,7,8,9};
@@ -94,6 +109,12 @@ public class CreateHarderPredictions {
         return stack;
     }
 
+    /**
+     * This method creates a Queue from the operations list and
+     * populates it with random numbers between 1 and 9.
+     *
+     * @return Returns the Queue made from the operations list.
+     */
     public Queue<Integer> getQueue(){
         Queue<Integer> queue = new LinkedList<>();
         int[] values = {1,2,3,4,5,6,7,8,9};
@@ -125,10 +146,22 @@ public class CreateHarderPredictions {
         return queue;
     }
 
+    /**
+     * This method returns the operation list.
+     *
+     * @return returns the operation list to be added to harder question dialog.
+     */
     public String getOperationsString(){
         return operationsString;
     }
 
+    /**
+     * This method generates 3 random Stacks similar to the
+     * correct Stack. These Stacks are checked to ensure they
+     * are not the same as the correct Stack and not empty.
+     *
+     * @return Returns the 3 incorrect Stacks for the Harder Prediction.
+     */
     public ArrayList<Stack<Integer>> getOtherStacks(){
         ArrayList<Stack<Integer>> stacksList = new ArrayList<>();
         Stack<Integer> stack1 = new Stack<>();
@@ -217,6 +250,13 @@ public class CreateHarderPredictions {
 
     }
 
+    /**
+     * This method generates 3 random Queues similar to the
+     * correct Queue. These Queues are checked to ensure they
+     * are not the same as the correct Queue and not empty.
+     *
+     * @return Returns the 3 incorrect Queues for the Harder Prediction.
+     */
     public ArrayList<Queue<Integer>> getOtherQueues() {
         ArrayList<Queue<Integer>> queuesList = new ArrayList<>();
         Queue<Integer> queue1 = new LinkedList<>();
@@ -296,8 +336,6 @@ public class CreateHarderPredictions {
         if(queue3.equals(globalQueue)){
             queue3.add(ThreadLocalRandom.current().nextInt(1, 9 + 1));
         }
-
-
 
 
         queuesList.add(queue1);

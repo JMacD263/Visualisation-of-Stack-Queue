@@ -1,13 +1,15 @@
-package src.Prototype3.GUIDialogs;
+package src.Final.GUIDialogs;
 
 import javax.swing.*;
 import javax.swing.border.EtchedBorder;
-import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 /**
- * Created by Jamie on 12/03/2016.
+ * This class extends JDialog and forms the Harder Prediction Questions.
+ * Mouse listeners are used to confirm which Stack or Queue was selected.
+ * The Stacks and Queues are added to the four panels in the class.
+ * The Question and Operation List labels are also set here.
  *
  */
 public class HarderPredictions extends JDialog{
@@ -20,6 +22,10 @@ public class HarderPredictions extends JDialog{
     private JLabel operationsLabel;
     private String answer;
 
+    /**
+     * Initialises the form, sets borders, the size and the name of the JDialog.
+     * Listeners are also added in this constructor.
+     */
     public HarderPredictions(){
         this.setTitle("Harder Prediction");
         this.setSize(920,900);
@@ -69,30 +75,66 @@ public class HarderPredictions extends JDialog{
         });
     }
 
+    /**
+     * The question label is set from the string passed in.
+     *
+     * @param label The Question to be asked.
+     */
     public void setQuestionLabel(String label){
         questionLabel.setText(label);
     }
 
+    /**
+     * The operations list label is set from the string passed in.
+     *
+     * @param label The operations list for the Stack or Queue.
+     */
     public void setOperationsLabel(String label){
         operationsLabel.setText(label);
     }
 
+    /**
+     * Sets a stack or queue to the "A" panel.
+     *
+     * @param panelA the Stack or Queue to be added to the panel.
+     */
     public void setPanelA(JComponent panelA){
         aPanel.add(panelA);
     }
 
+    /**
+     * Sets a stack or queue to the "B" panel.
+     *
+     * @param panelB the Stack or Queue to be added to the panel.
+     */
     public void setPanelB(JComponent panelB){
         bPanel.add(panelB);
     }
 
+    /**
+     * Sets a stack or queue to the "C" panel.
+     *
+     * @param panelC the Stack or Queue to be added to the panel.
+     */
     public void setPanelC(JComponent panelC){
         cPanel.add(panelC);
     }
 
+    /**
+     * Sets a stack or queue to the "D" panel.
+     *
+     * @param panelD the Stack or Queue to be added to the panel.
+     */
     public void setPanelD(JComponent panelD){
         dPanel.add(panelD);
     }
 
+    /**
+     * This returns which panel the user selected so that
+     * it can be checked if they answered correctly.
+     *
+     * @return returns the panel clicked on by the user.
+     */
     public String getAnswer(){
         return answer;
     }

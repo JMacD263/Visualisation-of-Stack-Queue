@@ -1,7 +1,6 @@
-package src.Prototype3.View;
+package src.Final.View;
 
-import src.Prototype3.Model.CircularQueue;
-import src.Prototype3.Model.Model;
+import src.Final.Model.CircularQueue;
 
 import javax.swing.*;
 import java.awt.*;
@@ -10,8 +9,7 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 /**
- * Created by xnb12162 on 23/02/16.
- *
+ * This class extends JComponent and is used to draw the Queues.
  */
 public class DrawQueueRepresentation extends JComponent {
     private String toBeHighlighted = "";
@@ -20,7 +18,9 @@ public class DrawQueueRepresentation extends JComponent {
     private boolean circular = false;
     private boolean firstRun = true;
 
-
+    /**
+     * This method checks if the Queue is circular or not and runs the corresponding draw method.
+     */
     public void paint(Graphics g){
 
         Graphics2D graph2 = (Graphics2D)g;
@@ -34,6 +34,11 @@ public class DrawQueueRepresentation extends JComponent {
 
     }
 
+    /**
+     * This method draws the boxes and elements of the Queue.
+     * This is for the Java Standard Library Queue.
+     * Highlighting is also done within this method.
+     */
     private void normalQueueSettings(Graphics2D graph2) {
         ArrayList<String> queueRepresentation = new ArrayList<>();
 
@@ -84,6 +89,10 @@ public class DrawQueueRepresentation extends JComponent {
         }
     }
 
+    /**
+     * This method draws the boxes and elements of the Circular Queue.
+     * Highlighting is also done within this method.
+     */
     private void circularQueueSettings(Graphics2D graph2) {
         int y = ((this.getHeight() / 2) - 20);
         int x;
@@ -151,22 +160,43 @@ public class DrawQueueRepresentation extends JComponent {
 
     }
 
+    /**
+     * This method is run after the boxes have been drawn for Circular Queue.
+     */
     public void toggleFirstRun(){
         firstRun = false;
     }
 
+    /**
+     * This method sets the Queue which is to be drawn.
+     *
+     * @param queue This is the Queue to be drawn.
+     */
     public void setQueue(Queue<Integer> queue){
         this.queue = queue;
     }
 
+    /**
+     * This method sets the Circular Queue which is to be drawn.
+     *
+     * @param circularQueue This is the Circular Queue to be drawn.
+     */
     public void setCircularQueue(CircularQueue<Integer> circularQueue){
         this.circularQueue = circularQueue;
     }
 
+    /**
+     * This sets the element which will be highlighted after a peek is performed.
+     * @param x This is the element which is to highlighted.
+     */
     public void highlight(int x){
         toBeHighlighted = Integer.toString(x);
     }
 
+    /**
+     * Sets whether the visualisation is for Circular Queue or Java Standard Library Queue.
+     * @param isCircular this is true if the visualisation is for Circular Queue and false if not.
+     */
     public void toggleCircular(boolean isCircular) {
         circular = isCircular;
     }

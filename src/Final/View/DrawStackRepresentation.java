@@ -1,6 +1,6 @@
-package src.Prototype3.View;
+package src.Final.View;
 
-import src.Prototype3.Model.ArrayStack;
+import src.Final.Model.ArrayStack;
 
 import javax.swing.*;
 import java.awt.*;
@@ -8,8 +8,7 @@ import java.util.ArrayList;
 import java.util.Stack;
 
 /**
- * Created by xnb12162 on 23/02/16.
- *
+ * This class extends JComponent and is used to draw the Stacks.
  */
 
 public class DrawStackRepresentation extends JComponent {
@@ -19,6 +18,9 @@ public class DrawStackRepresentation extends JComponent {
     boolean isArray = false;
     boolean firstRun = true;
 
+    /**
+     * This method checks if the Stack is Array Stack or not and runs the corresponding draw method.
+     */
     public void paint(Graphics g){
 
         Graphics2D graph2 = (Graphics2D)g;
@@ -32,6 +34,10 @@ public class DrawStackRepresentation extends JComponent {
 
     }
 
+    /**
+     * This method draws the boxes and elements of the Array Queue.
+     * Highlighting is also done within this method.
+     */
     private void arrayStackSettings(Graphics2D graph2) {
         int x;
         int y;
@@ -107,6 +113,11 @@ public class DrawStackRepresentation extends JComponent {
         firstRun = false;
     }
 
+    /**
+     * This method draws the boxes and elements of the Stack.
+     * This is for the Java Standard Library Stack.
+     * Highlighting is also done within this method.
+     */
     private void normalStackSettings(Graphics2D graph2) {
         Stack<Integer> s = new Stack<>();
         s.addAll(stack);
@@ -163,22 +174,41 @@ public class DrawStackRepresentation extends JComponent {
         }
     }
 
+    /**
+     * This method is run after the boxes have been drawn for Array Stack.
+     */
     public void toggleFirstRun(){
         firstRun = false;
     }
 
+    /**
+     * This method sets the Stack which is to be drawn.
+     * @param stack the Stack that is to be drawn.
+     */
     public void setStack(Stack<Integer> stack){
         this.stack = stack;
     }
 
+    /**
+     * This method sets the Array Stack which is to be drawn.
+     * @param arrayStack the Array Stack that is to be drawn.
+     */
     public void setArrayStack(ArrayStack<Integer> arrayStack){
         this.arrayStack = arrayStack;
     }
 
+    /**
+     * This sets the element which will be highlighted after a peek is performed.
+     * @param x This is the element which is to highlighted.
+     */
     public void highlight(int x){
         toBeHighlighted = Integer.toString(x);
     }
 
+    /**
+     * Sets whether the visualisation is for Array Stack or Java Standard Library Stack.
+     * @param isArray this is true if the visualisation is for Array Stack and false if not.
+     */
     public void toggleArray(boolean isArray){
         this.isArray = isArray;
     }

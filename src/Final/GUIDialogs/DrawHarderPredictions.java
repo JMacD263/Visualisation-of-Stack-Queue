@@ -1,12 +1,11 @@
-package src.Prototype3.GUIDialogs;
+package src.Final.GUIDialogs;
 
 import javax.swing.*;
 import java.awt.*;
 import java.util.*;
 
 /**
- * Created by Jamie on 12/03/2016.
- *
+ * This class is used to draw the harder prediction Stacks or Queues on the JDialog.
  *
  */
 public class DrawHarderPredictions extends JComponent {
@@ -14,7 +13,9 @@ public class DrawHarderPredictions extends JComponent {
     private Queue<Integer> queue = new LinkedList<>();
     private String visualisationType;
 
-
+    /**
+     * This method paints the Stack or Queue that has been set.
+     */
     public void paint(Graphics g) {
 
         Graphics2D graph2 = (Graphics2D) g;
@@ -88,14 +89,29 @@ public class DrawHarderPredictions extends JComponent {
         }
     }
 
+    /**
+     * Sets the stack that is to be drawn.
+     *
+     * @param stack The Stack to be painted.
+     */
     public void setStack(Stack<Integer> stack){
         this.stack = stack;
     }
 
+    /**
+     * Sets the queue that is to be drawn.
+     *
+     * @param queue The Queue to be painted.
+     */
     public void setQueue(Queue<Integer> queue){
         this.queue = queue;
     }
 
+    /**
+     * Sets if Stack or Queue is to be drawn.
+     *
+     * @param type String for setting visualisation type.
+     */
     public void setVisualisationType(String type){
         visualisationType = type;
     }

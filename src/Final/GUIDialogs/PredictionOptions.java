@@ -1,11 +1,12 @@
-package src.Prototype3.GUIDialogs;
+package src.Final.GUIDialogs;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 /**
- * Created by Jamie on 07/03/2016.
+ * This class extends JDialog and asks the user which prediction options they would like.
+ * These options are then saved once the JDialog has been closed.
  *
  */
 public class PredictionOptions extends JDialog{
@@ -18,6 +19,10 @@ public class PredictionOptions extends JDialog{
     private int noPredictions;
     private boolean isBlank;
 
+    /**
+     * This method sets the size and name of the JDialog.
+     * The radio buttons are also added as well as their listeners.
+     */
     public PredictionOptions() {
         this.setTitle("Prediction Options");
         this.setSize(800, 250);
@@ -55,10 +60,20 @@ public class PredictionOptions extends JDialog{
 
     }
 
+    /**
+     * This gets the users selected number of predictions.
+     *
+     * @return the users selected number of predictions.
+     */
     public int getNoPredictions(){
         return noPredictions;
     }
 
+    /**
+     * Gets the users selection for using current data or random data.
+     *
+     * @return Returns the users choice if they want to use current data or random data.
+     */
     public boolean getIsBlank(){
         return isBlank;
     }

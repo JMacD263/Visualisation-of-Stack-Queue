@@ -1,13 +1,13 @@
-package src.Prototype3.Controller;
+package src.Final.Controller;
 
-import src.Prototype3.GUIDialogs.CreateHarderPredictions;
-import src.Prototype3.GUIDialogs.DrawHarderPredictions;
-import src.Prototype3.GUIDialogs.HarderPredictions;
-import src.Prototype3.GUIDialogs.PredictionOptions;
-import src.Prototype3.Model.Model;
-import src.Prototype3.View.DrawQueueRepresentation;
-import src.Prototype3.View.DrawStackRepresentation;
-import src.Prototype3.View.View;
+import src.Final.GUIDialogs.CreateHarderPredictions;
+import src.Final.GUIDialogs.DrawHarderPredictions;
+import src.Final.GUIDialogs.HarderPredictions;
+import src.Final.GUIDialogs.PredictionOptions;
+import src.Final.Model.Model;
+import src.Final.View.DrawQueueRepresentation;
+import src.Final.View.DrawStackRepresentation;
+import src.Final.View.View;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -18,11 +18,14 @@ import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
 
 /**
- * Created by Jamie on 22/02/2016.
+ * The Controller class is used to communicate between the View and the Model.
+ * All ActionListeners are contained here.
+ *
+ * @author Jamie
+ * @since 22/02/2016.
  *
  */
 public class Controller {
-
     private View theView;
     private Model theModel;
     private LinkedList<String> operationsListStack = new LinkedList<>();
@@ -44,6 +47,14 @@ public class Controller {
     private int maxListSize = 45;
     String regex = "^[1-9]\\d{0,2}$"; //Regex for a positive integer, max 3 digits.
 
+    /**
+     * This class initialises the Controller, the Model and View are set from the passed in parameters.
+     * Listeners are also added to the View from here.
+     * The Stack and Queue panels in the View are also set here.
+     *
+     * @param view This is an instance of View the controller uses to manipulate the interface.
+     * @param model This is the Model that holds all the data of the Stacks and Queues.
+     */
     public Controller(View view, Model model) {
         this.theView = view;
         this.theModel = model;
@@ -73,7 +84,13 @@ public class Controller {
         theView.setQueuePanel(drawQueue);
     }
 
-    // Add operations to Stack list.
+    /**
+     * This method adds an operation to the Stack regular operations list.
+     * If the operations list is at its max size the first element
+     * entered is removed.
+     *
+     * @param op This is the String to be added to the Operations List
+     */
     public void addStackOperation(String op){
         if(operationsListStack.size() < maxListSize){ //Max size of stack operations list
             operationsListStack.push(op);
@@ -85,7 +102,13 @@ public class Controller {
         theView.setPreviousStackOperations(listData);
     }
 
-    // Add Java code operations to stack list
+    /**
+     * This method adds an operation to the Stack Java operations list.
+     * If the operations list is at its max size the first element
+     * entered is removed.
+     *
+     * @param op This is the String to be added to the Java Operations List
+     */
     public void addStackJavaOperations(String op){
         if(operationsListStackJava.size() < maxListSize){ //Max size of stack operations list
             operationsListStackJava.push(op);
@@ -97,7 +120,13 @@ public class Controller {
         theView.setPreviousStackJavaOperations(listData);
     }
 
-    // Add operations to Array Stack list.
+    /**
+     * This method adds an operation to the Array Stack regular operations list.
+     * If the operations list is at its max size the first element
+     * entered is removed.
+     *
+     * @param op This is the String to be added to the Operations List
+     */
     public void addArrayStackOperation(String op){
         if(operationsListArrayStack.size() < maxListSize) { //Max size of stack operations list
             operationsListArrayStack.push(op);
@@ -109,6 +138,13 @@ public class Controller {
         theView.setPreviousStackOperations(listData);
     }
 
+    /**
+     * This method adds an operation to the Array Stack Java operations list.
+     * If the operations list is at its max size the first element
+     * entered is removed.
+     *
+     * @param op This is the String to be added to the Operations List
+     */
     public void addArrayStackJavaOperation(String op){
         if(operationsListArrayStackJava.size() < maxListSize){ //max size of stack operations list
             operationsListArrayStackJava.push(op);
@@ -120,7 +156,13 @@ public class Controller {
         theView.setPreviousStackJavaOperations(listData);
     }
 
-    // Add operations to the queue list
+    /**
+     * This method adds an operation to the Queue regular operations list.
+     * If the operations list is at its max size the first element
+     * entered is removed.
+     *
+     * @param op This is the String to be added to the Operations List
+     */
     public void addQueueOperation(String op){
         if(operationsListQueue.size() < maxListSize){ //Max size of queue operations list
             operationsListQueue.push(op);
@@ -132,7 +174,13 @@ public class Controller {
         theView.setPreviousQueueOperations(listData);
     }
 
-    // Add Java code operations to queue list
+    /**
+     * This method adds an operation to the Queue Java operations list.
+     * If the operations list is at its max size the first element
+     * entered is removed.
+     *
+     * @param op This is the String to be added to the Operations List
+     */
     public void addQueueJavaOperation(String op){
         if(operationsListQueueJava.size() < maxListSize){ //Max size of stack operations list
             operationsListQueueJava.push(op);
@@ -144,7 +192,13 @@ public class Controller {
         theView.setPreviousQueueJavaOperations(listData);
     }
 
-    // Add operations to the circular queue list
+    /**
+     * This method adds an operation to the Circular Queue regular operations list.
+     * If the operations list is at its max size the first element
+     * entered is removed.
+     *
+     * @param op This is the String to be added to the Operations List
+     */
     public void addCircularQueueOperation(String op){
         if(operationsListCircularQueue.size() < maxListSize){
             operationsListCircularQueue.push(op);
@@ -156,7 +210,13 @@ public class Controller {
         theView.setPreviousQueueOperations(listData);
     }
 
-    // Add Java code operations to circular queue list
+    /**
+     * This method adds an operation to the Circular Queue Java operations list.
+     * If the operations list is at its max size the first element
+     * entered is removed.
+     *
+     * @param op This is the String to be added to the Operations List
+     */
     public void addCircularQueueJavaOperation(String op){
         if(operationsListCircularQueueJava.size() < maxListSize){ //Max size of stack operations list
             operationsListCircularQueueJava.push(op);
@@ -168,7 +228,13 @@ public class Controller {
         theView.setPreviousQueueJavaOperations(listData);
     }
 
-    // Switch Circular and Regular Queue Operations List
+    /**
+     * This method will switch between the Queue operation lists.
+     * If the parameter is Circular then the operations lists
+     * now displayed will be Circular and the same will happen for "Normal"
+     *
+     * @param s This string controls which operations lists are switched
+     */
     public void switchQueueOperationsList(String s){
         theView.setPreviousQueueOperations(new String[0]);
         theView.setPreviousQueueJavaOperations(new String[0]);
@@ -186,7 +252,13 @@ public class Controller {
         }
     }
 
-    // Switch Array and Regular Stack Operations List
+    /**
+     * This method will switch between the Stack operation lists.
+     * If the parameter is Array then the operations lists
+     * now displayed will be Array and the same will happen for "Normal"
+     *
+     * @param s This string controls which operations lists are switched
+     */
     public void switchStackOperationsList(String s){
         theView.setPreviousStackOperations(new String[0]);
         theView.setPreviousStackJavaOperations(new String[0]);
@@ -204,7 +276,11 @@ public class Controller {
         }
     }
 
-    // Reset all data
+    /**
+     * This method will reset or clear all current data.
+     * The model is cleared in addition to the operation lists.
+     * The visualisations are then updated to reflect this.
+     */
     public void reset(){
         theModel.reset(); //clears the data stored in the model
         operationsListStack.clear();
@@ -220,7 +296,12 @@ public class Controller {
         theView.updateQueueUI();
     }
 
-    // creates data for predictions
+    /**
+     * This method creates random data for use with the predictions.
+     * All implementations are populated with random numbers.
+     * 60% of the time dequeues are added to Circular Queue.
+     * This is to allow the head and tail to move around.
+     */
     public void createPreMadeData(){
         int min = 1;
         int max = 99;
@@ -238,7 +319,17 @@ public class Controller {
         }
     }
 
-    //Method for performing predictions
+    /**
+     * This method runs predictions based on the parameter passed in.
+     * It takes in the name of the operation that activated it, e.g. Push
+     * and then runs the relevant prediction. A JOptionPane with a questions is displayed
+     * and a user must select which answer they think is correct. They are then told if
+     * they answered correctly or not. If all answers in an operation group have been
+     * answered correctly the amount of times specified in the prediction options then
+     * a pop up will alert them that Harder Predictions are now available from the menu.
+     *
+     * @param type This string details the type of prediction about to take ploace
+     */
     public void runPrediction(String type) {
         int count = predictionCount.get(type);
         int answer;
@@ -601,24 +692,16 @@ public class Controller {
             JOptionPane.showMessageDialog(null, "If you wish to access harder questions you can now enable them from the prediction menu", "Progress", JOptionPane.INFORMATION_MESSAGE);
             theView.toggleHarderPredictions(true, false);
         }
-
-        // This is for testing
-//        if (count == noPredictions && answered) {
-//            buttons = new String[]{"Progress", "Stay"};
-//            int options = JOptionPane.showOptionDialog(null, "You have predicted correctly, would you like to progress to harder questions?", "Progress?",
-//                    JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, buttons, buttons[0]);
-//            if (options == 0) {
-//                harderPredictions = true;
-//                theView.toggleHarderPredictions(false, true);
-//            }else{
-//                JOptionPane.showMessageDialog(null, "If you wish to access harder questions you can now enable them from the prediction menu", "Progress", JOptionPane.INFORMATION_MESSAGE);
-//                theView.toggleHarderPredictions(true, false);
-//            }
-//        }
-
     }
 
-    //Method for harder predictions
+    /**
+     * This method will create a JDialog for the harder questions.
+     * The correct panel is selected at random to stop users simply
+     * memorising the correct panel. Once answered the user is informed
+     * if their answer was correct or not.
+     *
+     * @param type This string checks which Harder Prediction will take place
+     */
     public void runHarderPredictions(String type){
         if(type.equals("Stack")){
             CreateHarderPredictions createHarderPredictions = new CreateHarderPredictions(type);
@@ -770,6 +853,14 @@ public class Controller {
     This is a block of inner classes which create ActionListeners for the buttons
      */
 
+    /**
+     * When the Push button is clicked the following code is run.
+     * If the Stack is not full a user is asked which number they
+     * want to push, if the number passes the pattern matching it
+     * is added to the Stack and the relevant operation list additions
+     * are made. If predictions or harder predictions are enabled they
+     * are also activated from this button.
+     */
     class PushListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -823,6 +914,13 @@ public class Controller {
         }
     }
 
+    /**
+     * When the Pop button is clicked the following code is run.
+     * If the Stack is empty an error message is displayed.
+     * The relevant operation list additions are also made.
+     * If predictions or harder predictions are enabled they
+     * are also activated from this button.
+     */
     class PopListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -864,6 +962,13 @@ public class Controller {
         }
     }
 
+    /**
+     * When the Peek button is clicked the following code is run.
+     * If the Stack is empty an error message is displayed.
+     * The relevant operation list additions are also made.
+     * If predictions or harder predictions are enabled they
+     * are also activated from this button.
+     */
     class StackPeekListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -906,6 +1011,14 @@ public class Controller {
         }
     }
 
+    /**
+     * When the Enqueue button is clicked the following code is run.
+     * If the Queue is not full a user is asked which number they
+     * want to enqueue, if the number passes the pattern matching it
+     * is added to the Queue and the relevant operation list additions
+     * are made. If predictions or harder predictions are enabled they
+     * are also activated from this button.
+     */
     class EnqueueListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -974,6 +1087,13 @@ public class Controller {
         }
     }
 
+    /**
+     * When the Dequeue button is clicked the following code is run.
+     * If the Queue is empty an error message is displayed.
+     * The relevant operation list additions are also made.
+     * If predictions or harder predictions are enabled they
+     * are also activated from this button.
+     */
     class DequeueListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -1019,6 +1139,13 @@ public class Controller {
         }
     }
 
+    /**
+     * When the Peek button is clicked the following code is run.
+     * If the Queue is empty an error message is displayed.
+     * The relevant operation list additions are also made.
+     * If predictions or harder predictions are enabled they
+     * are also activated from this button.
+     */
     class QueuePeekListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -1060,6 +1187,11 @@ public class Controller {
         }
     }
 
+    /**
+     * If the on radio box is selected from the Predictions menu
+     * the following code is run. Prediction Options are displayed
+     * and then saved. Labels for the buttons are also hidden.
+     */
     class RadioOnListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -1101,6 +1233,11 @@ public class Controller {
         }
     }
 
+    /**
+     * If the off radio button is selected from the Predictions menu
+     * the following code is run. Predictions are turned off and the
+     * labels are set to display again.
+     */
     class RadioOffListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -1114,6 +1251,10 @@ public class Controller {
         }
     }
 
+    /**
+     * This switches to the Circular Queue from the Standard
+     * Java Library Queue.
+     */
     class CircularQueueListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -1126,6 +1267,10 @@ public class Controller {
         }
     }
 
+    /**
+     * This switches to the Standard Java Library Queue
+     * from the Circular Queue.
+     */
     class NormalQueueListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -1137,6 +1282,10 @@ public class Controller {
         }
     }
 
+    /**
+     * This switches to the Array Stack from the
+     * standard library Stack.
+     */
     class ArrayStackListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -1149,6 +1298,10 @@ public class Controller {
         }
     }
 
+    /**
+     * This switches to the standard java library Stack
+     * from the Array Stack.
+     */
     class NormalStackListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -1160,6 +1313,9 @@ public class Controller {
         }
     }
 
+    /**
+     * This runs the reset method to clear all data held.
+     */
     class ResetListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -1167,6 +1323,9 @@ public class Controller {
         }
     }
 
+    /**
+     * This turns on harder predictions.
+     */
     class HarderPredictionsListener implements ItemListener {
         @Override
         public void itemStateChanged(ItemEvent e) {

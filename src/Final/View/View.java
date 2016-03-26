@@ -1,4 +1,4 @@
-package src.Prototype3.View;
+package src.Final.View;
 
 import javax.swing.*;
 import java.awt.*;
@@ -7,8 +7,8 @@ import java.awt.event.ItemListener;
 import java.util.ArrayList;
 
 /**
- * Created by Jamie on 22/02/2016.
- *
+ * This is the View class which deals with the User Interface.
+ * This class extends JFrame and all elements of the GUI are created here.
  */
 public class View extends JFrame {
 
@@ -44,6 +44,12 @@ public class View extends JFrame {
     private JRadioButtonMenuItem normalStack;
     private JMenuItem resetMenuItem;
 
+    /**
+     * This sets the size and state of the JFrame.
+     * Icons are set within here.
+     * All items in the Menu Bar are added in this method.
+     * The JLists are set to centre the text also.
+     */
     public View(){
         super("Stack and Queue Visualisation");
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -141,22 +147,49 @@ public class View extends JFrame {
         renderer.setHorizontalAlignment(JLabel.CENTER);
     }
 
+    /**
+     * The List of Stack operations are set from the Controller and
+     * added to the relevant JList in this method.
+     *
+     * @param listData This is the Data that will be set to the JList.
+     */
     public void setPreviousStackOperations(String listData[]){
         previousStackOperations.setListData(listData);
     }
 
+    /**
+     * The List of Queue operations are set from the Controller and
+     * added to the relevant JList in this method.
+     *
+     * @param listData This is the Data that will be set to the JList.
+     */
     public void setPreviousQueueOperations(String listData[]){
         previousQueueOperations.setListData(listData);
     }
 
+    /**
+     * The List of Java Stack operations are set from the Controller and
+     * added to the relevant JList in this method.
+     *
+     * @param listData This is the Data that will be set to the JList.
+     */
     public void setPreviousStackJavaOperations(String listData[]){
         stackJavaOperations.setListData(listData);
     }
 
+    /**
+     * The List of Java Queue operations are set from the Controller and
+     * added to the relevant JList in this method.
+     *
+     * @param listData This is the Data that will be set to the JList.
+     */
     public void setPreviousQueueJavaOperations(String listData[]){
         queueJavaOperations.setListData(listData);
     }
 
+    /**
+     * This method clears the JLists of operations.
+     */
     public void resetPreviousOperations(){
         previousStackOperations.setListData(new String[0]);
         previousQueueOperations.setListData(new String[0]);
@@ -164,14 +197,27 @@ public class View extends JFrame {
         queueJavaOperations.setListData(new String[0]);
     }
 
+    /**
+     * This updates the Stack panel after changes are made.
+     */
     public void updateStackUI(){
         stackDisplay.updateUI();
     }
 
+    /**
+     * This updates the Queue panel after changes are made.
+     */
     public void updateQueueUI(){
         queueDisplay.updateUI();
     }
 
+    /**
+     * This method is used when the predictions are turned on and the labels
+     * have to be hidden. It is also used when predictions are turned off and
+     * the labels have to be shown again.
+     *
+     * @param isVisible true if the labels are to be shown, otherwise false.
+     */
     public void toggleLabels(boolean isVisible){
         pushLabel.setVisible(isVisible);
         popLabel.setVisible(isVisible);
@@ -181,19 +227,40 @@ public class View extends JFrame {
         peekQueueLabel.setVisible(isVisible);
     }
 
+    /**
+     * This takes the drawn Stack visualisation and sets it to the relevant Panel.
+     *
+     * @param drawStackRepresentation this is the Stack representation to be added to the panel.
+     */
     public void setStackPanel(DrawStackRepresentation drawStackRepresentation){
         stackDisplay.add(drawStackRepresentation);
     }
 
+    /**
+     * This takes the drawn Queue visualisation and sets it to the relevant Panel.
+     * @param drawQueueRepresentation this is the Queue representation to be added to the panel.
+     */
     public void setQueuePanel(DrawQueueRepresentation drawQueueRepresentation){
         queueDisplay.add(drawQueueRepresentation);
     }
 
+    /**
+     * Used to change the availability of the Harder Prediction checkbox in the prediction menu.
+     *
+     * @param isHarderPredictions true if harder predictions are enabled, otherwise false.
+     * @param isChecked true if the harder predictions has been turned on, otherwise false.
+     */
     public void toggleHarderPredictions(boolean isHarderPredictions, boolean isChecked){
         harderPredictions.setEnabled(isHarderPredictions);
         harderPredictions.setSelected(isChecked);
     }
 
+    /**
+     * This method is used when harder predictions are enabled to stop users clicking on
+     * circular queue. It is also used when harder predictions are turned off to reverse this.
+     *
+     * @param circularEnabled true if circular queue is to be enabled, false otherwise.
+     */
     public void toggleCircularQueue(boolean circularEnabled){
         if(circularEnabled){
             circularQueue.setEnabled(true);
@@ -205,6 +272,11 @@ public class View extends JFrame {
         }
     }
 
+    /**
+     * This method is used when harder predictions are enabled to stop users clicking on
+     * array stack. It is also used when harder predictions are turned off to reverse this.
+     * @param arrayEnabled true if array stack is to be enabled, false otherwise.
+     */
     public void toggleArrayStack(boolean arrayEnabled){
         if(arrayEnabled){
             arrayStack.setEnabled(true);
@@ -216,6 +288,10 @@ public class View extends JFrame {
         }
     }
 
+    /**
+     * Switches between the tabbed panes.
+     * @param index 0 for Stack pane, 1 for Queue pane.
+     */
     public void toggleTabbedPane(int index){
         tabbedPane1.setSelectedIndex(index);
     }
@@ -224,70 +300,115 @@ public class View extends JFrame {
     The following block of methods all add ActionListeners so that the controller knows when a button is pressed
      */
 
-    // If the pushButton is clicked execute actionPerformed method in the Controller
+
+    /**
+     * If the pushButton is clicked execute actionPerformed method in the Controller
+     * @param listenForPushButton Listener from the Controller for this button
+     */
     public void addPushListener(ActionListener listenForPushButton){
         pushButton.addActionListener(listenForPushButton);
     }
 
-    // If the popButton is clicked execute actionPerformed method in the Controller
+    /**
+     * If the popButton is clicked execute actionPerformed method in the Controller
+     * @param listenForPopButton Listener from the Controller for this button
+     */
     public void addPopListener(ActionListener listenForPopButton){
         popButton.addActionListener(listenForPopButton);
     }
 
-    // If the peekStackButton is clicked execute actionPerformed method in the Controller
+    /**
+     * If the peekStackButton is clicked execute actionPerformed method in the Controller
+     * @param listenForPeekStackButton Listener from the Controller for this button
+     */
     public void addPeekStackListener(ActionListener listenForPeekStackButton){
         peekStackButton.addActionListener(listenForPeekStackButton);
     }
 
-    // If the enqueueButton is clicked execute actionPerformed method in the Controller
+    /**
+     * If the enqueueButton is clicked execute actionPerformed method in the Controller
+     * @param listenForEnqueueButton Listener from the Controller for this button
+     */
     public void addEnqueueListener(ActionListener listenForEnqueueButton){
         enqueueButton.addActionListener(listenForEnqueueButton);
     }
 
-    // If the dequeueButton is clicked execute actionPerformed method in the Controller
+    /**
+     * If the dequeueButton is clicked execute actionPerformed method in the Controller
+     * @param listenForDequeueButton Listener from the Controller for this button
+     */
     public void addDequeueListener(ActionListener listenForDequeueButton){
         dequeueButton.addActionListener(listenForDequeueButton);
     }
 
-    // If the peekQueueButton is clicked execute actionPerformed method in the Controller
+    /**
+     * If the peekQueueButton is clicked execute actionPerformed method in the Controller
+     * @param listenForPeekQueueButton Listener from the Controller for this button
+     */
     public void addPeekQueueListener(ActionListener listenForPeekQueueButton){
         peekQueueButton.addActionListener(listenForPeekQueueButton);
     }
 
-    // If the on radio button is selected in the Prediction menu the actionPerformed method is run in the Controller
+    /**
+     * If the on radio button is selected in the Prediction menu the actionPerformed method is run in the Controller
+     * @param listenForOnRadio Listener from the Controller for this button
+     */
     public void addOnRadioListener(ActionListener listenForOnRadio){
         radioOn.addActionListener(listenForOnRadio);
     }
-    // If the off radio button is selected in the Prediction menu the actionPerformed method is run in the Controller
+
+    /**
+     * If the off radio button is selected in the Prediction menu the actionPerformed method is run in the Controller
+     * @param listenForOffRadio Listener from the Controller for this button
+     */
     public void addOffRadioListener(ActionListener listenForOffRadio){
         radioOff.addActionListener(listenForOffRadio);
     }
 
-    // If the circular queue is selected in the Prediction menu the actionPerformed method is run in the Controller
+    /**
+     * If the circular queue is selected in the Prediction menu the actionPerformed method is run in the Controller
+     * @param listenForCircularQueue Listener from the Controller for this button
+     */
     public void addCircularQueueListener(ActionListener listenForCircularQueue) {
         circularQueue.addActionListener(listenForCircularQueue);
     }
-    // If the normal queue is selected in the Prediction menu the actionPerformed method is run in the Controller
+
+    /**
+     * If the normal queue is selected in the Prediction menu the actionPerformed method is run in the Controller
+     * @param listenForNormalQueue Listener from the Controller for this button
+     */
     public void addNormalQueueListener(ActionListener listenForNormalQueue) {
         normalQueue.addActionListener(listenForNormalQueue);
     }
 
-    // If the array stack is selected in the Prediction menu the actionPerformed method is run in the Controller
+    /**
+     * If the array stack is selected in the Prediction menu the actionPerformed method is run in the Controller
+     * @param listenForArrayStack Listener from the Controller for this button
+     */
     public void addArrayStackListener(ActionListener listenForArrayStack) {
         arrayStack.addActionListener(listenForArrayStack);
     }
 
-    // If the normal stack is selected in the Prediction menu the actionPerformed method is run in the Controller
+    /**
+     * If the normal stack is selected in the Prediction menu the actionPerformed method is run in the Controller
+     * @param listenForNormalStack Listener from the Controller for this button
+     */
     public void addNormalStackListener(ActionListener listenForNormalStack) {
         normalStack.addActionListener(listenForNormalStack);
     }
 
-    // If the reset menu option is selected the relevant actionPerformed method is run in the Controller
+    /**
+     * If the reset menu option is selected the relevant actionPerformed method is run in the Controller
+     * @param listenForReset Listener from the Controller for this button
+     */
     public void addResetListener(ActionListener listenForReset){
         resetMenuItem.addActionListener(listenForReset);
     }
 
-    // If the harder predictions checkbox is selected the relevant actionPerformed method is run in the Controller
+    /**
+     * If the harder predictions checkbox is selected the relevant actionPerformed method is run in the Controller
+     * @param listenForHarderPredictions Listener from the Controller for this checkbox
+     */
     public void addHarderPredictionsListener(ItemListener listenForHarderPredictions){
         harderPredictions.addItemListener(listenForHarderPredictions);
     }
