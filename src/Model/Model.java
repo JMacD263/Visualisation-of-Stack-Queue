@@ -1,4 +1,4 @@
-package src.Final.Model;
+package src.Model;
 
 import java.util.LinkedList;
 import java.util.Queue;

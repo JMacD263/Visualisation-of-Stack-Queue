@@ -1,6 +1,6 @@
-package src.Final.View;
+package src.View;
 
-import src.Final.Model.ArrayStack;
+import src.Model.ArrayStack;
 
 import javax.swing.*;
 import java.awt.*;

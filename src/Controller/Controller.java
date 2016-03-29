@@ -1,13 +1,13 @@
-package src.Final.Controller;
+package src.Controller;
 
-import src.Final.GUIDialogs.CreateHarderPredictions;
-import src.Final.GUIDialogs.DrawHarderPredictions;
-import src.Final.GUIDialogs.HarderPredictions;
-import src.Final.GUIDialogs.PredictionOptions;
-import src.Final.Model.Model;
-import src.Final.View.DrawQueueRepresentation;
-import src.Final.View.DrawStackRepresentation;
-import src.Final.View.View;
+import src.GUIDialogs.CreateHarderPredictions;
+import src.GUIDialogs.DrawHarderPredictions;
+import src.GUIDialogs.HarderPredictions;
+import src.GUIDialogs.PredictionOptions;
+import src.Model.Model;
+import src.View.DrawQueueRepresentation;
+import src.View.DrawStackRepresentation;
+import src.View.View;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;

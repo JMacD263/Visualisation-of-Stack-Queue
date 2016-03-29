@@ -1,4 +1,4 @@
-package src.Final.GUIDialogs;
+package src.GUIDialogs;
 
 import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;

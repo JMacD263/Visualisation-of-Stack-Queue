@@ -1,6 +1,6 @@
-package src.Final.View;
+package src.View;
 
-import src.Final.Model.CircularQueue;
+import src.Model.CircularQueue;
 
 import javax.swing.*;
 import java.awt.*;

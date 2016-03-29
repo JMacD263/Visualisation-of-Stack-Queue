@@ -1,4 +1,4 @@
-package src.Final.Model;
+package src.Model;
 
 import org.junit.Before;
 import org.junit.Test;

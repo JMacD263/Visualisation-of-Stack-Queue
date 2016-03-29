@@ -1,9 +1,9 @@
-package src.Final.Controller;
+package src.Controller;
 
 import org.junit.Before;
 import org.junit.Test;
-import src.Final.Model.Model;
-import src.Final.View.View;
+import src.Model.Model;
+import src.View.View;
 
 import javax.swing.*;
 import java.lang.reflect.Field;

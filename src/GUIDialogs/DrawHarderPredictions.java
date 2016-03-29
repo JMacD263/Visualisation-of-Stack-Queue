@@ -1,4 +1,4 @@
-package src.Final.GUIDialogs;
+package src.GUIDialogs;
 
 import javax.swing.*;
 import java.awt.*;

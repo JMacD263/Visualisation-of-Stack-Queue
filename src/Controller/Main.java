@@ -1,7 +1,7 @@
-package src.Final.Controller;
+package src.Controller;
 
-import src.Final.Model.Model;
-import src.Final.View.View;
+import src.Model.Model;
+import src.View.View;
 
 /**
  * This class runs the program.

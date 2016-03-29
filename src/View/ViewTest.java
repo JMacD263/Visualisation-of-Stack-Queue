@@ -1,4 +1,4 @@
-package src.Final.View;
+package src.View;
 
 import org.junit.Before;
 import org.junit.Test;
